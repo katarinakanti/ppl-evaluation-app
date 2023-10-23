@@ -4,7 +4,7 @@ import "./Login.css";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import Image from "next/image";
+
 
 export default function Login() {
   const [isMounted, setIsMounted] = useState(false);
@@ -34,19 +34,15 @@ export default function Login() {
   return (
     <div className="login-container">
       <div className="login-photo">
-        <Image
-          src={require("./components/img/login.jpg")}
-          height={340}
-          width={320}
-        />
+        <img src="/img/login.jpg" height={340} width={320}/>
       </div>
 
       <div className="login-form">
         <h2>Login</h2>
         <form onSubmit={handleSignIn}>
-          <div>
+          <div >
             <label>Username:</label>
-            <input
+            <input  
               type="text"
               name="username"
               value={email}
