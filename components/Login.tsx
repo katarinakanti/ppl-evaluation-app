@@ -39,11 +39,11 @@ export default function Login() {
         <img className="object-cover" src="/img/slide1.jpg" height={440} width={420} />
       </div>
       <div className="login-form">
-        <h2>Login</h2>
+        <h2 className="font-arial">Login</h2>
         <form onSubmit={handleSignIn}>
           <div>
-            <label>Username:</label>
-            <input
+            <label className="font-arial text-xs">Username:</label>
+            <input className="font-arial mt-2"
               type="text"
               name="username"
               value={email}
@@ -51,16 +51,16 @@ export default function Login() {
             />
           </div>
           <div>
-            <label>Password:</label>
-            <input
+            <label className="font-arial mt-2">Password:</label>
+            <input className="font-arial mt-1"
               type="password"
               name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="mb-10 mt-10">
-            <button type="submit">Login</button>
+          <div className="mb-10 mt-6">
+            <button type="submit" className="font-arial">Login</button>
             {/* <Link href="/auth/register">Buat Akun</Link> */}
           </div>
         </form>
