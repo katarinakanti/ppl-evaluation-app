@@ -10,10 +10,10 @@ export default function Page() {
       </h1>
       <br />
       <br />
-      <div className="flex items-center justify-center mx-auto bg-gray-100 border border-gray-500 w-11/12 h-16">
+      <div className="flex items-center justify-center mx-auto bg-gray-100 border border-gray-500 w-10/12 h-16">
         <p className="text-center">IRS</p>
       </div>
-      <div className="flex items-center justify-center mx-auto bg-gray-100 w-11/12 h-96">
+      <div className="flex items-center justify-center mx-auto bg-gray-100 w-10/12 h-96">
         <div className="flex-col flex w-11/12">
           <div className="flex w-full mb-8">
             <div className="flex items-center justify-center bg-gray-300 w-14 h-20 p-4">
