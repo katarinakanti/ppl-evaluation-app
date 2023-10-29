@@ -6,9 +6,12 @@ import { useRouter } from "next/navigation";
 
 export function NonAuthNavbar() {
   return (
-    <div className="flex gap-2">
-      <Link href={"/auth/register"}>Register</Link>
-      <Link href={"/auth/login"}>Sign in</Link>
+
+    <div className="p-5 flex items-center mx-auto bg-gray-100 border w-full h-16">
+      <div className="flex gap-5">
+        <Link href={"/auth/register"}>Register</Link>
+        <Link href={"/auth/login"}>Sign in</Link>
+      </div>
     </div>
   );
 }
@@ -23,13 +26,16 @@ export function AuthNavbar() {
   };
 
   return (
-    <div className="flex gap-2">
-      <Link href={"/"}>Home</Link>
-      <Link href={"/mhs/irs"}>IRS</Link>
-      <Link href={"/mhs/khs"}>KHS</Link>
-      <Link href={"/mhs/pkl"}>PKL</Link>
-      <Link href={"/mhs/skripsi"}>Skripsi</Link>
-      <button onClick={handleSignOut}>Sign out</button>
+   
+    <div className="p-5 flex items-center mx-auto bg-gray-100 border w-full h-16">
+      <div className="flex gap-5">
+        <Link href={"/"}>Home</Link>
+        <Link href={"/mhs/irs"}>IRS</Link>
+        <Link href={"/mhs/khs"}>KHS</Link>
+        <Link href={"/mhs/pkl"}>PKL</Link>
+        <Link href={"/mhs/skripsi"}>Skripsi</Link>
+        <button onClick={handleSignOut}>Sign out</button>
+      </div>
     </div>
   );
 }
