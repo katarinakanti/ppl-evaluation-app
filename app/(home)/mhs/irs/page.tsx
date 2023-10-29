@@ -16,8 +16,10 @@ export default function Page() {
             <div className="flex items-center justify-center bg-gray-300 w-14 h-20 p-4">1</div>
             <div className="flex items-center bg-gray-200 w-full h-20 p-4">
               <div>
-                <p className="text-lg mb-1 font-sans font-semibold">Semester 1 | Tahun Ajaran 2021/2022 Ganjil</p>
-                <p className="text-sm font-sans font-extralight">Jumlah SKS Semester 24 | Jumlah SKS Kumulatif 21 | IP Semester : 4.00 | IP Kumulatif : 4.00</p>
+                <button>
+                  <p className="text-lg mb-1 font-sans font-semibold text-left">Semester 1 | Tahun Ajaran 2021/2022 Ganjil</p>
+                  <p className="text-sm font-sans font-extralight">Jumlah SKS Semester 24 | Jumlah SKS Kumulatif 21 | IP Semester : 4.00 | IP Kumulatif : 4.00</p>
+                </button>
               </div>            
             </div>            
           </div>
@@ -26,8 +28,10 @@ export default function Page() {
             <div className="flex items-center justify-center bg-gray-300 w-14 h-20 p-4">2</div>
             <div className="flex items-center bg-gray-200 w-full h-20 p-4">
               <div>
-                <p className="text-lg mb-1 font-sans font-semibold">Semester 2 | Tahun Ajaran 2021/2022 Ganjil</p>
-                <p className="text-sm font-sans font-extralight">Jumlah SKS Semester 24 | Jumlah SKS Kumulatif 21 | IP Semester : 4.00 | IP Kumulatif : 4.00</p>
+                <button>
+                  <p className="text-lg mb-1 font-sans font-semibold text-left">Semester 2 | Tahun Ajaran 2021/2022 Ganjil</p>
+                  <p className="text-sm font-sans font-extralight">Jumlah SKS Semester 24 | Jumlah SKS Kumulatif 21 | IP Semester : 4.00 | IP Kumulatif : 4.00</p>
+                </button>
               </div>            
             </div>            
           </div>
@@ -36,8 +40,10 @@ export default function Page() {
             <div className="flex items-center justify-center bg-gray-300 w-14 h-20 p-4">3</div>
             <div className="flex items-center bg-gray-200 w-full h-20 p-4">
               <div>
-                <p className="text-lg mb-1 font-sans font-semibold">Semester 3 | Tahun Ajaran 2021/2022 Ganjil</p>
-                <p className="text-sm font-sans font-extralight">Jumlah SKS Semester 24 | Jumlah SKS Kumulatif 21 | IP Semester : 4.00 | IP Kumulatif : 4.00</p>
+                <button>
+                  <p className="text-lg mb-1 font-sans font-semibold text-left">Semester 3 | Tahun Ajaran 2021/2022 Ganjil</p>
+                  <p className="text-sm font-sans font-extralight">Jumlah SKS Semester 24 | Jumlah SKS Kumulatif 21 | IP Semester : 4.00 | IP Kumulatif : 4.00</p>
+                </button>
               </div>            
             </div>            
           </div>

@@ -55,7 +55,7 @@ export default function Page() {
       </div >
       <div className="flex items-center  mx-auto bg-gray-100 w-11/12 h-12">
           <div className="mb-24 ml-10 mt-36">
-            <button className="btn-outline-primary">Upload Berita Acara PKL</button>
+            <button className="btn-outline-primary">Upload Berita Acara Skripsi</button>
             <div className="mt-5">
               <button className="btn-primary">Simpan</button>
             </div> 
