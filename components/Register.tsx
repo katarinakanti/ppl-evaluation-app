@@ -8,19 +8,28 @@ export default function Register() {
   const [isMounted, setIsMounted] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
 
-  const handleSignUp = async () => {
-    await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${location.origin}/auth/callback`,
-      },
-    });
-    router.refresh();
+  const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
+    e.preventDefault();
+    supabase.auth
+      .signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${location.origin}/auth/callback`,
+        },
+      })
+      .then(() => {
+        router.push("/auth/email-confirmation");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   useEffect(() => {
@@ -33,14 +42,6 @@ export default function Register() {
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -49,12 +50,12 @@ export default function Register() {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Register your account
+            Daftar dulu
           </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSignUp}>
             <div>
               <label
                 htmlFor="email"
@@ -109,11 +110,11 @@ export default function Register() {
 
             <div>
               <button
+                disabled={loading}
                 type="submit"
-                onClick={handleSignUp}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Register
+                {loading ? "Loading..." : "Register"}
               </button>
             </div>
           </form>
