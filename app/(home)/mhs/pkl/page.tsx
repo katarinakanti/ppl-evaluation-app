@@ -30,7 +30,7 @@ export default function Page() {
                 </select>
               </div>
               <div className="mt-10" > 
-                <input type="date" id="tanggal" name="tanggal"/>
+                <input type="number" id="waktu" name="waktu"/>
               </div>
               <div className="mt-10" > 
                 <select name="status" id="Status">

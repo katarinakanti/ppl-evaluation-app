@@ -28,7 +28,7 @@ export default function Page() {
                 </select>
               </div>
               <div className="mt-10" >
-                <input name="semester" placeholder="Lama Studi(Semester)"/>
+                <input type="number" name="semester" placeholder="Lama Studi(Semester)"/>
               </div>
               <div className="mt-10" > 
                 <input type="date" id="tanggal" name="tanggal"/> 
