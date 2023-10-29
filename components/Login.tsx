@@ -32,11 +32,12 @@ export default function Login() {
   }
 
   return (
+    <>
+    <link rel="stylesheet" href="view.css" />
     <div className="login-container">
-      <div className="login-photo">
-        <img src="/img/login.jpg" height={340} width={320} />
+      <div className="login-photo md:shrink-0">
+        <img className="object-cover" src="/img/slide1.jpg" height={440} width={420} />
       </div>
-
       <div className="login-form">
         <h2>Login</h2>
         <form onSubmit={handleSignIn}>
@@ -58,10 +59,24 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button type="submit">Login</button>
+          <div className="mb-10 mt-10">
+            <button type="submit">Login</button>
+            {/* <Link href="/auth/register">Buat Akun</Link> */}
+          </div>
         </form>
-        <Link href="/auth/register">Buat Akun</Link>
       </div>
     </div>
+    </>
+
+    // <div className="max-w-md mx-auto bg-white rounded-xl shadow-md justify-coet">
+    //   <div className="md:flex">
+    //     <div className="md:shrink-0">
+    //       {/* <img className="h-48 w-full object-cover md:h-full md:w-48" src="/img/slide1.png"> */}
+    //     </div>
+    //     <div className="p-8">
+    //       <h2>Login</h2>
+    //     </div>
+    //   </div>
+    // </div>
   );
 }

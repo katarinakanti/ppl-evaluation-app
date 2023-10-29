@@ -42,9 +42,9 @@ html {
   -moz-tab-size: 4;
   /* 3 */
   -o-tab-size: 4;
-     tab-size: 4;
+  tab-size: 4;
   /* 3 */
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: Open Sans, sans;
   /* 4 */
   font-feature-settings: normal;
   /* 5 */
@@ -143,10 +143,6 @@ small {
   font-size: 80%;
 }
 
-mr-40{
-  margin-right: 20rem;
-}
-
 /*
 Prevent `sub` and `sup` elements from affecting the line height in all browsers.
 */
@@ -213,22 +209,6 @@ textarea {
   /* 3 */
 }
 
-
-btn-outline-primary{
-  --bs-btn-color: #774dd3;
-  --bs-btn-border-color: #774dd3;
-  --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #774dd3;
-  --bs-btn-hover-border-color: #774dd3;
-  --bs-btn-focus-shadow-rgb: 119, 77, 211;
-  --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: #774dd3;
-  --bs-btn-active-border-color: #774dd3;
-  --bs-btn-active-shadow: none;
-  --bs-btn-disabled-color: #774dd3;
-  --bs-btn-disabled-bg: transparent;
-  --bs-gradient: none;
-}
 /*
 Remove the inheritance of text transform in Edge and Firefox.
 */
@@ -559,6 +539,38 @@ video {
   margin-right: auto;
 }
 
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
+.mb-24 {
+  margin-bottom: 6rem;
+}
+
+.mb-52 {
+  margin-bottom: 13rem;
+}
+
+.mb-56 {
+  margin-bottom: 14rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.ml-10 {
+  margin-left: 2.5rem;
+}
+
+.ml-32 {
+  margin-left: 8rem;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -567,8 +579,8 @@ video {
   margin-top: 0.5rem;
 }
 
-.mt-4 {
-  margin-top: 1rem;
+.mt-36 {
+  margin-top: 9rem;
 }
 
 .mt-5 {
@@ -591,6 +603,22 @@ video {
   height: 2.5rem;
 }
 
+.h-12 {
+  height: 3rem;
+}
+
+.h-16 {
+  height: 4rem;
+}
+
+.h-20 {
+  height: 5rem;
+}
+
+.h-96 {
+  height: 24rem;
+}
+
 .h-screen {
   height: 100vh;
 }
@@ -599,12 +627,16 @@ video {
   min-height: 100%;
 }
 
-.w-auto {
-  width: auto;
+.w-11\/12 {
+  width: 91.666667%;
 }
 
-.w-medium {
-  width: 5px;
+.w-14 {
+  width: 3.5rem;
+}
+
+.w-auto {
+  width: auto;
 }
 
 .w-full {
@@ -645,13 +677,32 @@ video {
   border-radius: 0.375rem;
 }
 
+.border {
+  border-width: 1px;
+}
+
 .border-0 {
   border-width: 0px;
+}
+
+.border-gray-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(107 114 128 / var(--tw-border-opacity));
 }
 
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+.bg-gray-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.bg-gray-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
 }
 
 .bg-gray-800 {
@@ -667,6 +718,10 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.p-4 {
+  padding: 1rem;
 }
 
 .px-3 {
@@ -698,9 +753,32 @@ video {
   text-align: center;
 }
 
+.font-arial {
+  font-family: Arial, sans;
+}
+
+.font-sans {
+  font-family: Open Sans, sans;
+}
+
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 .text-sm {
@@ -710,6 +788,10 @@ video {
 
 .font-bold {
   font-weight: 700;
+}
+
+.font-extralight {
+  font-weight: 200;
 }
 
 .font-medium {
