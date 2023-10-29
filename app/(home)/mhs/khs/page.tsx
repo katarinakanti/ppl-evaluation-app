@@ -6,10 +6,10 @@ export default function Page() {
       <h1 className="text-center text-4xl font-bold font-arial">Kartu Hasil Studi (KHS)</h1>
       <br />
       <br />
-      <div className="flex items-center justify-center mx-auto bg-gray-100 border border-gray-500 w-11/12 h-16">
+      <div className="flex items-center justify-center mx-auto bg-gray-100 border border-gray-500 w-10/12 h-16">
         <p className="text-center">KHS</p>
       </div>
-      <div className="flex items-center justify-center mx-auto bg-gray-100 w-11/12 h-96">
+      <div className="flex items-center justify-center mx-auto bg-gray-100 w-10/12 h-96">
         <div className="flex-col flex w-11/12">
 
           <div className="flex w-full mb-8">
