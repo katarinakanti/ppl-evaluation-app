@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Page() {
   return (
     <div>
@@ -19,7 +21,7 @@ export default function Page() {
             </div>
             <div className="flex items-center bg-gray-200 w-full h-20 p-4">
               <div>
-                <button>
+                <Link href="/mhs/irs/1">
                   <p className="text-lg mb-1 font-sans font-semibold text-left">
                     Semester 1 | Tahun Ajaran 2021/2022 Ganjil
                   </p>
@@ -27,7 +29,7 @@ export default function Page() {
                     Jumlah SKS Semester 24 | Jumlah SKS Kumulatif 21 | IP
                     Semester : 4.00 | IP Kumulatif : 4.00
                   </p>
-                </button>
+                </Link>
               </div>
             </div>
           </div>

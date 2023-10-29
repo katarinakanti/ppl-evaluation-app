@@ -20,7 +20,7 @@ export default async function Home() {
   return (
     <>
       <h1>Homepage</h1>
-      <h1>Hello, {session.user.email}</h1>
+      <h1>Hello, {session.user.user_metadata.nama}</h1>
     </>
   );
 }

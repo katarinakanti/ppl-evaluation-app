@@ -1,6 +1,6 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { AuthNavbar, NonAuthNavbar } from "@/components/Navbar";
+import { MhsNavbar, NonAuthNavbar, OpNavbar } from "@/components/Navbar";
 import Link from "next/link";
 
 export default async function Layout({
@@ -12,19 +12,22 @@ export default async function Layout({
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  const metadata = user?.user_metadata;
+  const role = session?.user.user_metadata.role;
 
   return (
     <>
-      {session ? <AuthNavbar /> : <NonAuthNavbar />}
-      {metadata && metadata.role === "admin" && (
-        <Link className="bg-blue-200 m-2 p-2" href="/operator/generate">
-          Generate Mahasiswa
-        </Link>
+      {session ? (
+        role === "mahasiswa" ? (
+          <MhsNavbar />
+        ) : role === "operator" ? (
+          <OpNavbar />
+        ) : (
+          <NonAuthNavbar />
+        )
+      ) : (
+        <NonAuthNavbar />
       )}
+
       {children}
     </>
   );

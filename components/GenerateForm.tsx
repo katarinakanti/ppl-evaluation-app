@@ -26,7 +26,13 @@ export default function GenerateForm() {
       </div>
       <div>
         <label htmlFor="status">Status</label>
-        <input type="text" name="status" id="status" />
+        <select name="status" id="status">
+          <option value="Aktif">Aktif</option>
+          <option value="Cuti">Cuti</option>
+          <option value="Mangkir">Mangkir</option>
+          <option value="Lulus">Lulus</option>
+          <option value="Drop Out">Drop Out</option>
+        </select>
       </div>
       <div>
         <button

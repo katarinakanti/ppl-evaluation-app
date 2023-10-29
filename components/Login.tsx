@@ -10,9 +10,7 @@ export default function Login() {
   const [isMounted, setIsMounted] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginType, setLoginType] = useState<
-    "mahasiswa" | "dosen" | "operator" | "departemen"
-  >("mahasiswa");
+  const [loginType, setLoginType] = useState("mahasiswa");
 
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
@@ -48,9 +46,21 @@ export default function Login() {
         </div>
         <div className="login-form">
           <h2>Login</h2>
+          <div>
+            <label>Login Type:</label>
+            <select
+              value={loginType}
+              onChange={(e) => setLoginType(e.target.value)}
+            >
+              <option value="mahasiswa">Mahasiswa</option>
+              <option value="dosen">Dosen</option>
+              <option value="operator">Operator</option>
+              <option value="departemen">Departemen</option>
+            </select>
+          </div>
           <form onSubmit={handleSignIn}>
             <div>
-              <label>Username:</label>
+              <label>{loginType === "mahasiswa" ? "NIM" : "Email"}</label>
               <input
                 type="text"
                 name="username"

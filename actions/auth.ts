@@ -83,9 +83,6 @@ export async function generateMhs(prevState: State, formData: FormData) {
         status_mhs_id: statusNumber,
       },
     ]);
-
-    console.log("data", data);
-    console.log("error", error);
   } catch (e) {
     return {
       message: "Ada kesalahan dalam pembuatan akun.",

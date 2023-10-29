@@ -13,7 +13,7 @@ export function NonAuthNavbar() {
   );
 }
 
-export function AuthNavbar() {
+export function MhsNavbar() {
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
 
@@ -29,6 +29,25 @@ export function AuthNavbar() {
       <Link href={"/mhs/khs"}>KHS</Link>
       <Link href={"/mhs/pkl"}>PKL</Link>
       <Link href={"/mhs/skripsi"}>Skripsi</Link>
+      <button onClick={handleSignOut}>Sign out</button>
+    </div>
+  );
+}
+
+export function OpNavbar() {
+  const router = useRouter();
+  const supabase = createClientComponentClient<Database>();
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.refresh();
+  };
+
+  return (
+    <div className="flex gap-2">
+      <Link className="bg-blue-200 m-2 p-2" href="/operator/generate">
+        Generate Mahasiswa
+      </Link>
       <button onClick={handleSignOut}>Sign out</button>
     </div>
   );
