@@ -10,6 +10,9 @@ export default function Login() {
   const [isMounted, setIsMounted] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginType, setLoginType] = useState<
+    "mahasiswa" | "dosen" | "operator" | "departemen"
+  >("mahasiswa");
 
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
@@ -17,7 +20,7 @@ export default function Login() {
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await supabase.auth.signInWithPassword({
-      email,
+      email: loginType === "mahasiswa" ? `${email}@maildrop.cc` : email,
       password,
     });
     router.refresh();
@@ -33,39 +36,44 @@ export default function Login() {
 
   return (
     <>
-    <link rel="stylesheet" href="view.css" />
-    <div className="login-container">
-      <div className="login-photo md:shrink-0">
-        <img className="object-cover" src="/img/slide1.jpg" height={440} width={420} />
+      <link rel="stylesheet" href="view.css" />
+      <div className="login-container">
+        <div className="login-photo md:shrink-0">
+          <img
+            className="object-cover"
+            src="/img/slide1.jpg"
+            height={440}
+            width={420}
+          />
+        </div>
+        <div className="login-form">
+          <h2>Login</h2>
+          <form onSubmit={handleSignIn}>
+            <div>
+              <label>Username:</label>
+              <input
+                type="text"
+                name="username"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Password:</label>
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="mb-10 mt-10">
+              <button type="submit">Login</button>
+              {/* <Link href="/auth/register">Buat Akun</Link> */}
+            </div>
+          </form>
+        </div>
       </div>
-      <div className="login-form">
-        <h2 className="font-arial">Login</h2>
-        <form onSubmit={handleSignIn}>
-          <div>
-            <label className="font-arial text-xs">Username:</label>
-            <input className="font-arial mt-2"
-              type="text"
-              name="username"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <label className="font-arial mt-2">Password:</label>
-            <input className="font-arial mt-1"
-              type="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div className="mb-10 mt-6">
-            <button type="submit" className="font-arial">Login</button>
-            {/* <Link href="/auth/register">Buat Akun</Link> */}
-          </div>
-        </form>
-      </div>
-    </div>
     </>
 
     // <div className="max-w-md mx-auto bg-white rounded-xl shadow-md justify-coet">
