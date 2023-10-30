@@ -46,7 +46,7 @@ export default function Login() {
         </div>
         <div className="login-form">
           <h2>Login</h2>
-          <div>
+          <div className="font-semibold mb-5">
             <label>Login Type:</label>
             <select
               value={loginType}
@@ -57,9 +57,9 @@ export default function Login() {
               <option value="operator">Operator</option>
               <option value="departemen">Departemen</option>
             </select>
-          </div>
+          </div >
           <form onSubmit={handleSignIn}>
-            <div>
+            <div className="font-semibold">
               <label>{loginType === "mahasiswa" ? "NIM" : "Email"}</label>
               <input
                 type="text"
@@ -68,7 +68,7 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div>
+            <div className="font-semibold">
               <label>Password:</label>
               <input
                 type="password"
@@ -77,7 +77,7 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="mb-10 mt-10">
+            <div className="mb-10">
               <button type="submit">Login</button>
               {/* <Link href="/auth/register">Buat Akun</Link> */}
             </div>
