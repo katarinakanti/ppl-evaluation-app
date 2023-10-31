@@ -36,11 +36,11 @@ export default async function Home() {
               <p className="text-xl mb-5 font-arial font-semibold text-left">
                 Abigail Metanoia Melody
               </p>
-              <div className="font-medium  flex-1 justify-between">
+              <div className="font-medium flex justify-between">
                 <p className="text-left text-sm font-arial font-extralight">
                   NIM : 240601211200038
                 </p>
-                <p className=" mt-5 flex-col text-left text-sm c font-extralight">
+                <p className=" mt-5 text-left text-sm c font-extralight">
                   Informatika
                 </p>
               </div>
@@ -49,14 +49,15 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="flex mb-8 mt-10 mx-auto bg-gray-100 w-10/12 h-96">
-        <div className="flex mx-auto bg-gray-300 w-screen h-10">
-          <p className="flex items-center ml-5 font-arial">Profil</p>
-          <div className="flex  flex-col items-center mt-20">
-            <img src="/img/slide1.jpg" alt="Foto_Mahasiswa" height={150} width={150}/>
+      <div className="flex mx-auto bg-gray-300 w-10/12 h-10">
+      <p className="flex items-center ml-5 font-arial">Profil</p>
+      </div>
+        <div className="flex mb-8 mx-auto bg-gray-100 w-10/12 h-fit">
+          <div className="flex flex-col items-center mt-20 ml-20">
+            <img src="/img/slide1.jpg" alt="Foto_Mahasiswa" height={350} width={350}/>
             <p className="mt-2 text-center text-xl font-arial font-medium">2023/2024</p>
           </div>
-          <div className="flex flex-col items-center mt-20 ml-10">
+          <div className="flex flex-col mt-20 ml-48">
               <div className="text-left font-arial font-medium">
                 <table>
                   <tr>
@@ -68,50 +69,60 @@ export default async function Home() {
                   <tr>
                     <th>Nama Lengkap</th>
                     <div className="ml-32">
-                      <td>ABIGAIL METANOIA MELODY</td>
+                      {/* <td>ABIGAIL METANOIA MELODY</td> */}
+                      <td>
+                        <input type="text" placeholder="Nama" />
+                      </td>
                     </div>
                   </tr>
                   <tr>
                     <th>Fakultas</th>
                     <div className="ml-32">
-                      <td>SAINS DAN MATEMATIKA</td>
+                      {/* <td>SAINS DAN MATEMATIKA</td> */}
+                      <input type="text" placeholder="SAINS DAN MATEMATIKA" />
                     </div>
                   </tr>
                   <tr>
                     <th>Prodi</th>
                     <div className="ml-32">
-                      <td>Informatia S1</td>
+                      {/* <td>Informatia S1</td> */}
+                      <input type="text" placeholder="Informatia S1" />
                     </div>
                   </tr>
                   <tr>
                     <th>Angkatan</th>
                     <div className="ml-32">
-                      <td>2021</td>
+                      {/* <td>2021</td> */}
+                      <input type="text" placeholder="Angakatan" />
                     </div>
                   </tr>
   <br />
                   <tr>
                     <th>Tempat Lahir</th>
                     <div className="ml-32">
-                      <td>Semarang</td>
+                      {/* <td>Semarang</td> */}
+                      <input type="text" placeholder="Tempat Lahir" />
                     </div>
                   </tr>
                   <tr>
                     <th>Tanggal Lahir</th>
                     <div className="ml-32">
-                      <td>17 Juni 2003</td>
+                      {/* <td>17 Juni 2003</td> */}
+                      <input type="text" placeholder="Tanggal Lahir" />
                     </div>
                   </tr>
                   <tr>
                     <th>NIK</th>
                     <div className="ml-32">
-                      <td>337408 570603 0001</td>
+                      {/* <td>337408 570603 0001</td> */}
+                      <input type="text" placeholder="NIK" />
                     </div>
                   </tr>
                   <tr>
                     <th>Nama Ibu</th>
                     <div className="ml-32">
-                      <td>MARTHA EVELIN</td>
+                      {/* <td>MARTHA EVELIN</td> */}
+                      <input type="text" placeholder="Nama Ibu" />
                     </div>
                   </tr>
                   <tr>
@@ -124,39 +135,45 @@ export default async function Home() {
                   <tr>
                     <th>Nomor HP</th>
                     <div className="ml-32">
-                      <td>081994055237</td>
+                      {/* <td>081994055237</td> */}
+                      <input type="text" placeholder="Nomor HP" />
                     </div>
                   </tr>
                   <tr>
                     <th>Email SSO</th>
                     <div className="ml-32">
-                      <td>abigailmetanoia@students.undip.ac.id</td>
+                      {/* <td>abigailmetanoia@students.undip.ac.id</td> */}
+                      <input type="text" placeholder="Email SSO" />
                     </div>
                   </tr>
                   <tr>
-                    <th>Email pribadi</th>
+                    <th>Email Pribadi</th>
                     <div className="ml-32">
-                      <td>abigailmetanoia17@gmail.com</td>
+                      {/* <td>abigailmetanoia17@gmail.com</td> */}
+                      <input type="text" placeholder="Email Pribadi" />
                     </div>
                   </tr>
                   <tr>
                     <th>Alamat Asal</th>
                     <div className="ml-32">
-                      <td>Jl. KedungMundu Lama 189E KedungMundu RT 2 RW 5</td>
+                      {/* <td>Jl. KedungMundu Lama 189E KedungMundu RT 2 RW 5</td> */}
+                      <input type="text" placeholder="Alamat Asal" />
                     </div>
                   </tr>
                   <tr>
                     <th>Alamat Sekarang</th>
                     <div className="ml-32">
-                      <td>-</td>
+                      {/* <td>-</td> */}
+                      <input type="text" placeholder="Alamat Sekarang" />
                     </div>
-                  </tr>   
+                  </tr>  
+                  <br />
+                  <br /> 
                 </table>
               </div>
-          </div>
-        <div className="flex flex-col mt-96 ml-96">
-            <button className="btn-primary">Simpan</button>
-        </div>
+              <button className="btn-primary items-center mt-10">Simpan</button>
+              <br />
+              <br />
         </div>
       </div>
     </>
