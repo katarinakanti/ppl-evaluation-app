@@ -49,10 +49,10 @@ export default function Page() {
               <p className="flex items-center w-60 p-10 font-semibold">Status</p>
               <div className="flex items-center ml-32" > 
                 <select className="p-2 border border-gray-300 bg-white" name="status" id="Status">
-                  <option selected>Pilih Status PKL</option>
-                  <option value="belumPKL">Belum PKL</option>
-                  <option value="sedangPKL">Sedang PKL</option>
-                  <option value="sudahPKL">Sudah PKL</option>
+                  <option selected>Pilih Status Skripsi</option>
+                  <option value="belumSkripsi">Belum Skripsi</option>
+                  <option value="sedangSkripsi">Sedang Skripsi</option>
+                  <option value="sudahSkripsi">Sudah Skripsi</option>
                 </select>
               </div>
             </div>
@@ -61,7 +61,7 @@ export default function Page() {
                 <p className="flex items-center w-60 p-10 font-semibold">Nilai</p>
                 <div className="flex items-center ml-32" > 
                   <select className="p-2 border border-gray-300 bg-white" name="nilai" id="nilai">
-                    <option selected>A,B,C,D,E</option>
+                    <option selected>Pilih Nilai</option>
                     <option value="A">A</option>
                     <option value="B">B</option>
                     <option value="C">C</option>
