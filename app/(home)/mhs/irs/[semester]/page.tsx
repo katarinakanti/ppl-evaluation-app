@@ -1,4 +1,17 @@
-export default function Page() {
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+
+export default async function Page({
+  params,
+}: {
+  params: { semester: string };
+}) {
+  const supabase = createServerComponentClient<Database>({ cookies });
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  const no_induk = session?.user.user_metadata.no_induk;
+
   return (
     <>
       <link rel="stylesheet" href="view.css" />
@@ -18,8 +31,9 @@ export default function Page() {
                   Semester
                 </p>
               </div>
-              <div className="flex items-center ml-40"> :
-                <p className="ml-10">1</p>
+              <div className="flex items-center ml-40">
+                {" "}
+                :<p className="ml-10">{params.semester}</p>
               </div>
             </div>
 
@@ -29,8 +43,9 @@ export default function Page() {
                   Jumlah SKS Semester
                 </p>
               </div>
-              <div className="flex items-center ml-40"> :
-                <p className="ml-10">24</p>                
+              <div className="flex items-center ml-40">
+                {" "}
+                :<p className="ml-10">{no_induk}</p>
               </div>
             </div>
 
@@ -40,29 +55,33 @@ export default function Page() {
                   Status Verifikasi
                 </p>
               </div>
-              <div className="flex items-center ml-40"> :
-                <p className="ml-10">-</p>                
+              <div className="flex items-center ml-40">
+                {" "}
+                :<p className="ml-10">-</p>
               </div>
             </div>
 
             <div className="flex w-full mt-7">
-              <button className="w-32 h-10 ml-10 bg-white hover:bg-pink-100 text-pink-400 border border-pink-400 font-semibold rounded">Scan IRS</button>
+              <button className="w-32 h-10 ml-10 bg-white hover:bg-pink-100 text-pink-400 border border-pink-400 font-semibold rounded">
+                Scan IRS
+              </button>
                   {" "}
             </div>
             <div className="flex w-full mt-5 mb-10">
-              <button className="w-32 h-10 ml-10 bg-white hover:bg-blue-100 text-blue-400 border border-blue-400 px-10 font-semibold rounded">Ubah</button>
+              <button className="w-32 h-10 ml-10 bg-white hover:bg-blue-100 text-blue-400 border border-blue-400 px-10 font-semibold rounded">
+                Ubah
+              </button>
                   {" "}
             </div>
           </div>
-        </div>          
+        </div>
       </div>
     </>
-
   );
 }
 
-
-{/* <div className="flex justify-end w-full">
+{
+  /* <div className="flex justify-end w-full">
               <div className="flex col mb-10 mr-10">
                 <div className="flex w-full">
                   <button className="w-32 h-10 bg-white hover:bg-green-600 text-pink-400 border border-pink-400 font-semibold rounded">Lihat IRS</button>
@@ -77,4 +96,5 @@ export default function Page() {
                       {" "}
                 </div>
               </div>
-            </div> */}
+            </div> */
+}

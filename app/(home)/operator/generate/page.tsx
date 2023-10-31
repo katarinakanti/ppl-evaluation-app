@@ -1,11 +1,14 @@
 import Link from "next/link";
-import GenerateForm from "@/components/GenerateForm";
+import GenerateMhs from "@/components/GenerateMhs";
+import { fetchAllDosen } from "@/data/dosen";
 
-export default function Operator() {
+export default async function Operator() {
+  const dosen = await fetchAllDosen();
+
   return (
     <div>
       <h1>Generate Akun Mahasiswa</h1>
-      <GenerateForm />
+      <GenerateMhs dosen={dosen} />
     </div>
   );
 }

@@ -10,16 +10,28 @@ export async function GET(request: Request) {
     { supabaseKey: process.env.NEXT_PUBLIC_SERVICE_ROLE_KEY }
   );
 
-  // await supabase.auth.admin.createUser({
-  //   email: "yoshi@maildrop.cc",
-  //   password: "12345678",
-  //   email_confirm: true,
-  //   user_metadata: {
-  //     nama: "Operator",
-  //     no_induk: "123",
-  //     role: "operator",
-  //   },
-  // });
+  const nama = "Dr. Eng. Adi Wibowo, S.Si., M.Kom.";
+  const no_induk = "198203092006041002";
+  const role = "dosen";
+
+  await supabase.auth.admin.createUser({
+    email: `${no_induk}@maildrop.cc`,
+    password: "12345678",
+    email_confirm: true,
+    user_metadata: {
+      nama,
+      no_induk,
+      role,
+    },
+  });
+
+  // also write to database on 'operator' table with column 'nip' = no_induk and nama
+  await supabase.from("dosen").insert([
+    {
+      nip: no_induk,
+      nama,
+    },
+  ]);
 
   return NextResponse.json({ message: "ok" });
 }

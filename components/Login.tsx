@@ -10,7 +10,6 @@ export default function Login() {
   const [isMounted, setIsMounted] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginType, setLoginType] = useState("mahasiswa");
 
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
@@ -18,7 +17,7 @@ export default function Login() {
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await supabase.auth.signInWithPassword({
-      email: loginType === "mahasiswa" ? `${email}@maildrop.cc` : email,
+      email: `${email}@maildrop.cc`,
       password,
     });
     router.refresh();
@@ -46,21 +45,9 @@ export default function Login() {
         </div>
         <div className="login-form">
           <h2>Login</h2>
-          <div className="font-semibold mb-5">
-            <label>Login Type:</label>
-            <select
-              value={loginType}
-              onChange={(e) => setLoginType(e.target.value)}
-            >
-              <option value="mahasiswa">Mahasiswa</option>
-              <option value="dosen">Dosen</option>
-              <option value="operator">Operator</option>
-              <option value="departemen">Departemen</option>
-            </select>
-          </div >
           <form onSubmit={handleSignIn}>
             <div className="font-semibold">
-              <label>{loginType === "mahasiswa" ? "NIM" : "Email"}</label>
+              <label>NIM/NIP</label>
               <input
                 type="text"
                 name="username"

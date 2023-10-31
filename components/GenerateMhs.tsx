@@ -4,8 +4,9 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { generateMhs } from "@/actions/auth";
+import { Dosen } from "@/data/dosen";
 
-export default function GenerateForm() {
+export default function GenerateMhs({ dosen }: { dosen: Dosen[] }) {
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(generateMhs, initialState);
   const { pending } = useFormStatus();
@@ -32,6 +33,16 @@ export default function GenerateForm() {
           <option value="Mangkir">Mangkir</option>
           <option value="Lulus">Lulus</option>
           <option value="Drop Out">Drop Out</option>
+        </select>
+      </div>
+      <div>
+        <label htmlFor="doswal_nip">Dosen Wali</label>
+        <select name="doswal_nip" id="doswal_nip">
+          {dosen.map((d) => (
+            <option key={d.nip} value={d.nip}>
+              {d.nama}
+            </option>
+          ))}
         </select>
       </div>
       <div>

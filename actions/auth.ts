@@ -24,6 +24,9 @@ const UserSchema = z.object({
   angkatan: z.coerce
     .number()
     .gt(2004, { message: "Isi angkatannya yang bener yaa" }),
+  doswal_nip: z.string({
+    invalid_type_error: "Isi nipnya yang sesuai ya.",
+  }),
   status: z.enum(["Aktif", "Cuti", "Lulus", "Mangkir", "Drop Out"], {
     invalid_type_error: "Isi statusnya yang sesuai ya.",
   }),
@@ -34,6 +37,7 @@ export type State = {
     nama?: string[];
     no_induk?: string[];
     angkatan?: string[];
+    doswal_nip?: string[];
     status?: string[];
   };
   message?: string | null;
@@ -47,6 +51,7 @@ export async function generateMhs(prevState: State, formData: FormData) {
     no_induk: formData.get("no_induk"),
     angkatan: formData.get("angkatan"),
     status: formData.get("status"),
+    doswal_nip: formData.get("doswal_nip"),
   });
 
   if (!validatedFields.success) {
@@ -56,7 +61,7 @@ export async function generateMhs(prevState: State, formData: FormData) {
     };
   }
 
-  const { nama, no_induk, angkatan, status } = validatedFields.data;
+  const { nama, no_induk, angkatan, status, doswal_nip } = validatedFields.data;
 
   // 2. Create dummy email that is no_induk@maildrop.cc
   const email = `${no_induk}@maildrop.cc`;
@@ -81,6 +86,7 @@ export async function generateMhs(prevState: State, formData: FormData) {
         nama,
         angkatan,
         status_mhs_id: statusNumber,
+        doswal_nip,
       },
     ]);
   } catch (e) {
