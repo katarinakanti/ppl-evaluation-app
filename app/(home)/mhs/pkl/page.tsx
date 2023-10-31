@@ -52,7 +52,7 @@ export default function Page() {
                 <p className="flex items-center w-60 p-10 font-semibold">Nilai</p>
                 <div className="flex items-center ml-32" > 
                   <select className="p-2 border border-gray-300 bg-white" name="nilai" id="nilai">
-                    <option selected>A,B,C,D,E</option>
+                    <option selected>Pilih Nilai</option>
                     <option value="A">A</option>
                     <option value="B">B</option>
                     <option value="C">C</option>
