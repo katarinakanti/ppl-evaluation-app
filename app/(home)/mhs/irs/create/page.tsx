@@ -27,7 +27,7 @@ export default function Page() {
                   min="1"
                   max="14"
                   step="1"
-                  placeholder="0 - 14"
+                  placeholder="1 - 14"
                   required
                 />
               </div>
@@ -54,11 +54,11 @@ export default function Page() {
             </div>
 
             <div className="flex w-full mt-7">
-              <button className="ml-10 btn-outline-primary">Scan KHS</button>
+              <button className="w-32 h-10 ml-10 bg-white hover:bg-pink-100 text-pink-400 border border-pink-400 font-semibold rounded">Scan IRS</button>
                   {" "}
             </div>
             <div className="flex w-full mt-5 mb-10">
-              <button className="ml-10 btn-primary">Simpan</button>
+              <button className="w-32 h-10 ml-10 bg-white hover:bg-blue-100 text-blue-400 border border-blue-400 px-10 font-semibold rounded">Simpan</button>
                   {" "}
             </div>
           </div>

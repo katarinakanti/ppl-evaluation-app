@@ -20,28 +20,64 @@ export default function Page() {
               <p className="flex items-center w-60 p-10 font-semibold">SKS Semester</p>              
               </div>
               <div className="flex items-center ml-80"> :
-                  <p className="ml-10 w-80 p-2">21</p>       
+                    <input className="ml-20 w-80 p-2 border border-gray-300 bg-white"
+                        type="number"
+                        name="skss"
+                        id="skss"
+                        min="0"
+                        max="24"
+                        step="1"
+                        placeholder="0 - 24"
+                        required
+                    />             
               </div>
             </div>
 
             <div className="flex w-full -mt-10">
               <p className="flex items-center w-60 p-10 font-semibold">IP Semester</p>
               <div className="flex items-center ml-80" > :
-                    <p className="ml-10 w-80 p-2 ">4.00</p>
+                    <input className="ml-20 w-80 p-2 border border-gray-300 bg-white"
+                        type="number"
+                        name="ips"
+                        id="ips"
+                        min="0.0"
+                        max="0.4"
+                        step="0.1"
+                        placeholder="0.0 - 4.0"
+                        required
+                    />
               </div>
             </div>
 
             <div className="flex w-full -mt-10">
               <p className="flex items-center w-60 p-10 font-semibold">SKS Kumulatif</p>
               <div className="flex items-center ml-80" > :
-              <p className="ml-10 w-80 p-2">21</p>
+                    <input className="ml-20 w-80 p-2 border border-gray-300 bg-white"
+                        type="number"
+                        name="sksk"
+                        id="sksk"
+                        min="0"
+                        max="144"
+                        step="1"
+                        placeholder="0 - 144"
+                        required
+                    />
               </div>
             </div>
 
               <div className="flex w-full -mt-10">
                 <p className="flex items-center w-60 p-10 font-semibold">IP Kumulatif</p>
                 <div className="flex items-center ml-80" > :
-                <p className="ml-10 w-80 p-2">4.00</p>
+                    <input className="ml-20 w-80 p-2 border border-gray-300 bg-white"
+                        type="number"
+                        name="sksk"
+                        id="sksk"
+                        min="0.0"
+                        max="4.0"
+                        step="0.1"
+                        placeholder="0.0 - 4.0"
+                        required
+                    />
                 </div>
               </div>
 
@@ -50,7 +86,7 @@ export default function Page() {
                   {" "}
               </div>
               <div className="flex w-full mt-5 mb-10">
-                <button className="w-32 h-10 ml-10 bg-white hover:bg-blue-100 text-blue-400 border border-blue-400 px-10 font-semibold rounded">Ubah</button>
+                <button className="w-32 h-10 ml-10 bg-white hover:bg-blue-100 text-blue-400 border border-blue-400 px-10 font-semibold rounded">Simpan</button>
                     {" "}
               </div>
           </div>
