@@ -619,6 +619,10 @@ video {
   height: 24rem;
 }
 
+.h-120 {
+  height: 35rem;
+}
+
 .h-screen {
   height: 100vh;
 }
@@ -629,6 +633,10 @@ video {
 
 .w-11\/12 {
   width: 91.666667%;
+}
+
+.w-12\/12 {
+  width: 100%;
 }
 
 .w-14 {
@@ -935,4 +943,22 @@ video {
     padding-left: 2rem;
     padding-right: 2rem;
   }
+}
+
+.circle-container {
+  display: flex;
+  align-items: center;
+}
+
+.circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
