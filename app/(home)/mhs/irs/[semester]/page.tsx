@@ -19,17 +19,7 @@ export default function Page() {
                 </p>
               </div>
               <div className="flex items-center ml-28">
-                <input
-                  className="w-80 p-2 border border-gray-300 bg-white"
-                  type="number"
-                  name="semester"
-                  id="semester"
-                  min="1"
-                  max="14"
-                  step="1"
-                  placeholder="0 - 14"
-                  required
-                />
+                <p>1</p>
               </div>
             </div>
 
@@ -38,17 +28,7 @@ export default function Page() {
                 Jumlah SKS Semester
               </p>
               <div className="flex items-center ml-28">
-                <input
-                  className="w-80 p-2 border border-gray-300 bg-white"
-                  type="number"
-                  name="skss"
-                  id="skss"
-                  min="0"
-                  max="24"
-                  step="1"
-                  placeholder="0 - 24"
-                  required
-                />
+                <p>24</p>
                           {" "}
               </div>
             </div>
