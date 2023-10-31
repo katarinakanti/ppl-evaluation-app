@@ -13,9 +13,8 @@ export default function GenerateMhs({ dosen }: { dosen: Dosen[] }) {
 
   return (
     <form action={dispatch}>
-      <div>
-        <label htmlFor="nama">Nama</label>
-        <input type="text" name="nama" id="nama" />
+      <div className="text-center mt-10 text-3xl font-semibold">
+        <h2>Generate Akun Mahasiswa Baru</h2>
       </div>
       <div>
         <label htmlFor="no_induk">NIM</label>

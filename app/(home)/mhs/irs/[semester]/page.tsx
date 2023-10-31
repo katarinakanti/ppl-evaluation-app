@@ -80,21 +80,20 @@ export default async function Page({
   );
 }
 
-{
-  /* <div className="flex justify-end w-full">
-              <div className="flex col mb-10 mr-10">
-                <div className="flex w-full">
-                  <button className="w-32 h-10 bg-white hover:bg-green-600 text-pink-400 border border-pink-400 font-semibold rounded">Lihat IRS</button>
-                      {" "}
-                </div>
-                <div className="flex w-full">
-                  <button className="bg-white hover:bg-green-600 text-blue-400 border border-blue-400 px-10 font-semibold rounded">Ubah</button>
-                      {" "}
-                </div>
-                <div className="flex w-full">
-                  <button className="bg-green-500 hover:bg-green-600 text-white font-semibold px-4 rounded">Approved</button>
-                      {" "}
-                </div>
-              </div>
-            </div> */
-}
+
+{/* <div className="flex justify-end w-full">
+  <div className="flex col mb-10 mr-10">
+    <div className="flex w-full">
+      <button className="w-32 h-10 bg-white hover:bg-green-600 text-pink-400 border border-pink-400 font-semibold rounded">Lihat IRS</button>
+          {" "}
+    </div>
+    <div className="flex w-full">
+      <button className="bg-white hover:bg-green-600 text-blue-400 border border-blue-400 px-10 font-semibold rounded">Ubah</button>
+          {" "}
+    </div>
+    <div className="flex w-full">
+      <button className="bg-green-500 hover:bg-green-600 text-white font-semibold px-4 rounded">Approved</button>
+          {" "}
+    </div>
+  </div>
+</div>  */}
