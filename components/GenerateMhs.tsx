@@ -16,41 +16,69 @@ export default function GenerateMhs({ dosen }: { dosen: Dosen[] }) {
       <div className="text-center mt-10 text-3xl font-semibold">
         <h2>Generate Akun Mahasiswa Baru</h2>
       </div>
-      <div>
-        <label htmlFor="no_induk">NIM</label>
-        <input type="text" name="no_induk" id="no_induk" />
-      </div>
-      <div>
-        <label htmlFor="angkatan">Angkatan</label>
-        <input type="text" name="angkatan" id="angkatan" />
-      </div>
-      <div>
-        <label htmlFor="status">Status</label>
-        <select name="status" id="status">
-          <option value="Aktif">Aktif</option>
-          <option value="Cuti">Cuti</option>
-          <option value="Mangkir">Mangkir</option>
-          <option value="Lulus">Lulus</option>
-          <option value="Drop Out">Drop Out</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="doswal_nip">Dosen Wali</label>
-        <select name="doswal_nip" id="doswal_nip">
-          {dosen.map((d) => (
-            <option key={d.nip} value={d.nip}>
-              {d.nama}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <button
-          disabled={pending}
-          className="bg-green-200 disabled:bg-green-600 disabled:cursor-not-allowed hover:bg-green-300"
-        >
-          {pending ? "Loading..." : "Generate"}
-        </button>
+
+      <div className="mx-auto bg-gray-100 w-10/12 h-fit">
+        <div className="flex-col ml-16 mt-8">
+          <div className="flex w-full">
+            <p>
+              <label className="mt-5 flex items-center w-60 p-10" htmlFor="no_induk">NIM</label>
+            </p>
+            <div className="mt-5 flex items-center ml-24">
+              <input className="w-96 p-1 border border-gray-300 bg-white" type="text" name="no_induk" id="no_induk" placeholder="Add text"/>
+            </div>
+          </div>
+          
+          <div className="flex w-full -mt-10">
+            <p>
+              <label className="flex items-center w-60 p-10" htmlFor="angkatan">Angkatan</label>
+            </p> 
+            <div className="flex items-center ml-24">
+              <input className="w-96 p-1 border border-gray-300 bg-white" type="text" name="angkatan" id="angkatan" placeholder="Add Text"/>
+            </div>
+          </div>
+
+          <div className="flex w-full -mt-10">
+            <p>
+              <label className="flex items-center w-60 p-10" htmlFor="status">Status</label>
+            </p>
+            <div className="flex items-center ml-24">
+              <select className="w-96 p-1 border border-gray-300 bg-white" name="status" id="status">
+                <option value="Pilih">Pilih Status</option>
+                <option value="Aktif">Aktif</option>
+                <option value="Cuti">Cuti</option>
+                <option value="Mangkir">Mangkir</option>
+                <option value="Lulus">Lulus</option>
+                <option value="Drop Out">Drop Out</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="flex w-full -mt-10">
+            <p>
+            <label className="flex items-center w-60 p-10" htmlFor="doswal_nip">Dosen Wali</label>
+            </p>
+            <div className="flex items-center ml-24">
+              <select className="w-96 p-1 border border-gray-300 bg-white" name="doswal_nip" id="doswal_nip">
+                {dosen.map((d) => (
+                  <option key={d.nip} value={d.nip}>
+                    {d.nama}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <div className="flex w-full justify-end">
+          <div className="flex items-center mr-20">
+            <button
+              disabled={pending}
+              className="mb-10 bg-green-500 hover:bg-green-600 text-white font-semibold px-7 py-2 rounded">
+              {pending ? "Loading..." : "Generate"}
+            </button>
+          </div>
+        </div>
       </div>
     </form>
   );

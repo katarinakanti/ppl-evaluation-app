@@ -8,8 +8,8 @@ export function NonAuthNavbar() {
   return (
     <div className="p-5 flex items-center mx-auto bg-gray-100 border w-full h-16">
       <div className="flex gap-5">
-        <Link href={"/auth/register"}>Register</Link>
-        <Link href={"/auth/login"}>Sign in</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/auth/register"}>Register</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/auth/login"}>Sign in</Link>
       </div>
     </div>
   );
@@ -27,13 +27,13 @@ export function MhsNavbar() {
   return (
     <div className="p-5 flex items-center mx-auto bg-gray-100 border w-full h-16">
       <div className="flex gap-5">
-        <Link href={"/"}>Home</Link>
-        <Link href={"/profile"}>Profile</Link>
-        <Link href={"/mhs/irs"}>IRS</Link>
-        <Link href={"/mhs/khs"}>KHS</Link>
-        <Link href={"/mhs/pkl"}>PKL</Link>
-        <Link href={"/mhs/skripsi"}>Skripsi</Link>
-        <button onClick={handleSignOut}>Sign out</button>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/"}>Home</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/profile"}>Profile</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/mhs/irs"}>IRS</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/mhs/khs"}>KHS</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/mhs/pkl"}>PKL</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/mhs/skripsi"}>Skripsi</Link>
+        <button className="hover:bg-gray-300 px-3 py-2 rounded" onClick={handleSignOut}>Sign out</button>
       </div>
     </div>
   );
@@ -51,12 +51,12 @@ export function DosenNavbar() {
   return (
     <div className="p-5 flex items-center mx-auto bg-gray-100 border w-full h-16">
       <div className="flex gap-5">
-        <Link href={"/"}>Home</Link>
-        <Link href={"/dosen/irs"}>IRS</Link>
-        <Link href={"/dosen/khs"}>KHS</Link>
-        <Link href={"/dosen/pkl"}>PKL</Link>
-        <Link href={"/dosen/skripsi"}>Skripsi</Link>
-        <button onClick={handleSignOut}>Sign out</button>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/"}>Home</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/dosen/irs"}>IRS</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/dosen/khs"}>KHS</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/dosen/pkl"}>PKL</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/dosen/skripsi"}>Skripsi</Link>
+        <button className="hover:bg-gray-300 px-3 py-2 rounded" onClick={handleSignOut}>Sign out</button>
       </div>
     </div>
   );
@@ -72,11 +72,13 @@ export function OpNavbar() {
   };
 
   return (
-    <div className="flex gap-2">
-      <Link className="bg-blue-200 m-2 p-2" href="/operator/generate">
-        Generate Mahasiswa
-      </Link>
-      <button onClick={handleSignOut}>Sign out</button>
+    <div className="p-5 flex items-center mx-auto bg-gray-100 border w-full h-16">
+      <div className="flex gap-5">
+        <Link className="hover:bg-gray-300 px-2 py-2 rounded" href="/operator/generate">
+          Generate Mahasiswa
+        </Link>
+        <button className="hover:bg-gray-300 px-3 py-2 rounded" onClick={handleSignOut}>Sign out</button>
+      </div>
     </div>
   );
 }
@@ -93,12 +95,12 @@ export function DeptNavbar() {
   return (
     <div className="p-5 flex items-center mx-auto bg-gray-100 border w-full h-16">
       <div className="flex gap-5">
-        <Link href={"/"}>Home</Link>
-        <Link href={"/dept/irs"}>IRS</Link>
-        <Link href={"/dept/khs"}>KHS</Link>
-        <Link href={"/dept/pkl"}>PKL</Link>
-        <Link href={"/dept/skripsi"}>Skripsi</Link>
-        <button onClick={handleSignOut}>Sign out</button>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/"}>Home</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/dept/irs"}>IRS</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/dept/khs"}>KHS</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/dept/pkl"}>PKL</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/dept/skripsi"}>Skripsi</Link>
+        <button className="hover:bg-gray-300 px-3 py-2 rounded" onClick={handleSignOut}>Sign out</button>
       </div>
     </div>
   );

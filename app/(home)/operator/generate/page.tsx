@@ -7,7 +7,6 @@ export default async function Operator() {
 
   return (
     <div>
-      <h1>Generate Akun Mahasiswa</h1>
       <GenerateMhs dosen={dosen} />
     </div>
   );
