@@ -64,18 +64,18 @@ export default async function Page() {
               <img
                 src="/img/slide1.jpg"
                 alt="Foto_Mahasiswa"
-                height={150}
-                width={150}
+                height={350}
+                width={350}
               />
               <p className="mt-3 text-center text-xl font-arial font-medium">
                 2023/2024
               </p>
-              <p className="mt-3 bg-lime-500 mx-auto w-2/3 rounded py-1 text-center text-medium font-medium">
+              <p className="mt-3 bg-lime-500 text-white mx-auto w-2/3 rounded py-1 text-center text-medium font-medium">
                 Aktif
               </p>            
             </div>
 
-            <div className="flex flex-col items-center ml-14">
+            <div className="flex flex-col items-center ml-32">
               <div className="text-left font-arial font-medium">
                 <table className="w-full">
                   <tbody>
@@ -85,7 +85,9 @@ export default async function Page() {
                     </tr>
                     <tr>
                       <th>Nama Lengkap</th>
-                      <td>Abigail Metanoia Melody</td>
+                      <td>
+                        <input  className="p-2 border border-gray-300 bg-white" type="text" placeholder="Nama" />
+                      </td>
                     </tr>
                     <tr>
                       <th>Angkatan</th>
@@ -93,27 +95,44 @@ export default async function Page() {
                     </tr>
                     <tr>
                       <th>Jalur Masuk</th>
-                      <td>SBMPTN</td>
+                      <td>
+                        <select className="p-2 border border-gray-300 bg-white" name="status" id="Status">
+                          <option selected>Pilih Jalur Masuk</option>
+                          <option value="belumPKL">SNMPTN</option>
+                          <option value="sedangPKL">SBMPTN</option>
+                          <option value="sudahPKL">Jalur Mandiri</option>
+                        </select>
+                      </td>
                     </tr>
                     <tr>
                       <th>Nomor HP</th>
-                      <td>081994055237</td>
+                      <td>
+                        <input  className="p-2 border border-gray-300 bg-white" type="tel" placeholder="Nomor Telepon" /> 
+                      </td>
                     </tr>
                     <tr>
                       <th>Email</th>
-                      <td>abigailmetanoia17@gmail.com</td>
+                      <td>
+                      <input  className="p-2 border border-gray-300 bg-white" type="text" placeholder="Email Pribadi" />
+                      </td>
                     </tr>
                     <tr>
                       <th>Alamat Asal</th>
-                      <td>Jl. KedungMundu Lama 189E KedungMundu RT 2 RW 5</td>
+                      <td>
+                      <input  className="p-2 border border-gray-300 bg-white" type="text" placeholder="Alamat Asal" />
+                      </td>
                     </tr>
                     <tr>
                       <th>Kab/Kota</th>
-                      <td>Semarang</td>
+                      <td>
+                        <input  className="p-2 border border-gray-300 bg-white" type="text" placeholder="Kabupaten/Kota" />
+                      </td>
                     </tr>
                     <tr>
                       <th>Propinsi</th>
-                      <td>Jawa Tengah</td>
+                      <td>
+                        <input  className="p-2 border border-gray-300 bg-white" type="text" placeholder="Propinsi" />
+                      </td>
                     </tr>
                   </tbody>
                 </table>
