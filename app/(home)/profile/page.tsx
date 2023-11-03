@@ -60,12 +60,12 @@ export default async function Page() {
       <div className="mx-auto bg-gray-100 w-10/12 h-fit">
         <div className="flex mx-auto pt-14">
           <div className="flex items-center ml-24 justify-center">
-            <div className="flex-col items-center w-1/6 justify-center">
+            <div className="flex-col ml-5">
               <img
                 src="/img/slide1.jpg"
                 alt="Foto_Mahasiswa"
-                height={350}
-                width={350}
+                height={150}
+                width={150}
               />
               <p className="mt-3 text-center text-xl font-arial font-medium">
                 2023/2024
@@ -75,7 +75,7 @@ export default async function Page() {
               </p>
             </div>
 
-            <div className="flex flex-col items-center ml-32">
+            <div className="flex flex-col items-center ml-36">
               <div className="text-left font-arial font-medium">
                 <UserForm session={session} userData={userData} />
 
