@@ -47,7 +47,14 @@ return (
                             <div className="flex">
                                 <p className="font-semibold">Dosen Pembimbing</p>
                                 <div className="flex ml-24">:
-                                    <p className="ml-10">Guruh Aryotejo, S.Kom., M.Sc.</p>       
+                                <select className="p-2 border border-gray-300 bg-white" name="dospem" id="dospem">
+                                    <option selected>Pilih Dosen Pembimbing</option>
+                                    <option value="1">Guruh Aryotejo, S.Kom., M.Sc.</option>
+                                    <option value="2">Budi Prasetyo, S.Kom,. M.Kom.</option>
+                                    <option value="3">Dinda Mustika, S.Kom., M.Sc.</option>
+                                    <option value="4">Putri Ayu, S.Kom., M.Kom.</option>
+                                    <option value="5">Gusti Wiranto, S.Kom., M. Sc.</option>
+                                </select>       
                                 </div>                
                             </div>
                         </div>
@@ -59,7 +66,7 @@ return (
                             <div className="flex">
                                 <p className="font-semibold">Waktu</p>
                                 <div className="flex ml-48">:
-                                    <p className="ml-10">6 bulan</p>       
+                                    <input className="p-2 border border-gray-300 bg-white" type="number" id="waktu" name="waktu" placeholder="dalam bulan"/>      
                                 </div>                
                             </div>
                         </div>
@@ -71,7 +78,12 @@ return (
                             <div className="flex">
                                 <p className="font-semibold">Status</p>
                                 <div className="flex ml-48">:
-                                    <p className="ml-10">Sudah PKL</p>       
+                                <select className="p-2 border border-gray-300 bg-white" name="status" id="Status">
+                                    <option selected>Masukkan Status PKL</option>
+                                    <option value="belumPKL">Belum PKL</option>
+                                    <option value="sedangPKL">Sedang PKL</option>
+                                    <option value="sudahPKL">Sudah PKL</option>
+                                </select>     
                                 </div>                
                             </div>
                         </div>
@@ -83,7 +95,14 @@ return (
                             <div className="flex">
                                 <p className="font-semibold">Nilai</p>
                                 <div className="flex ml-52">:
-                                    <p className="ml-10">A</p>       
+                                <select className="p-2 border border-gray-300 bg-white" name="nilai" id="nilai">
+                                    <option selected>Masukkan Nilai</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                </select>     
                                 </div>                
                             </div>
                         </div>

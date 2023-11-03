@@ -22,11 +22,12 @@ export async function fetchDosenByNip(nip: string): Promise<Dosen> {
     const dosen = await serverActionSupabase
       .from("dosen")
       .select("*")
-      .eq("nip", nip);
+      .eq("nip", nip)
+      .single();
     if (!dosen.data) {
       throw new Error("Dosen not found");
     }
-    return dosen.data[0] as Dosen;
+    return dosen.data as Dosen;
   } catch (error) {
     console.error("Failed to fetch dosen data: ", error);
     throw new Error("Failed to fetch dosen");
