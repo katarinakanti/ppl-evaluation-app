@@ -13,10 +13,6 @@ export default async function Page() {
     data: { session },
   } = await supabase.auth.getSession();
 
-  if (!session) {
-    redirect("/auth/login");
-  }
-
   const mahasiswaData = await fetchMahasiswaByNim(
     session.user.user_metadata.no_induk
   );

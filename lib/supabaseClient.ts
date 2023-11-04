@@ -5,15 +5,15 @@ import {
   createRouteHandlerClient,
 } from "@supabase/auth-helpers-nextjs";
 
-const cookieStore = cookies();
+// const cookieStore = cookies();
 // export const serverComponentSupabase = createServerComponentClient({
 //   cookies: () => cookieStore,
 // });
 export const serverActionSupabase = createServerActionClient({
-  cookies: () => cookieStore,
+  cookies,
 });
 export const routeHandlerSupabase = createRouteHandlerClient({
-  cookies: () => cookieStore,
+  cookies,
 });
 export const serverActionAdminSupabase = createServerActionClient(
   { cookies },

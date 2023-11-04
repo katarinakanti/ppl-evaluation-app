@@ -14,3 +14,15 @@ export function mapStatusToNumber(status: string): number {
       throw new Error("Invalid status");
   }
 }
+
+export function mapAngkatanAndSmtToWord(angkatan: number, smt: number): string {
+  const firstAcademicYear = angkatan + Math.ceil(smt / 2);
+  const academicYear = `${firstAcademicYear - 1}/${firstAcademicYear}`;
+  const semester = smt % 2 === 0 ? "Genap" : "Ganjil";
+
+  return `${academicYear} ${semester}`;
+}
+
+export function getFileUrl(path: string): string {
+  return `https://ysqlqkegzdalostasyxo.supabase.co/storage/v1/object/public/ppl/${path}`;
+}

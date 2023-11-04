@@ -14,6 +14,7 @@ const CreateMahasiswa = MahasiswaSchema.pick({
   status: true,
   doswal_nip: true,
 });
+
 export async function generateMhs(
   prevState: MahasiswaState,
   formData: FormData
