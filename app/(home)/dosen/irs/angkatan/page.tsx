@@ -34,14 +34,14 @@ return (
                 </div> 
                 <div className="flex items-center bg-gray-200 w-11/12 h-20 p-4">
                     <div className="ml-5">
-                        {/* <Link href="/dosen/pkl/1/A"> */}
+                        <Link href="/dosen/irs/angkatan/show">
                         <p className="text-lg mb-1 font-sans font-semibold text-left">
                             Abigail Metanoia Melody
                         </p>
                         <p className="text-sm font-sans font-extralight">
                         NIM : 24060121120038  |    Jumlah Total SKS : 100    |     IPK  : 4.00
                         </p>
-                        {/* </Link> */}
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -51,14 +51,14 @@ return (
                 </div> 
                 <div className="flex items-center bg-gray-200 w-11/12 h-20 p-4">
                     <div className="ml-5">
-                        {/* <Link href="/dosen/pkl/1/B"> */}
+                        <Link href="/dosen/irs/angkatan/show">
                         <p className="text-lg mb-1 font-sans font-semibold text-left">
                             Salsabila Tuada
                         </p>
                         <p className="text-sm font-sans font-extralight">
                         NIM : 24060121120038  |    Jumlah Total SKS : 100    |     IPK  : 4.00
                         </p>
-                        {/* </Link> */}
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@ return (
                 </div> 
                 <div className="flex items-center bg-gray-200 w-11/12 h-20 p-4">
                     <div className="ml-5">
-                        <Link href="/dosen/pkl/1/C">
+                        <Link href="/dosen/irs/angkatan/show">
                         <p className="text-lg mb-1 font-sans font-semibold text-left">
                             Agustina Mita
                         </p>
