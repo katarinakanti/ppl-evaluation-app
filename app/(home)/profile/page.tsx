@@ -17,7 +17,7 @@ export default async function Page() {
     redirect("/auth/login");
   }
 
-  const userData = await fetchMahasiswaByNim(
+  const mahasiswaData = await fetchMahasiswaByNim(
     session.user.user_metadata.no_induk
   );
   const provData = await fetchAllProvinsi();
@@ -77,22 +77,21 @@ export default async function Page() {
 
             <div className="flex flex-col items-center ml-36">
               <div className="text-left font-arial font-medium">
-                <UserForm session={session} userData={userData} />
-
-                {/* <table className="w-full">
-                  <tbody>
-                  </tbody>
-                </table> */}
+                <UserForm
+                  session={session}
+                  mahasiswaData={mahasiswaData}
+                  provData={provData}
+                />
               </div>
             </div>
           </div>
         </div>
 
-        <div className="flex mt-10 justify-end mr-28">
+        {/* <div className="flex mt-10 justify-end mr-28">
           <button className="bg-white hover:bg-blue-100 text-blue-400 border border-blue-400 px-7 py-1 font-semibold rounded mb-5">
             Simpan
           </button>
-        </div>
+        </div> */}
       </div>
     </>
   );

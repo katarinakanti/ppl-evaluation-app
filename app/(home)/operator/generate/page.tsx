@@ -1,5 +1,5 @@
 import Link from "next/link";
-import GenerateMhs from "@/components/GenerateMhs";
+import GenerateMhs from "./form";
 import { fetchAllDosen } from "@/data/dosen";
 
 export default async function Operator() {

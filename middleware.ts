@@ -10,6 +10,7 @@ export async function middleware(req: NextRequest) {
   const session = await supabase.auth.getSession();
   const urlSegment = req.url.split("/")[3];
   const role = session?.data?.session?.user?.user_metadata?.role;
+  const no_hp = session?.data?.session?.user?.user_metadata?.no_hp;
 
   if (urlSegment === "operator") {
     if (role === "operator") {
@@ -21,7 +22,11 @@ export async function middleware(req: NextRequest) {
 
   if (urlSegment === "mhs") {
     if (role === "mahasiswa") {
-      return res;
+      if (no_hp) {
+        return res;
+      } else {
+        return NextResponse.redirect(new URL("/profile", req.url));
+      }
     } else {
       return NextResponse.redirect(new URL("/", req.url));
     }

@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
-import { generateMhs } from "@/actions/auth";
+import { generateMhs } from "./form-submit";
 import { Dosen } from "@/data/dosen";
 
 export default function GenerateMhs({ dosen }: { dosen: Dosen[] }) {
@@ -21,28 +21,70 @@ export default function GenerateMhs({ dosen }: { dosen: Dosen[] }) {
         <div className="flex-col ml-16 mt-8">
           <div className="flex w-full">
             <p>
-              <label className="mt-5 flex items-center w-60 p-10" htmlFor="no_induk">NIM</label>
+              <label
+                className="mt-5 flex items-center w-60 p-10"
+                htmlFor="nama"
+              >
+                Nama
+              </label>
             </p>
             <div className="mt-5 flex items-center ml-24">
-              <input className="w-96 p-1 border border-gray-300 bg-white" type="text" name="no_induk" id="no_induk" placeholder="Add text"/>
-            </div>
-          </div>
-          
-          <div className="flex w-full -mt-10">
-            <p>
-              <label className="flex items-center w-60 p-10" htmlFor="angkatan">Angkatan</label>
-            </p> 
-            <div className="flex items-center ml-24">
-              <input className="w-96 p-1 border border-gray-300 bg-white" type="text" name="angkatan" id="angkatan" placeholder="Add Text"/>
+              <input
+                className="w-96 p-1 border border-gray-300 bg-white"
+                type="text"
+                name="nama"
+                id="nama"
+                placeholder="Nama lengkap mahasiswa..."
+              />
             </div>
           </div>
 
           <div className="flex w-full -mt-10">
             <p>
-              <label className="flex items-center w-60 p-10" htmlFor="status">Status</label>
+              <label className="mt-5 flex items-center w-60 p-10" htmlFor="nim">
+                NIM
+              </label>
+            </p>
+            <div className="mt-5 flex items-center ml-24">
+              <input
+                className="w-96 p-1 border border-gray-300 bg-white"
+                type="text"
+                name="nim"
+                id="nim"
+                placeholder="Add text"
+              />
+            </div>
+          </div>
+
+          <div className="flex w-full -mt-10">
+            <p>
+              <label className="flex items-center w-60 p-10" htmlFor="angkatan">
+                Angkatan
+              </label>
             </p>
             <div className="flex items-center ml-24">
-              <select className="w-96 p-1 border border-gray-300 bg-white" name="status" id="status">
+              <input
+                className="w-96 p-1 border border-gray-300 bg-white"
+                type="number"
+                name="angkatan"
+                id="angkatan"
+                placeholder="Add Text"
+              />
+            </div>
+          </div>
+
+          <div className="flex w-full -mt-10">
+            <p>
+              <label className="flex items-center w-60 p-10" htmlFor="status">
+                Status
+              </label>
+            </p>
+            <div className="flex items-center ml-24">
+              <select
+                className="w-96 p-1 border border-gray-300 bg-white"
+                name="status"
+                id="status"
+              >
                 <option value="Pilih">Pilih Status</option>
                 <option value="Aktif">Aktif</option>
                 <option value="Cuti">Cuti</option>
@@ -55,10 +97,19 @@ export default function GenerateMhs({ dosen }: { dosen: Dosen[] }) {
 
           <div className="flex w-full -mt-10">
             <p>
-            <label className="flex items-center w-60 p-10" htmlFor="doswal_nip">Dosen Wali</label>
+              <label
+                className="flex items-center w-60 p-10"
+                htmlFor="doswal_nip"
+              >
+                Dosen Wali
+              </label>
             </p>
             <div className="flex items-center ml-24">
-              <select className="w-96 p-1 border border-gray-300 bg-white" name="doswal_nip" id="doswal_nip">
+              <select
+                className="w-96 p-1 border border-gray-300 bg-white"
+                name="doswal_nip"
+                id="doswal_nip"
+              >
                 {dosen.map((d) => (
                   <option key={d.nip} value={d.nip}>
                     {d.nama}
@@ -67,14 +118,14 @@ export default function GenerateMhs({ dosen }: { dosen: Dosen[] }) {
               </select>
             </div>
           </div>
-
         </div>
 
         <div className="flex w-full justify-end">
           <div className="flex items-center mr-20">
             <button
               disabled={pending}
-              className="mb-10 bg-green-500 hover:bg-green-600 text-white font-semibold px-7 py-2 rounded">
+              className="mb-10 bg-green-500 hover:bg-green-600 text-white font-semibold px-7 py-2 rounded"
+            >
               {pending ? "Loading..." : "Generate"}
             </button>
           </div>
