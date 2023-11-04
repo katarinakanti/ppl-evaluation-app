@@ -20,43 +20,40 @@ return (
         <div className="flex-col flex w-11/12">
         <div className="flex w-full mb-8">
             <div className="text-2xl font-semibold flex items-center justify-center bg-gray-300 w-14 h-20 p-4">
-            1
             </div>
             <div className="flex items-center bg-gray-200 w-full h-20 p-4">
             <div>
-                {/* <Link href="/dosen/irs/1"> */}
+                <Link href="/dosen/irs/angkatan">
                 <p className="text-lg mb-1 font-sans font-semibold text-left">
                     Angkatan 2019
                 </p>
                 <p className="text-sm font-sans font-extralight">
                     Jumlah Mahasiswa : 170 | Mahasiswa Anda : 70 | Sudah PKL : 2
                 </p>
-                {/* </Link> */}
+                </Link>
             </div>
             </div>
         </div>
 
         <div className="flex w-full mb-8">
             <div className=" text-2xl font-semibold flex items-center justify-center bg-gray-300 w-14 h-20 p-4">
-            2
             </div>
             <div className="flex items-center bg-gray-200 w-full h-20 p-4">
             <div>
-                {/* <Link href="/dosen/irs/2"> */}
+                <Link href="/dosen/irs/angkatan">
                 <p className="text-lg mb-1 font-sans font-semibold text-left">
                     Angkatan 2020
                 </p>
                 <p className="text-sm font-sans font-extralight">
                     Jumlah Mahasiswa : 168 | Mahasiswa Anda : 70 | Sudah PKL : 2
                 </p>
-                {/* </Link> */}
+                </Link>
             </div>
             </div>
         </div>
 
         <div className="flex w-full">
             <div className="text-2xl font-semibold flex items-center justify-center bg-gray-300 w-14 h-20 p-4">
-            3
             </div>
             <div className="flex items-center bg-gray-200 w-full h-20 p-4 mb-10">
             <div>
