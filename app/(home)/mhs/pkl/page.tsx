@@ -1,8 +1,28 @@
-// import "./pkl.css";
+// import CreatePkl from "./create/form";
+import {fetchPklByNimById } from "@/data/pkl";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import Link from "next/link";
 
-export default function Page() {
+export default async function Page({
+  params,
+}: {
+  params: { nim: string };
+}) {
+  const supabase = createServerComponentClient<Database>({ cookies });
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  const no_induk = session?.user.user_metadata.no_induk;
+
+  const pkl = await fetchPklByNimById(
+    session!.user.user_metadata.no_induk,
+    Number(params.nim)
+  );
+
   return (
     <>
+      {/* <CreatePkl /> */}
       <link rel="stylesheet" href="view.css" />
       <div className="text-center mt-10 text-3xl font-semibold">
         <h2>Praktek Kerja Lapangan (PKL)</h2>
@@ -19,80 +39,55 @@ export default function Page() {
               </p>
             </div>
             <div className="flex items-center ml-32">
-              <select
-                className="p-2 border border-gray-300 bg-white"
-                name="dospem"
-                id="dospem"
-              >
-                <option>Pilih Dosen Pembimbing</option>
-                <option value="1">Guruh Aryotejo, S.Kom., M.Sc.</option>
-                <option value="2">Budi Prasetyo, S.Kom,. M.Kom.</option>
-                <option value="3">Dinda Mustika, S.Kom., M.Sc.</option>
-                <option value="4">Putri Ayu, S.Kom., M.Kom.</option>
-                <option value="5">Gusti Wiranto, S.Kom., M. Sc.</option>
-              </select>
+              {" "}
+              :<p className="ml-10">{pkl.dosen_pembimbing}</p>
             </div>
           </div>
 
           <div className="flex w-full -mt-10">
-            <p className="flex items-center w-60 p-10 font-semibold">Waktu</p>
+            <p className="flex items-center w-60 p-10 font-semibold">
+              Waktu PKL</p>
             <div className="flex items-center ml-32">
-              <input
-                className="p-2 border border-gray-300 bg-white"
-                type="number"
-                id="waktu"
-                name="waktu"
-                placeholder="dalam bulan"
-              />
-                        {" "}
+              :<p className="ml-10">{pkl.waktu_pkl}</p>
             </div>
           </div>
 
           <div className="flex w-full -mt-10">
-            <p className="flex items-center w-60 p-10 font-semibold">Status</p>
+            <p className="flex items-center w-60 p-10 font-semibold">
+              Status PKL</p>
             <div className="flex items-center ml-32">
-              <select
-                className="p-2 border border-gray-300 bg-white"
-                name="status"
-                id="Status"
-              >
-                <option>Masukkan Status PKL</option>
-                <option value="belumPKL">Belum PKL</option>
-                <option value="sedangPKL">Sedang PKL</option>
-                <option value="sudahPKL">Sudah PKL</option>
-              </select>
-                        {" "}
+              :<p className="ml-10">{pkl.status_pkl}</p> 
             </div>
           </div>
 
           <div className="flex w-full -mt-10">
-            <p className="flex items-center w-60 p-10 font-semibold">Nilai</p>
+            <p className="flex items-center w-60 p-10 font-semibold">
+              Nilai</p>
             <div className="flex items-center ml-32">
-              <select
-                className="p-2 border border-gray-300 bg-white"
-                name="nilai"
-                id="nilai"
-              >
-                <option>Masukkan Nilai</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-                <option value="E">E</option>
-              </select>
-                        {" "}
+              :<p className="ml-10">{pkl.nilai_pkl}</p>
             </div>
           </div>
 
-          <div className="flex w-full mt-7">
-            <button className="w-60 h-10 ml-10 bg-white hover:bg-blue-100 text-blue-400 border border-blue-400 font-semibold rounded">
-              Upload Berita Acara PKL
+          <div className="flex w-full -mt-10">
+              <div>
+                <p className="flex items-center w-60 p-10 font-semibold">
+                  Status Verifikasi
+                </p>
+              </div>
+              <div className="flex items-center ml-40">
+                :
+                <p className="ml-10">
+                  {pkl.status_verifikasi_id === 1
+                    ? "Diproses"
+                    : "Sudah diverifikasi"}
+                </p>
+              </div>
+            </div>
+        
+          <div className="flex w-full mt-5 mb-10 ml-10">
+            <button className="bg-white hover:bg-blue-100 text-green-400 border border-green-400 px-5 py-1 font-semibold rounded mb-5">
+              <Link href="/mhs/pkl/create">Ubah</Link>
             </button>
-                {" "}
-          </div>
-          <div className="flex w-full mt-5 mb-10">
-            <button className="ml-10 btn-primary">Simpan</button>
-                {" "}
           </div>
         </div>
       </div>
