@@ -55,7 +55,7 @@ export default async function Page() {
 
       <div className="mx-auto bg-gray-100 w-10/12 h-fit">
         <div className="flex mx-auto pt-14">
-          <div className="flex items-center ml-24 justify-center">
+          <div className="flex ml-24">
             <div className="flex-col ml-5">
               <img
                 src="/img/slide1.jpg"
