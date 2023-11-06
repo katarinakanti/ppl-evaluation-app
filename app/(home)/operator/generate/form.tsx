@@ -80,7 +80,8 @@ export default function GenerateMhs({ dosen }: { dosen: Dosen[] }) {
               </label>
             </p>
             <div className="flex items-center ml-24">
-              <select
+              <p>Aktif</p>
+              {/* <select
                 className="w-96 p-1 border border-gray-300 bg-white"
                 name="status"
                 id="status"
@@ -91,7 +92,7 @@ export default function GenerateMhs({ dosen }: { dosen: Dosen[] }) {
                 <option value="Mangkir">Mangkir</option>
                 <option value="Lulus">Lulus</option>
                 <option value="Drop Out">Drop Out</option>
-              </select>
+              </select> */}
             </div>
           </div>
 

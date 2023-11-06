@@ -93,28 +93,3 @@ export default async function Page() {
   );
 }
 
-{
-  /* <div className="flex items-center ml-10">
-          <div>
-            <button>
-              <p className="text-xl mb-5 font-arial font-semibold text-left">
-                Abigail Metanoia Melody
-              </p>
-
-              <div className="flex flex-col">
-                <div className="flex w-full font-medium justify-between">
-                  <p className="text-sm font-arial font-extralight">
-                    NIM : 240601211200038
-                  </p>
-                </div>
-                <div>
-                  <p className="flex w-full mt-5 text-left text-sm c font-extralight">
-                    Informatika
-                  </p>
-                </div>
-              </div>
-
-            </button>
-          </div>
-        </div> */
-}
