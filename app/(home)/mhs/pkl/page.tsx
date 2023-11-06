@@ -58,7 +58,7 @@ export default async function Page({ params }: { params: { nim: string } }) {
 
             <div className="flex w-full -mt-10">
               <div>
-                <p className="flex items-center w-60 p-10 font-semibold">
+                <p className="flex items-center w-52 p-10 font-semibold">
                   Status Verifikasi
                 </p>
               </div>
@@ -76,7 +76,7 @@ export default async function Page({ params }: { params: { nim: string } }) {
               <button className="bg-white hover:bg-blue-100 text-green-400 border border-green-400 px-5 py-1 font-semibold rounded mb-5">
                 <Link href="/mhs/pkl/edit">Ubah</Link>
               </button>
-              <button className="bg-white hover:bg-blue-100 text-blue-400 border border-blue-400 px-5 py-1 font-semibold rounded mb-5">
+              <button className="ml-5 bg-white hover:bg-blue-100 text-blue-400 border border-blue-400 px-5 py-1 font-semibold rounded mb-5">
                 <a target="_blank" href={getFileUrl(pkl.scan_pkl)}>
                   Scan PKL
                 </a>
