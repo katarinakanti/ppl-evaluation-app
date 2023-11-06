@@ -48,7 +48,6 @@ export default function Page() {
                 name="semester"
                 placeholder="Semester"
               />
-                       
             </div>
           </div>
 

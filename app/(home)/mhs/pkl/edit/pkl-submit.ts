@@ -7,11 +7,10 @@ import { PklSchema } from "@/data/pkl";
 import { PklState } from "@/data/pkl";
 import { z } from "zod";
 
-const CreatePklSchema = PklSchema.pick({
+const EditPklSchema = PklSchema.pick({
   dosen_pembimbing_nip: true,
   waktu_pkl: true,
   nilai_pkl: true,
-  semester: true,
 });
 
 const MAX_FILE_SIZE = 500000;
@@ -28,18 +27,29 @@ const FileSchema = z.object({
 });
 
 const MergedSchema = z.object({
-  ...CreatePklSchema.shape,
+  ...EditPklSchema.shape,
   ...FileSchema.shape,
 });
 
-export async function createPkl(prevState: PklState, formData: FormData) {
-  const validatedFields = MergedSchema.safeParse({
+export async function updatePkl(prevState: PklState, formData: FormData) {
+  const fileUpload = formData.get("file");
+
+  const isFileUploaded =
+    fileUpload instanceof File &&
+    fileUpload.size > 0 &&
+    fileUpload.type !== "application/octet-stream";
+
+  const dataToValidate = {
     dosen_pembimbing_nip: formData.get("dosen_pembimbing_nip"),
-    semester: formData.get("semester"),
     waktu_pkl: formData.get("waktu_pkl"),
+    status_pkl: formData.get("status_pkl"),
     nilai_pkl: formData.get("nilai_pkl"),
-    file: formData.get("file"),
-  });
+    ...(isFileUploaded && { file: fileUpload }),
+  };
+
+  const validatedFields = (
+    isFileUploaded ? MergedSchema : EditPklSchema
+  ).safeParse(dataToValidate);
 
   if (!validatedFields.success) {
     console.log(validatedFields.error);
@@ -49,39 +59,45 @@ export async function createPkl(prevState: PklState, formData: FormData) {
     };
   }
 
-  const { dosen_pembimbing_nip, waktu_pkl, nilai_pkl, semester, file } =
-    validatedFields.data;
+  const { dosen_pembimbing_nip, waktu_pkl, nilai_pkl } = validatedFields.data;
 
   try {
     const {
       data: { session },
     } = await supabase.auth.getSession();
 
-    const nim = session?.user.user_metadata.no_induk;
+    const nim = session?.user?.user_metadata.no_induk;
 
-    const { data: upload_file, error: file_error } = await supabase.storage
-      .from("ppl")
-      .upload(`pkl/${nim}`, file, {
-        cacheControl: "3600",
-        upsert: true,
-      });
+    if (isFileUploaded) {
+      const { data: upload_file, error: file_error } = await supabase.storage
+        .from("ppl")
+        .update(`pkl/${nim}`, fileUpload, {
+          cacheControl: "3600",
+          upsert: true,
+        });
 
-    const { data, error } = await supabase.from("pkl").insert([
-      {
-        nim,
-        dosen_pembimbing_nip,
-        waktu_pkl,
-        nilai_pkl,
-        semester,
-        scan_pkl: upload_file!.path,
-      },
-    ]);
+      if (file_error) throw file_error;
+    }
+
+    const record = {
+      dosen_pembimbing_nip,
+      waktu_pkl,
+      nilai_pkl,
+    };
+
+    const { data, error } = await supabase
+      .from("pkl")
+      .update(record)
+      .eq("nim", nim);
+
+    if (error) throw error;
   } catch (e) {
-    console.error("Failed to create PKL: ", e);
     return {
       message: "Ada kesalahan dalam pembuatan PKL.",
     };
   }
   revalidatePath("/mhs/pkl");
   redirect("/mhs/pkl");
+
+  return { message: "PKL berhasil diperbarui." };
 }

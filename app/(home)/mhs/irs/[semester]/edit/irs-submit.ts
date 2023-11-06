@@ -1,7 +1,7 @@
 "use server";
 import { serverActionAdminSupabase as supabase } from "@/lib/supabaseClient";
 import { revalidatePath } from "next/cache";
-import { redirect, RedirectType } from "next/navigation";
+import { redirect } from "next/navigation";
 
 import { IrsSchema } from "@/data/irs";
 import { IrsState } from "@/data/irs";
@@ -19,7 +19,7 @@ const FileSchema = z.object({
   file: z
     .any()
     .optional()
-    .refine((files) => files?.size <= MAX_FILE_SIZE, `Max file size is 5MB.`)
+    .refine((files) => files?.size <= MAX_FILE_SIZE, `Max file size is 500KB.`)
     .refine(
       (files) => files?.type === ACCEPTED_FILE_TYPE,
       "Only .pdf format is supported."
@@ -34,7 +34,6 @@ const MergedSchema = z.object({
 // TODO: fix the update
 export async function updateIrs(prevState: IrsState, formData: FormData) {
   const fileUpload = formData.get("file");
-
   // Assuming fileUpload is a File object when a file is uploaded and `null` otherwise
   const isFileUploaded =
     fileUpload instanceof File &&
@@ -49,7 +48,9 @@ export async function updateIrs(prevState: IrsState, formData: FormData) {
   };
 
   // Validate the data
-  const validatedFields = MergedSchema.safeParse(dataToValidate);
+  const validatedFields = (
+    isFileUploaded ? MergedSchema : EditIrsSchema
+  ).safeParse(dataToValidate);
 
   if (!validatedFields.success) {
     console.log(validatedFields.error);
@@ -63,12 +64,9 @@ export async function updateIrs(prevState: IrsState, formData: FormData) {
 
   try {
     const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    const nim = user?.user_metadata.no_induk;
-
-    let scan_irs_path;
+      data: { session },
+    } = await supabase.auth.getSession();
+    const nim = session?.user.user_metadata.no_induk;
 
     // If a file is uploaded, we handle the file upload
     if (isFileUploaded) {
@@ -78,10 +76,6 @@ export async function updateIrs(prevState: IrsState, formData: FormData) {
           cacheControl: "3600",
           upsert: true,
         });
-
-      if (file_error) throw file_error;
-
-      scan_irs_path = scan_irs.path;
     }
 
     // Prepare the record to be inserted/updated
@@ -89,7 +83,6 @@ export async function updateIrs(prevState: IrsState, formData: FormData) {
       nim,
       semester,
       sks_diambil,
-      ...(scan_irs_path && { scan_irs: scan_irs_path }), // Include scan_irs path conditionally
     };
 
     const { data, error } = await supabase
@@ -97,6 +90,8 @@ export async function updateIrs(prevState: IrsState, formData: FormData) {
       .update(record)
       .eq("nim", nim)
       .eq("semester", semester);
+
+    console.log(data);
 
     if (error) throw error;
   } catch (e) {

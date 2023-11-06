@@ -26,17 +26,3 @@ export function mapAngkatanAndSmtToWord(angkatan: number, smt: number): string {
 export function getFileUrl(path: string): string {
   return `https://ysqlqkegzdalostasyxo.supabase.co/storage/v1/object/public/ppl/${path}`;
 }
-
-export function groupMahasiswaByAngkatan(mahasiswaData: Array<{ angkatan: number }>) {
-  const groupedByAngkatan: Record<number, Array<{ angkatan: number }>> = {};
-
-  mahasiswaData.forEach((mahasiswa) => {
-    const angkatan = mahasiswa.angkatan;
-    if (!groupedByAngkatan[angkatan]) {
-      groupedByAngkatan[angkatan] = [];
-    }
-    groupedByAngkatan[angkatan].push(mahasiswa);
-  });
-
-  return groupedByAngkatan;
-}

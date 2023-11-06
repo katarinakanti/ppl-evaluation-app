@@ -4,11 +4,13 @@ import { useFormState, useFormStatus } from "react-dom";
 import { updateIrs } from "./irs-submit";
 import { Irs } from "@/data/irs";
 import { getFileUrl } from "@/utils/functions";
+import { Button } from "@/components/Button";
 
 export default function UpdateIrs({ data }: { data: Irs }) {
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(updateIrs, initialState);
   const { pending } = useFormStatus();
+
   return (
     <>
       {/* <link rel="stylesheet" href="view.css" /> */}
@@ -113,14 +115,7 @@ export default function UpdateIrs({ data }: { data: Irs }) {
               )}
             </div>
             <div className="flex w-full mt-5 mb-10">
-              <button
-                disabled={pending}
-                type="submit"
-                className="w-32 h-10 ml-10 bg-white hover:bg-blue-100 text-blue-400 border border-blue-400 px-10 font-semibold rounded"
-              >
-                {pending ? "Saving..." : "Save"}
-              </button>
-                  {" "}
+              <Button />
             </div>
           </div>
         </div>
