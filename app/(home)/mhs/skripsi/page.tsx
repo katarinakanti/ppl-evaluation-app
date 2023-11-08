@@ -1,118 +1,94 @@
-// import "./pkl.css";
+// import CreatePkl from "./create/form";
+import { fetchSkripsiByNim } from "@/data/skripsi";
+import { getFileUrl } from "@/utils/functions";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import Link from "next/link";
 
-export default function Page() {
+export default async function Page({ params }: { params: { nim: string } }) {
+  const supabase = createServerComponentClient<Database>({ cookies });
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  const nim = session?.user.user_metadata.no_induk;
+
+  const skripsi = await fetchSkripsiByNim(nim);
+
   return (
     <>
-      <link rel="stylesheet" href="view.css" />
+      {/* <CreatePkl /> */}
+      {/* <link rel="stylesheet" href="view.css" /> */}
       <div className="text-center mt-10 text-3xl font-semibold">
         <h2>Skripsi</h2>
       </div>
       <div className="mt-10 flex items-center justify-center mx-auto bg-gray-100 border border-gray-500 w-10/12 h-16">
         <p className="text-center">Skripsi</p>
-              
       </div>
+
       <div className="flex items-center  mx-auto bg-gray-100 w-10/12 h-fit">
-        <div className="flex-col ml-8">
-          <div className="flex w-full mt-5">
-            <div>
+        {skripsi ? (
+          <div className="flex-col ml-8">
+            <div className="flex w-full mt-5">
+              <div>
+                <p className="flex items-center w-60 p-10 font-semibold">
+                  Dosen Pembimbing
+                </p>
+              </div>
+              <div className="flex items-center ml-32">
+                {" "}
+                :<p className="ml-10">{skripsi.dosen.nama}</p>
+              </div>
+            </div>
+
+            <div className="flex w-full -mt-10">
               <p className="flex items-center w-60 p-10 font-semibold">
-                Dosen Pembimbing
-              </p>
+              Tanggal Sidang</p>
+              <div className="flex items-center ml-32">
+                :<p className="ml-10">{skripsi.tgl_sidang.toString()}</p>
+              </div>
             </div>
-            <div className="flex items-center ml-32">
-              <select
-                className="p-2 border border-gray-300 bg-white"
-                name="dospem"
-                id="dospem"
-              >
-                <option>Pilih Dosen Pembimbing</option>
-                <option value="1">Guruh Aryotejo, S.Kom., M.Sc.</option>
-                <option value="2">Budi Prasetyo, S.Kom,. M.Kom.</option>
-                <option value="3">Dinda Mustika, S.Kom., M.Sc.</option>
-                <option value="4">Putri Ayu, S.Kom., M.Kom.</option>
-                <option value="5">Gusti Wiranto, S.Kom., M. Sc.</option>
-              </select>
+
+            <div className="flex w-full -mt-10">
+              <p className="flex items-center w-60 p-10 font-semibold">Nilai</p>
+              <div className="flex items-center ml-32">
+                :<p className="ml-10">{skripsi.nilai_skripsi}</p>
+              </div>
+            </div>
+
+            <div className="flex w-full -mt-10">
+              <div>
+                <p className="flex items-center w-52 p-10 font-semibold">
+                  Status Verifikasi
+                </p>
+              </div>
+              <div className="flex items-center ml-40">
+                :
+                <p className="ml-10">
+                  {skripsi.status_verifikasi_id === 1
+                    ? "Diproses"
+                    : "Sudah diverifikasi"}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex w-full mt-5 mb-10 ml-10">
+              <button className="bg-white hover:bg-blue-100 text-green-400 border border-green-400 px-5 py-1 font-semibold rounded mb-5">
+                <Link href="/mhs/skripsi/edit">Ubah</Link>
+              </button>
+              <button className="ml-5 bg-white hover:bg-blue-100 text-blue-400 border border-blue-400 px-5 py-1 font-semibold rounded mb-5">
+                <a target="_blank" href={getFileUrl(skripsi.scan_skripsi)}>
+                  Scan skripsi
+                </a>
+              </button>
             </div>
           </div>
-
-          <div className="flex w-full -mt-10">
-            <div>
-              <p className="flex items-center w-60 p-10 font-semibold">
-                Lama Studi
-              </p>
-            </div>
-            <div className="flex items-center ml-32">
-              <input
-                className="p-2 border border-gray-300 bg-white"
-                type="number"
-                name="semester"
-                placeholder="Semester"
-              />
-            </div>
-          </div>
-
-          <div className="flex w-full -mt-10">
-            <p className="flex items-center w-60 p-10 font-semibold">
-              Tanggal Lulus/Sidang
-            </p>
-            <div className="flex items-center ml-32">
-              <input
-                className="p-2 border border-gray-300 bg-white"
-                type="date"
-                id="tanggal"
-                name="tanggal"
-              />
-                        {" "}
-            </div>
-          </div>
-
-          <div className="flex w-full -mt-10">
-            <p className="flex items-center w-60 p-10 font-semibold">Status</p>
-            <div className="flex items-center ml-32">
-              <select
-                className="p-2 border border-gray-300 bg-white"
-                name="status"
-                id="Status"
-              >
-                <option>Masukkan Status Skripsi</option>
-                <option value="belumSkripsi">Belum Skripsi</option>
-                <option value="sedangSkripsi">Sedang Skripsi</option>
-                <option value="sudahSkripsi">Sudah Skripsi</option>
-              </select>
-                        {" "}
-            </div>
-          </div>
-
-          <div className="flex w-full -mt-10">
-            <p className="flex items-center w-60 p-10 font-semibold">Nilai</p>
-            <div className="flex items-center ml-32">
-              <select
-                className="p-2 border border-gray-300 bg-white"
-                name="nilai"
-                id="nilai"
-              >
-                <option>Masukkan Nilai</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-                <option value="E">E</option>
-              </select>
-                        {" "}
-            </div>
-          </div>
-
-          <div className="flex w-full mt-7">
-            <button className="w-60 h-10 ml-10 bg-white hover:bg-blue-100 text-blue-400 border border-blue-400 font-semibold rounded">
-              Upload Berita Acara Skripsi
+        ) : (
+          <div className="flex w-full mt-5 mb-10 ml-10">
+            <button className="bg-white hover:bg-blue-100 text-green-400 border border-green-400 px-5 py-1 font-semibold rounded mb-5">
+              <Link href="/mhs/skripsi/create">Isi Form Skripsi</Link>
             </button>
-                {" "}
           </div>
-          <div className="flex w-full mt-5 mb-10">
-            <button className="ml-10 btn-primary">Simpan</button>
-                {" "}
-          </div>
-        </div>
+        )}
       </div>
     </>
   );

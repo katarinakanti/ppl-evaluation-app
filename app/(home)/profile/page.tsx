@@ -55,7 +55,7 @@ export default async function Page() {
 
       <div className="mx-auto bg-gray-100 w-10/12 h-fit">
         <div className="flex mx-auto pt-14">
-          <div className="flex items-center ml-24 justify-center">
+          <div className="flex ml-24">
             <div className="flex-col ml-5">
               <img
                 src="/img/slide1.jpg"
@@ -93,28 +93,3 @@ export default async function Page() {
   );
 }
 
-{
-  /* <div className="flex items-center ml-10">
-          <div>
-            <button>
-              <p className="text-xl mb-5 font-arial font-semibold text-left">
-                Abigail Metanoia Melody
-              </p>
-
-              <div className="flex flex-col">
-                <div className="flex w-full font-medium justify-between">
-                  <p className="text-sm font-arial font-extralight">
-                    NIM : 240601211200038
-                  </p>
-                </div>
-                <div>
-                  <p className="flex w-full mt-5 text-left text-sm c font-extralight">
-                    Informatika
-                  </p>
-                </div>
-              </div>
-
-            </button>
-          </div>
-        </div> */
-}

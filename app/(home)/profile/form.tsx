@@ -86,11 +86,23 @@ export default function UserForm({
             <tbody>
               <tr>
                 <th className="w-56">NIM</th>
-                <td>{session.user.user_metadata.no_induk}</td>
+                <td>
+                  {session.user.user_metadata.no_induk}
+                  </td>
               </tr>
               <tr>
                 <th>Nama Lengkap</th>
-                <td>{session.user.user_metadata.nama}</td>
+                <td>
+                  {/* {session.user.user_metadata.nama} */}
+                  <input
+                    className="p-2 border border-gray-300 bg-white"
+                    type="text"
+                    placeholder="Nama Lengkap"
+                    name="nama"
+                    defaultValue={mahasiswaData.nama}
+                    required
+                  />
+                </td>
               </tr>
               <tr>
                 <th>Angkatan</th>

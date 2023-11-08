@@ -13,7 +13,7 @@ export const Button = () => {
                 disabled:opacity-50 disabled:cursor-not-allowed
                 "
     >
-      {pending ? "Saving..." : "Save"}
+      {pending ? "Saving..." : "Simpan"}
     </button>
   );
 };
