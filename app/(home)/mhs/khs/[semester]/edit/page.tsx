@@ -1,8 +1,8 @@
-import { fetchIrsByNimBySem } from "@/data/irs";
+import { fetchKhsByNimBySem } from "@/data/khs";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
-import UpdateIrs from "./form";
+import UpdateKhs from "./form";
 
 export default async function Page({
   params,
@@ -15,14 +15,11 @@ export default async function Page({
   } = await supabase.auth.getSession();
   const no_induk = session?.user.user_metadata.no_induk;
 
-  const irsSemester = await fetchIrsByNimBySem(
-    no_induk,
-    Number(params.semester)
-  );
+  const khsData = await fetchKhsByNimBySem(no_induk, Number(params.semester));
 
   return (
     <>
-      <UpdateIrs data={irsSemester} />
+      <UpdateKhs data={khsData} />
     </>
   );
 }

@@ -1,26 +1,28 @@
 "use server";
 import { serverActionAdminSupabase as supabase } from "@/lib/supabaseClient";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { redirect, RedirectType } from "next/navigation";
 
-import { IrsSchema } from "@/data/irs";
-import { IrsState } from "@/data/irs";
+import { KhsSchema } from "@/data/khs";
+import { KhsState } from "@/data/khs";
 import { z } from "zod";
 import { FileSchema } from "@/data/file";
 
-const EditIrsSchema = IrsSchema.pick({
+const EditKhsSchema = KhsSchema.pick({
   semester: true,
-  sks_diambil: true,
+  sks_semester: true,
+  ip_semester: true,
+  sks_kumulatif: true,
+  ip_kumulatif: true,
 });
 
 const MergedSchema = z.object({
-  ...EditIrsSchema.shape,
+  ...EditKhsSchema.shape,
   ...FileSchema.shape,
 });
 
-export async function updateIrs(prevState: IrsState, formData: FormData) {
+export async function updateKhs(prevState: KhsState, formData: FormData) {
   const fileUpload = formData.get("file");
-  // Assuming fileUpload is a File object when a file is uploaded and `null` otherwise
   const isFileUploaded =
     fileUpload instanceof File &&
     fileUpload.size > 0 &&
@@ -29,24 +31,28 @@ export async function updateIrs(prevState: IrsState, formData: FormData) {
   // Prepare your validation data. If the file is not uploaded, it will not be included in the validation
   const dataToValidate = {
     semester: formData.get("semester"),
-    sks_diambil: formData.get("sks_diambil"),
+    sks_semester: formData.get("sks_semester"),
+    ip_semester: formData.get("ip_semester"),
+    sks_kumulatif: formData.get("sks_kumulatif"),
+    ip_kumulatif: formData.get("ip_kumulatif"),
     ...(isFileUploaded && { file: fileUpload }),
   };
 
   // Validate the data
   const validatedFields = (
-    isFileUploaded ? MergedSchema : EditIrsSchema
+    isFileUploaded ? MergedSchema : EditKhsSchema
   ).safeParse(dataToValidate);
 
   if (!validatedFields.success) {
     console.log(validatedFields.error);
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: "Ada kesalahan dalam pengisian form.",
+      message: "There was an error in form submission.",
     };
   }
 
-  const { semester, sks_diambil } = validatedFields.data; // Don't destructure file here
+  const { semester, sks_semester, ip_semester, sks_kumulatif, ip_kumulatif } =
+    validatedFields.data; // Don't destructure file here
 
   try {
     const {
@@ -56,23 +62,27 @@ export async function updateIrs(prevState: IrsState, formData: FormData) {
 
     // If a file is uploaded, we handle the file upload
     if (isFileUploaded) {
-      const { data: scan_irs, error: file_error } = await supabase.storage
-        .from("ppl")
-        .upload(`irs/${nim}_${semester}`, fileUpload, {
+      const { data: scan_khs, error: file_error } = await supabase.storage
+        .from("khs-folder")
+        .upload(`khs/${nim}_${semester}`, fileUpload, {
           cacheControl: "3600",
           upsert: true,
         });
+
+      if (file_error) throw file_error;
     }
 
     // Prepare the record to be inserted/updated
     const record = {
-      nim,
-      semester,
-      sks_diambil,
+      sks_semester,
+      ip_semester,
+      sks_kumulatif,
+      ip_kumulatif,
+      ...(isFileUploaded && { file_url: `khs/${nim}_${semester}` }), // Add the file URL if a file is uploaded
     };
 
     const { data, error } = await supabase
-      .from("irs")
+      .from("khs")
       .update(record)
       .eq("nim", nim)
       .eq("semester", semester);
@@ -81,15 +91,15 @@ export async function updateIrs(prevState: IrsState, formData: FormData) {
   } catch (e) {
     console.error(e); // Log the error for debugging purposes
     return {
-      message: "Ada kesalahan dalam pembuatan IRS.",
+      message: "There was an error updating the KHS.",
       error: e,
     };
   }
 
   // Assuming revalidatePath and redirect are functions you have defined elsewhere:
-  revalidatePath("/mhs/irs");
-  redirect("/mhs/irs");
+  revalidatePath("/mhs/khs");
+  redirect("/mhs/khs");
 
   // Optionally return something indicating success
-  return { message: "IRS berhasil diperbarui." };
+  return { message: "KHS successfully updated." };
 }
