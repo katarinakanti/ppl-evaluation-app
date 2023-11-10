@@ -8,13 +8,13 @@ export default async function Page() {
     const supabase = createServerComponentClient<Database>({ cookies });
     const {
         data: { session },
-      } = await supabase.auth.getSession();
+    } = await supabase.auth.getSession();
     
     const MhsData = await fetchMhsByNip(session!.user.user_metadata.no_induk)
     
     const MhsDataNumber = MhsData.map((mahasiswa) => ({
         angkatan: Number(mahasiswa.angkatan),
-      }));
+    }));
     const groupAngkatan = groupMahasiswaByAngkatan(MhsDataNumber);
 return (
 <div>
@@ -45,7 +45,7 @@ return (
                                 Angkatan {angkatan}
                             </p>
                             <p className="text-sm font-sans font-extralight">
-                                Jumlah Mahasiswa Anda : {groupAngkatan[angkatanNumber].length} | Sudah PKL : 2
+                                Jumlah Mahasiswa Anda : {groupAngkatan[angkatanNumber].length} 
                             </p>
                             </Link>
                         </div>

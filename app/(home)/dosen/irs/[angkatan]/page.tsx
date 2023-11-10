@@ -1,22 +1,31 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { fetchMhsByNip } from "@/data/dosen";
+import { groupMahasiswaByAngkatan } from "@/utils/functions";
 import { fetchMhsByNipByAngkt } from "@/data/dosen";
 import Link from "next/link";
 
 export default async function Page({
     params,
-  }: {
+}: {
     params: { angkatan: number };
-  }) {
+}) {
     const supabase = createServerComponentClient<Database>({ cookies });
     const {
-      data: { session },
+    data: { session },
     } = await supabase.auth.getSession();
-  
+
     const MhsPerAngkatan = await fetchMhsByNipByAngkt(
-      session!.user.user_metadata.no_induk,
-      Number(params.angkatan)
-    );
+    session!.user.user_metadata.no_induk,
+    Number(params.angkatan)
+);    
+    const MhsData = await fetchMhsByNip(session!.user.user_metadata.no_induk)
+    
+    const MhsDataNumber = MhsData.map((mahasiswa) => ({
+        angkatan: Number(mahasiswa.angkatan),
+    }));
+    const groupAngkatan = groupMahasiswaByAngkatan(MhsDataNumber);
+
 return (
     <>
     <div className="text-center mt-10 text-3xl font-semibold">
@@ -34,10 +43,15 @@ return (
                     <p className="text-xl flex items-center font-semibold">
                         Angkatan {params.angkatan}
                     </p>
-                    <div className="flex">
-                        <p className="text-sm flex items-center mt-5">Jumlah Mahasiswa Perwalian Anda : 170</p>
-                        <p className="ml-12 text-sm flex items-center mt-5">Sudah PKL : 2</p>
-                    </div>
+                    {Object.keys(groupAngkatan).map((angkatan) => {
+                        const angkatanNumber = parseInt(angkatan, 10); // Mengonversi string ke number
+                    return (
+                            <div className="flex">
+                                <p className="text-sm flex items-center mt-5">Jumlah Mahasiswa Perwalian Anda : {groupAngkatan[angkatanNumber].length}</p>
+                                {/* <p className="ml-12 text-sm flex items-center mt-5">Sudah PKL : 2</p> */}
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
             <div className="flex justify-end mt-10 mb-10 mr-12">

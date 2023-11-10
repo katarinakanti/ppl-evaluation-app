@@ -5,6 +5,7 @@ import { getFileUrl } from "@/utils/functions";
 import { useState, useEffect } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface VerifikasiIRSComponentProps {
   irs: Irs;
@@ -104,6 +105,14 @@ export default function VerifikasiIrs({ irs }: VerifikasiIRSComponentProps) {
               </a>
                   {" "}
             </div>
+            <div className="flex w-full mt-7">
+              <a target="_blank" href={`/dosen/irs/${irs.nim}/${irs.semester}/edit`}>
+                <button className="w-32 h-10 ml-10 bg-white hover:bg-pink-100 text-orange-400 border border-orange-400 font-semibold rounded">
+                  Ubah
+                </button>
+              </a>
+                  {" "}
+            </div>
             <div className="flex w-full mt-5 mb-10">
               <button
                 onClick={handleClick}
@@ -111,7 +120,7 @@ export default function VerifikasiIrs({ irs }: VerifikasiIRSComponentProps) {
                 disabled:opacity-50 disabled:cursor-not-allowed text-center"
               >
                 {status}
-              </button>
+              </button>  
                   {" "}
             </div>
           </div>
