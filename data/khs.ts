@@ -36,7 +36,7 @@ export type KhsState = {
   errors?: {
     nim?: string[];
     semester?: string[];
-    scan_irs?: string[];
+    scan_khs?: string[];
     status_verifikasi_id?: string[];
     sks_semester?: string[];
     ip_semester?: string[];
