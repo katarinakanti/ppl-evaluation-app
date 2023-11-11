@@ -8,10 +8,10 @@ export type Dosen = {
 };
 
 export type Mhs = {
-  nim: string[];
-  angkatan : string [];
-  doswal_nip : string [];
-  nama : string[]
+  nim: string;
+  angkatan: string;
+  doswal_nip: string;
+  nama: string;
 };
 
 export async function fetchAllDosen(): Promise<Dosen[]> {
@@ -95,7 +95,7 @@ export async function fetchMhsByNipByAngkt(
       `
       )
       .eq("doswal_nip", nip)
-      .eq("angkatan", angkatan)
+      .eq("angkatan", angkatan);
     if (!mahasiswa.data) {
       throw new Error("irs not found");
     }
@@ -106,10 +106,10 @@ export async function fetchMhsByNipByAngkt(
   }
 }
 
-export async function handleApprovalClick(nim : string) {
+export async function handleApprovalClick(nim: string) {
   const { data, error } = await supabase
     .from("mahasiswa")
-    .update({ status_verifikasi_id: 2 }) 
+    .update({ status_verifikasi_id: 2 })
     .eq("nim", nim);
   if (error) {
     console.error("Gagal mengubah status verifikasi:", error);
@@ -117,7 +117,3 @@ export async function handleApprovalClick(nim : string) {
     console.log("Status verifikasi berhasil diubah");
   }
 }
-
-
-
-

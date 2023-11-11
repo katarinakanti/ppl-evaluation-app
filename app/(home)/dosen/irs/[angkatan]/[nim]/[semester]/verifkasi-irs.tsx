@@ -9,9 +9,13 @@ import Link from "next/link";
 
 interface VerifikasiIRSComponentProps {
   irs: Irs;
+  angkatan: string;
 }
 
-export default function VerifikasiIrs({ irs }: VerifikasiIRSComponentProps) {
+export default function VerifikasiIrs({
+  irs,
+  angkatan,
+}: VerifikasiIRSComponentProps) {
   const router = useRouter();
   const supabase = createClientComponentClient();
   const [status, setStatus] = useState<"Approve" | "Disapprove" | "Loading">(
@@ -30,8 +34,6 @@ export default function VerifikasiIrs({ irs }: VerifikasiIRSComponentProps) {
       setStatus(status === "Approve" ? "Disapprove" : "Approve");
       router.refresh();
     }
-    // revalidatePath(`/dosen/irs/${angkatan}/${irs.nim}/${irs.semester}`);
-    // redirect(`/dosen/irs/${angkatan}/${irs.nim}/${irs.semester}`);
   };
 
   useEffect(() => {
@@ -106,11 +108,13 @@ export default function VerifikasiIrs({ irs }: VerifikasiIRSComponentProps) {
                   {" "}
             </div>
             <div className="flex w-full mt-7">
-              <a target="_blank" href={`/dosen/irs/${irs.nim}/${irs.semester}/edit`}>
+              <Link
+                href={`/dosen/irs/${angkatan}/${irs.nim}/${irs.semester}/edit`}
+              >
                 <button className="w-32 h-10 ml-10 bg-white hover:bg-pink-100 text-orange-400 border border-orange-400 font-semibold rounded">
                   Ubah
                 </button>
-              </a>
+              </Link>
                   {" "}
             </div>
             <div className="flex w-full mt-5 mb-10">
@@ -120,7 +124,7 @@ export default function VerifikasiIrs({ irs }: VerifikasiIRSComponentProps) {
                 disabled:opacity-50 disabled:cursor-not-allowed text-center"
               >
                 {status}
-              </button>  
+              </button>
                   {" "}
             </div>
           </div>

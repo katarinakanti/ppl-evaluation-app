@@ -1,28 +1,20 @@
-    import { fetchIrsByNimBySem } from "@/data/irs";
-    import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-    import { cookies } from "next/headers";
-    import Link from "next/link";
-    import UpdateIrs from "./form";
+import { fetchIrsByNimBySem } from "@/data/irs";
+import Link from "next/link";
+import UpdateIrs from "./form";
 
-    export default async function Page({
-    params,
-    }: {
-    params: { semester: string };
-    }) {
-    const supabase = createServerComponentClient<Database>({ cookies });
-    const {
-    data: { session },
-    } = await supabase.auth.getSession();
-        const no_induk = session?.user.user_metadata.no_induk;
+export default async function Page({
+  params,
+}: {
+  params: { angkatan: string; nim: string; semester: string };
+}) {
+  const irsSemester = await fetchIrsByNimBySem(
+    params.nim,
+    Number(params.semester)
+  );
 
-        const irsSemester = await fetchIrsByNimBySem(
-        no_induk,
-        Number(params.semester)
-    );
-
-    return (
-        <>
-            <UpdateIrs data={irsSemester} />
-        </>
-    );
+  return (
+    <>
+      <UpdateIrs data={irsSemester} params={params} />
+    </>
+  );
 }

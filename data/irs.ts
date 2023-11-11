@@ -72,6 +72,8 @@ export async function fetchIrsByNimBySem(
       .eq("semester", semester)
       .single();
 
+    console.log("nim, semester", nim, semester);
+
     if (!irs.data) {
       throw new Error("irs not found");
     }
