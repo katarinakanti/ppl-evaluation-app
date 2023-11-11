@@ -11,7 +11,7 @@ export default async function Page({
 
   return (
     <>
-      <Link href={`/dosen/irs/${params.angkatan}/${params.nim}`}>Back</Link>
+      <Link href={`/dosen/irs/${params.angkatan}/${params.nim}`}></Link>
       <VerifikasiIrs irs={data} angkatan={params.angkatan} />
     </>
   );

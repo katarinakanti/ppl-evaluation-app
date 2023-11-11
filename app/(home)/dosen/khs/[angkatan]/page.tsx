@@ -8,7 +8,7 @@ import Link from "next/link";
 export default async function Page({
 params,
 }: {
-params: { angkatan: number };
+params: { angkatan: string};
 }) {
 const supabase = createServerComponentClient<Database>({ cookies });
 const {

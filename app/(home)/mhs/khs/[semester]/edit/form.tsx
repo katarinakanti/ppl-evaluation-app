@@ -21,6 +21,9 @@ export default function UpdateKhs({ data }: { data: Khs }) {
       <form action={dispatch} className="mx-auto bg-gray-100 w-10/12 h-fit">
         {" "}
               
+        <br />
+        <p className="text-center text-4xl">Semester {data.semester}</p>
+        <br />
         <div className="flex items-center">
           <div className="flex-col ml-8">
             <div className="flex w-full -mt-3">

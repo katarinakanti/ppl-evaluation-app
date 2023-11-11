@@ -43,8 +43,8 @@ export async function fetchIrsByNim(nim: string): Promise<Irs[]> {
         *
       `
       )
-      .eq("nim", nim)
-      .order("semester", { ascending: true });
+      .eq("nim", nim);
+      // .order("semester", { ascending: true });
 
     if (!irs.data) {
       throw new Error("irs not found");

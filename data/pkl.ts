@@ -60,3 +60,27 @@ export async function fetchPklByNim(nim: string): Promise<PklWithRelations> {
     throw new Error("Failed to fetch mahasiswa");
   }
 }
+
+
+export async function fetchPklByNimAngkatanDosen(
+  nim: string[], 
+  angkatan: string, 
+  dosenPembimbing: string): Promise<PklWithRelations> {
+  try {
+    const pkl = await supabase
+      .from("pkl")
+      .select("*, dosen:dosen_pembimbing_nip (*), mhs:nim(*)")
+      .eq("nim", nim)
+      .eq("angkatan", angkatan)
+      .eq("dosen_pembimbing_nip", dosenPembimbing)
+      .single();
+
+    if (!pkl.data) {
+      return null;
+    }
+    return pkl.data as PklWithRelations;
+  } catch (error) {
+    console.error("Failed to fetch data: ", error);
+    throw new Error("Failed to fetch data");
+  }
+}

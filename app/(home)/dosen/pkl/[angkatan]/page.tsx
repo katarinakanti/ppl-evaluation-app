@@ -5,7 +5,7 @@ import Link from "next/link";
 export default async function Page({
 params,
 }: {
-params: { semester: string };
+params: { angkatan: string };
 }) {
 const supabase = createServerComponentClient<Database>({ cookies });
 const {
@@ -13,11 +13,13 @@ data: { session },
 } = await supabase.auth.getSession();
 const no_induk = session?.user.user_metadata.no_induk;
 
+
+
 return (
 <>
     <link rel="stylesheet" href="view.css" />
     <div className="text-center mt-10 text-3xl font-semibold">
-    <h2>Praktek Kerja Lapangan (PKL)-Angkatan 2019</h2>
+    <h2>Praktek Kerja Lapangan (PKL)-Angkatan {params.angkatan}</h2>
     </div>
     <div className="mt-10 flex items-center justify-center mx-auto bg-gray-100 border border-gray-500 w-10/12 h-16">
     <p className="text-center">PKL</p>
@@ -29,7 +31,7 @@ return (
             <div className="flex w-full">
                 <div className="mt-10">
                     <p className="text-xl flex items-center font-semibold">
-                        Angkatan 2019
+                        Angkatan {params.angkatan}
                     </p>
                     <div className="flex">
                         <p className="text-sm flex items-center mt-5">Jumalah Mahasiswa : 170</p>
@@ -38,9 +40,11 @@ return (
                     </div>
                 </div>
             </div>
+
             <div className="flex justify-end mt-10 mb-5 mr-5">
                 <input className="p-2 border border-gray-300 bg-white" type="search" name="search" id="search" placeholder="Cari Nama/Nim" />
             </div>
+
             <div className="flex w-full mb-10 mt-10">
                 <div className="items-center justify-center bg-gray-300 w-14 h-20 p-4">
                 </div> 

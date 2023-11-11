@@ -19,12 +19,12 @@ export default async function Page({
     session!.user.user_metadata.no_induk,
     Number(params.angkatan)
   );
-  const MhsData = await fetchMhsByNip(session!.user.user_metadata.no_induk);
+  // const MhsData = await fetchMhsByNip(session!.user.user_metadata.no_induk);
 
-  const MhsDataNumber = MhsData.map((mahasiswa) => ({
-    angkatan: Number(mahasiswa.angkatan),
-  }));
-  const groupAngkatan = groupMahasiswaByAngkatan(MhsDataNumber);
+  // const MhsDataNumber = MhsData.map((mahasiswa) => ({
+  //   angkatan: Number(mahasiswa.angkatan),
+  // }));
+  // const groupAngkatan = groupMahasiswaByAngkatan(MhsDataNumber);
 
   return (
     <>

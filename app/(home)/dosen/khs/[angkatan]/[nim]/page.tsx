@@ -1,4 +1,4 @@
-import { fetchIrsByNim } from "@/data/irs";
+import { fetchKhsByNim } from "@/data/khs";
 import { mapAngkatanAndSmtToWord } from "@/utils/functions";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
@@ -16,18 +16,18 @@ export default async function Page({
   const no_induk = params.nim;
   const angkt = "20" + no_induk.substring(6, 8);
 
-  const irsData = await fetchIrsByNim(params.nim);
+  const irsData = await fetchKhsByNim(params.nim);
   return (
     <div>
       <br />
       <br />
       <h1 className="text-center text-4xl font-bold font-arial">
-        Isian Rencana Semester (IRS) - Angkatan {params.angkatan}
+        Kartu Hasil Semester (KHS) - Angkatan {params.angkatan}
       </h1>
       <br />
       <br />
       <div className="flex items-center justify-center mx-auto bg-gray-100 border border-gray-500 w-10/12 h-16">
-        <p className="text-center">IRS</p>
+        <p className="text-center">KHS</p>
       </div>
       
       <div className="mx-auto bg-gray-100 w-10/12 h-fit">
@@ -40,7 +40,7 @@ export default async function Page({
                 </div>
                 <div className="flex items-center bg-gray-200 w-full h-20 p-4">
                   <div>
-                    <Link href={`/dosen/irs/${params.angkatan}/${params.nim}/${data.semester}`}>
+                    <Link href={`/dosen/khs/${params.angkatan}/${params.nim}/${data.semester}`}>
                       <p className="text-lg mb-1 font-sans font-semibold text-left">
                         Semester {data.semester} | Tahun Ajaran{" "}
                         {mapAngkatanAndSmtToWord(
@@ -48,9 +48,9 @@ export default async function Page({
                           data.semester
                         )}
                       </p>
-                      <p className="text-sm font-sans font-extralight">
-                        Jumlah SKS Semester {data.sks_diambil}
-                      </p>
+                      {/* <p className="text-sm font-sans font-extralight">
+                        Jumlah SKS Semester : 
+                      </p> */}
                       <p className="text-sm font-sans font-extralight">
                         Status verifikasi:{" "}
                         {data.status_verifikasi_id === 1
