@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import "./cat.css";
+import { useRouter } from "next/navigation";
 
 export default function Cat() {
+  const router = useRouter();
   return (
     <>
       <div className="cat">
@@ -19,9 +23,15 @@ export default function Cat() {
       </div>
       <div className="flex flex-col justify-center items-center">
         <h1 className="text-center">Page Not Found</h1>
-        <Link className="text-center" href="/">
+        <button
+          className="text-center"
+          onClick={() => {
+            router.refresh();
+            router.push("/");
+          }}
+        >
           Back to Homepage
-        </Link>
+        </button>
       </div>
     </>
   );

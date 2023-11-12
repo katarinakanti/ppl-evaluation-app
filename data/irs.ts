@@ -2,6 +2,7 @@ import { serverActionSupabase as supabase } from "@/lib/supabaseClient";
 
 import { z } from "zod";
 import { Mahasiswa } from "./mahasiswa";
+import { transformIRSData } from "@/utils/functions";
 
 export const IrsSchema = z.object({
   nim: z.string(),
@@ -22,7 +23,6 @@ export const IrsSchema = z.object({
 export type IrsWithRelations =
   | (Irs & {
       mahasiswa: Mahasiswa;
-      
     })
   | null;
 
@@ -52,7 +52,7 @@ export async function fetchIrsByNim(nim: string): Promise<Irs[]> {
       `
       )
       .eq("nim", nim);
-      // .order("semester", { ascending: true });
+    // .order("semester", { ascending: true });
 
     if (!irs.data) {
       throw new Error("irs not found");
@@ -66,10 +66,8 @@ export async function fetchIrsByNim(nim: string): Promise<Irs[]> {
 
 export async function fetchAllIrs(): Promise<Irs[]> {
   try {
-    const irs = await supabase
-      .from("irs")
-      .select(`*`)
-      // .order("semester", { ascending: true });
+    const irs = await supabase.from("irs").select(`*`);
+    // .order("semester", { ascending: true });
 
     if (!irs.data) {
       throw new Error("irs not found");
@@ -80,7 +78,6 @@ export async function fetchAllIrs(): Promise<Irs[]> {
     throw new Error("Failed to fetch mahasiswa");
   }
 }
-
 
 export async function fetchIrsByNimBySem(
   nim: string,
@@ -110,24 +107,53 @@ export async function fetchIrsByNimBySem(
   }
 }
 
-export async function fetchIrsByAngkatan(angkatan: string): Promise<Irs[]> {
+export async function fetchIrsByAngkatan(
+  angkatan: string
+): Promise<{ semester: number; average_sks: number }[]> {
   try {
-    const irs = await supabase
-      .from("irs")
-      .select("*, mhs:angkatan(*)")
-      .eq("angkatan", angkatan)
-      ;
+    // Cek di supabase buat rpc-nya
+    // https://supabase.com/dashboard/project/ysqlqkegzdalostasyxo/database/functions
+    const irs = await supabase.rpc("get_irs_by_angkatan", {
+      angkatan,
+    });
 
     if (!irs.data) {
       throw new Error("IRS not found");
     }
 
-    return irs.data as Irs[];
-
+    return irs.data;
   } catch (error) {
+    console.log("Failed to fetch IRS data: ", error);
     console.error("Failed to fetch IRS data: ", error);
     throw new Error("Failed to fetch IRS data");
   }
 }
 
+type IrsByAngkatanBySmt = {
+  nim: string;
+  nama: string;
+  status_mhs: string;
+  angkatan: number;
+  sks_diambil: number;
+  status_verifikasi: string;
+};
+export async function fetchIrsByAngkatanBySmt(
+  akt: number,
+  smt: number
+): Promise<IrsByAngkatanBySmt[]> {
+  try {
+    // Cek di supabase buat rpc-nya
+    // https://supabase.com/dashboard/project/ysqlqkegzdalostasyxo/database/functions
+    const irs = await supabase.rpc("get_irs_by_akt_smt", { akt, smt });
 
+    if (!irs.data) {
+      throw new Error("IRS not found");
+    }
+
+    return irs.data;
+  } catch (error) {
+    console.log("Failed to fetch IRS data: ", error);
+    console.error("Failed to fetch IRS data: ", error);
+    throw new Error("Failed to fetch IRS data");
+  }
+}

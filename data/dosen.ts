@@ -1,4 +1,22 @@
 import { serverActionSupabase as supabase } from "@/lib/supabaseClient";
+import { z } from "zod";
+
+export const DosenSchema = z.object({
+  nama: z.string({
+    invalid_type_error: "Isi namanya yang sesuai ya.",
+  }),
+  nip: z.string({
+    invalid_type_error: "Isi nipnya yang sesuai ya.",
+  }),
+});
+
+export type DosenState = {
+  errors?: {
+    nama?: string[];
+    nip?: string[];
+  };
+  message?: string | null;
+};
 
 export type Dosen = {
   nip: string;

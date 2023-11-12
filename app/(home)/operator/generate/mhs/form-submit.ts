@@ -2,7 +2,6 @@
 import { serverActionAdminSupabase as supabase } from "@/lib/supabaseClient";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { mapStatusToNumber } from "@/utils/functions";
 
 import { MahasiswaSchema } from "@/data/mahasiswa";
 import { MahasiswaState } from "@/data/mahasiswa";
@@ -11,7 +10,6 @@ const CreateMahasiswa = MahasiswaSchema.pick({
   nama: true,
   nim: true,
   angkatan: true,
-  status: true,
   doswal_nip: true,
 });
 
@@ -24,18 +22,18 @@ export async function generateMhs(
     nama: formData.get("nama"),
     nim: formData.get("nim"),
     angkatan: formData.get("angkatan"),
-    status: formData.get("status"),
     doswal_nip: formData.get("doswal_nip"),
   });
 
   if (!validatedFields.success) {
+    console.log(validatedFields.error.flatten().fieldErrors);
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       message: "Ada kesalahan dalam pengisian form.",
     };
   }
 
-  const { nama, nim, angkatan, status, doswal_nip } = validatedFields.data;
+  const { nama, nim, angkatan, doswal_nip } = validatedFields.data;
 
   // 2. Create dummy email that is nim@maildrop.cc
   const email = `${nim}@maildrop.cc`;
@@ -52,23 +50,24 @@ export async function generateMhs(
         role: "mahasiswa",
       },
     });
+
     // 4. create also the user on the correlated table (mahasiswa, dosen)
-    const statusNumber = mapStatusToNumber(status);
     const { data, error } = await supabase.from("mahasiswa").insert([
       {
         nim: nim,
         nama,
         angkatan,
-        status_mhs_id: statusNumber,
+        status_mhs_id: 1,
         doswal_nip,
       },
     ]);
+    console.log("User created successfully");
   } catch (e) {
     return {
       message: "Ada kesalahan dalam pembuatan akun.",
     };
   }
 
-  revalidatePath("/operator/generate");
-  redirect("/operator/generate");
+  revalidatePath("/operator/generate/mhs");
+  redirect("/operator/generate/mhs");
 }

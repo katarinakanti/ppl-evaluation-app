@@ -1,7 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { generateMhs } from "./form-submit";
 import { Dosen } from "@/data/dosen";
@@ -51,7 +49,7 @@ export default function GenerateMhs({ dosen }: { dosen: Dosen[] }) {
                 type="text"
                 name="nim"
                 id="nim"
-                placeholder="Add text"
+                placeholder="NIM mahasiswa..."
               />
             </div>
           </div>
@@ -68,7 +66,7 @@ export default function GenerateMhs({ dosen }: { dosen: Dosen[] }) {
                 type="number"
                 name="angkatan"
                 id="angkatan"
-                placeholder="Add Text"
+                placeholder="Angkatan mahasiswa..."
               />
             </div>
           </div>

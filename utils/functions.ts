@@ -1,3 +1,5 @@
+import { Irs } from "@/data/irs";
+
 export function mapStatusToNumber(status: string): number {
   switch (status) {
     case "Aktif":
@@ -41,14 +43,32 @@ export function groupMahasiswaByAngkatan(
   return groupedByAngkatan;
 }
 
+export function groupMhsByAngkatan(
+  data: Mahasiswa[]
+): { angkatan: number; count: number }[] {
+  const angkatanCounts: { [angkatan: number]: number } = {};
+
+  for (const student of data) {
+    if (student.angkatan) {
+      if (angkatanCounts[student.angkatan]) {
+        angkatanCounts[student.angkatan]++;
+      } else {
+        angkatanCounts[student.angkatan] = 1;
+      }
+    }
+  }
+
+  const result = Object.entries(angkatanCounts).map(([angkatan, count]) => ({
+    angkatan: parseInt(angkatan),
+    count,
+  }));
+
+  return result;
+}
+
 interface Mahasiswa {
   nim: string;
   angkatan: number;
-}
-
-interface Irs {
-  nim: string;
-  semester: number;
 }
 
 export function groupByAngkatanBySemester(
@@ -91,4 +111,29 @@ export function formatDateToIndonesian(date: Date): string {
     year: "numeric",
   };
   return tanggal.toLocaleDateString("id-ID", options);
+}
+
+export function transformIRSData(
+  irsData: Irs[]
+): { semester: number; avg_sks: number }[] {
+  const semesterAvgSKS: { [semester: number]: number[] } = {};
+
+  for (const irs of irsData) {
+    const { semester } = irs;
+
+    if (!semesterAvgSKS[semester]) {
+      semesterAvgSKS[semester] = [];
+    }
+
+    semesterAvgSKS[semester].push(irs.sks_diambil);
+  }
+
+  const result = Object.entries(semesterAvgSKS).map(([semester, sksArray]) => ({
+    semester: parseInt(semester),
+    avg_sks: Math.round(
+      sksArray.reduce((acc, sks) => acc + sks, 0) / sksArray.length
+    ),
+  }));
+
+  return result;
 }
