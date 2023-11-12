@@ -116,3 +116,33 @@ export async function fetchMahasiswaByNim(
     throw new Error("Failed to fetch mahasiswa");
   }
 }
+
+export async function fetchMahasiswaByAngkatan(
+  angkatan: number,
+  search?: string
+): Promise<MahasiswaWithRelations[]> {
+  try {
+    let query = supabase
+      .from("mahasiswa")
+      .select(
+        `
+        *,
+        jalur_masuk:jalur_masuk_id (*),
+        dosen:doswal_nip (*),
+        status:status_mhs_id (*),
+        kota:kota_id (*)
+      `
+      )
+      .eq("angkatan", angkatan);
+
+    if (search) {
+      query = query.or(`nama.ilike.%${search}%,nim.ilike.%${search}%`);
+    }
+
+    const mahasiswa = await query;
+    return mahasiswa.data as MahasiswaWithRelations[];
+  } catch (error) {
+    console.error("Failed to fetch mahasiswa data: ", error);
+    throw new Error("Failed to fetch mahasiswa");
+  }
+}

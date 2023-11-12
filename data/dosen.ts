@@ -84,18 +84,22 @@ export async function fetchMhsByNipTunggal(nip: string): Promise<Mhs> {
 
 export async function fetchMhsByNipByAngkt(
   nip: string,
-  angkatan: number
+  angkatan: number,
+  searchTerm?: string
 ): Promise<Mhs[]> {
   try {
-    const mahasiswa = await supabase
+    let query = supabase
       .from("mahasiswa")
-      .select(
-        `
-        *
-      `
-      )
+      .select("*")
       .eq("doswal_nip", nip)
       .eq("angkatan", angkatan);
+
+    if (searchTerm) {
+      query = query.or(`nama.ilike.%${searchTerm}%,nim.ilike.%${searchTerm}%`);
+    }
+
+    const mahasiswa = await query;
+
     if (!mahasiswa.data) {
       throw new Error("irs not found");
     }

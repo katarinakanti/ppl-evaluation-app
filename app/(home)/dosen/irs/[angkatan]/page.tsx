@@ -4,11 +4,17 @@ import { fetchMhsByNip } from "@/data/dosen";
 import { groupMahasiswaByAngkatan } from "@/utils/functions";
 import { fetchMhsByNipByAngkt } from "@/data/dosen";
 import Link from "next/link";
+import Search from "@/components/Search";
 
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: { angkatan: number };
+  searchParams: {
+    query?: string;
+    page?: string;
+  };
 }) {
   const supabase = createServerComponentClient<Database>({ cookies });
   const {
@@ -17,8 +23,11 @@ export default async function Page({
 
   const MhsPerAngkatan = await fetchMhsByNipByAngkt(
     session!.user.user_metadata.no_induk,
-    Number(params.angkatan)
+    Number(params.angkatan),
+    searchParams.query
   );
+
+  // console.log(searchParams);
   // const MhsData = await fetchMhsByNip(session!.user.user_metadata.no_induk);
 
   // const MhsDataNumber = MhsData.map((mahasiswa) => ({
@@ -51,13 +60,14 @@ export default async function Page({
               </div>
             </div>
             <div className="flex justify-end mt-10 mb-10 mr-12">
-              <input
+              {/* <input
                 className="p-2 border border-gray-300 bg-white"
                 type="search"
                 name="search"
                 id="search"
                 placeholder="Cari Nama/Nim"
-              />
+              /> */}
+              <Search placeholder={"Cari Nama/NIM"} />
             </div>
             {MhsPerAngkatan.map((data) => (
               <div key={data.nim} className="flex w-full pb-10">
