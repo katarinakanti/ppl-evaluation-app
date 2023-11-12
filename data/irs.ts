@@ -1,6 +1,7 @@
 import { serverActionSupabase as supabase } from "@/lib/supabaseClient";
 
 import { z } from "zod";
+import { Mahasiswa } from "./mahasiswa";
 
 export const IrsSchema = z.object({
   nim: z.string(),
@@ -17,6 +18,13 @@ export const IrsSchema = z.object({
   created_at: z.string(),
   updated_at: z.string(),
 });
+
+export type IrsWithRelations =
+  | (Irs & {
+      mahasiswa: Mahasiswa;
+      
+    })
+  | null;
 
 export type Irs = z.infer<typeof IrsSchema>;
 
@@ -56,6 +64,24 @@ export async function fetchIrsByNim(nim: string): Promise<Irs[]> {
   }
 }
 
+export async function fetchAllIrs(): Promise<Irs[]> {
+  try {
+    const irs = await supabase
+      .from("irs")
+      .select(`*`)
+      // .order("semester", { ascending: true });
+
+    if (!irs.data) {
+      throw new Error("irs not found");
+    }
+    return irs.data as Irs[];
+  } catch (error) {
+    console.error("Failed to fetch mahasiswa data: ", error);
+    throw new Error("Failed to fetch mahasiswa");
+  }
+}
+
+
 export async function fetchIrsByNimBySem(
   nim: string,
   semester: number
@@ -81,6 +107,26 @@ export async function fetchIrsByNimBySem(
   } catch (error) {
     console.error("Failed to fetch irs data: ", error);
     throw new Error("Failed to fetch irs data");
+  }
+}
+
+export async function fetchIrsByAngkatan(angkatan: string): Promise<Irs[]> {
+  try {
+    const irs = await supabase
+      .from("irs")
+      .select("*, mhs:angkatan(*)")
+      .eq("angkatan", angkatan)
+      ;
+
+    if (!irs.data) {
+      throw new Error("IRS not found");
+    }
+
+    return irs.data as Irs[];
+
+  } catch (error) {
+    console.error("Failed to fetch IRS data: ", error);
+    throw new Error("Failed to fetch IRS data");
   }
 }
 
