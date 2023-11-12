@@ -1,6 +1,23 @@
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { fetchMhsByNip } from "@/data/dosen";
+import { groupMahasiswaByAngkatan } from "@/utils/functions";
 import Link from "next/link";
 
-export default function Page() {
+export default async function Page() {
+const supabase = createServerComponentClient<Database>({ cookies });
+const {
+data: { session },
+} = await supabase.auth.getSession();
+
+const MhsData = await fetchMhsByNip(session!.user.user_metadata.no_induk);
+
+const MhsDataNumber = MhsData.map((mahasiswa) => ({
+angkatan: Number(mahasiswa.angkatan),
+}));
+
+const groupAngkatan = groupMahasiswaByAngkatan(MhsDataNumber);
+
 return (
 <div>
     <br />
@@ -16,61 +33,28 @@ return (
 
     <div className="mx-auto bg-gray-100 w-10/12 h-fit">
     <div className="flex items-center justify-center pt-10">
-
         <div className="flex-col flex w-11/12">
-        <div className="flex w-full mb-8">
-            <div className="text-2xl font-bold flex items-center justify-center bg-gray-300 w-14 h-20 p-4">
-            1
+        {Object.keys(groupAngkatan).map((angkatan) => {
+            const angkatanNumber = parseInt(angkatan, 10); // Mengonversi string ke number
+            return (
+            <div className="flex w-full mb-8" key={angkatanNumber}>
+                <div className="text-2xl font-semibold flex items-center justify-center bg-gray-300 w-14 h-20 p-4"></div>
+                <div className="flex items-center bg-gray-200 w-full h-20 p-4">
+                <div>
+                    <Link href={`/dosen/skripsi/${angkatan}`}>
+                    <p className="text-lg mb-1 font-sans font-semibold text-left">
+                        Angkatan {angkatan}
+                    </p>
+                    <p className="text-sm font-sans font-extralight">
+                        Jumlah Mahasiswa Anda :{" "}
+                        {groupAngkatan[angkatanNumber].length}
+                    </p>
+                    </Link>
+                </div>
+                </div>
             </div>
-            <div className="flex items-center bg-gray-200 w-full h-20 p-4">
-            <div>
-                <Link href="/dosen/skripsi/1">
-                <p className="text-lg mb-1 font-sans font-semibold text-left">
-                    Angkatan 2019
-                </p>
-                <p className="text-sm font-sans font-extralight">
-                    Jumlah Mahasiswa : 170 | Mahasiswa Anda : 70 | Sudah Skripsi : 2
-                </p>
-                </Link>
-            </div>
-            </div>
-        </div>
-
-        <div className="flex w-full mb-8">
-            <div className=" text-2xl font-bold flex items-center justify-center bg-gray-300 w-14 h-20 p-4">
-            2
-            </div>
-            <div className="flex items-center bg-gray-200 w-full h-20 p-4">
-            <div>
-                <Link href="/dosen/skripsi/2">
-                <p className="text-lg mb-1 font-sans font-semibold text-left">
-                    Angkatan 2020
-                </p>
-                <p className="text-sm font-sans font-extralight">
-                    Jumlah Mahasiswa : 168 | Mahasiswa Anda : 70 | Sudah Skripsi : 2
-                </p>
-                </Link>
-            </div>
-            </div>
-        </div>
-
-        <div className="flex w-full">
-            <div className="text-2xl font-bold flex items-center justify-center bg-gray-300 w-14 h-20 p-4">
-            3
-            </div>
-            <div className="flex items-center bg-gray-200 w-full h-20 p-4">
-            <div>
-                <button>
-                <p className="text-lg mb-1 font-sans font-semibold text-left">
-                    Angkatan 2021
-                </p>
-                <p className="text-sm font-sans font-extralight">
-                    Jumlah Mahasiswa : 170 | Mahasiswa Anda : 70 | Sudah Skripsi : 2
-                </p>
-                </button>
-            </div>
-            </div>
-        </div>
+            );
+        })}
         </div>
     </div>
     </div>

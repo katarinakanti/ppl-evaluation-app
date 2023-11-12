@@ -102,29 +102,36 @@ export default function VerifikasiIrs({
         </div>
 
         <div className="flex justify-end w-full items-end">
-          <div className="flex col mb-10 mr-10 ">
-            <div className="flex w-full">
-              <a target="_blank" href={getFileUrl(irs.scan_irs)}>
-                <button className="w-32 h-10 bg-white hover:bg-pink-200 text-pink-400 border border-pink-400 font-semibold rounded">Lihat IRS</button>
-                    {" "}
+            <div className="flex col mb-10 mr-10 ">
+              <div className="flex w-full">
+                <a target="_blank" href={getFileUrl(irs.scan_irs)}>
+                  <button className="w-32 h-10 bg-white hover:bg-pink-200 text-pink-400 border border-pink-400 font-semibold rounded">
+                    Lihat IRS
+                  </button>
+                      {" "}
                 </a>
-            </div>
-            <div className="flex w-full ml-3">
+              </div>
+              <div className="flex w-full ml-3">
                 <Link
-                href={`/dosen/irs/${angkatan}/${irs.nim}/${irs.semester}/edit`}
+                  href={`/dosen/irs/${angkatan}/${irs.nim}/${irs.semester}/edit`}
                 >
-                <button className="bg-white h-10 hover:bg-blue-200 text-blue-400 border border-blue-400 px-10 font-semibold rounded">Ubah</button>
-                    {" "}
+                  <button className="bg-white h-10 hover:bg-blue-200 text-blue-400 border border-blue-400 px-10 font-semibold rounded">
+                    Ubah
+                  </button>
+                      {" "}
                 </Link>
-            </div>
-            <div className="flex w-full">
-              <button onClick={handleClick} 
-              className="bg-green-500 h-10 hover:bg-green-600 text-white font-semibold px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed text-center">
-                {status}</button>
-                  {" "}
+              </div>
+              <div className="flex w-full">
+                <button
+                  onClick={handleClick}
+                  className="bg-green-500 h-10 hover:bg-green-600 text-white font-semibold px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed text-center"
+                >
+                  {status}
+                </button>
+                    {" "}
+              </div>
             </div>
           </div>
-        </div>
           
       </div>
     </>
