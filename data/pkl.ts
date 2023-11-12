@@ -56,6 +56,7 @@ export async function fetchPklByNim(nim: string): Promise<PklWithRelations> {
     if (!pkl.data) {
       return null;
     }
+
     return pkl.data as PklWithRelations;
   } catch (error) {
     console.error("Failed to fetch mahasiswa data: ", error);
@@ -84,9 +85,10 @@ export async function fetchPklByNim1(nim: string): Promise<Pkl[]> {
 }
 
 export async function fetchPklByNimAngkatanDosen(
-  nim: string[], 
-  angkatan: string, 
-  dosenPembimbing: string): Promise<PklWithRelations> {
+  nim: string[],
+  angkatan: string,
+  dosenPembimbing: string
+): Promise<PklWithRelations> {
   try {
     const pkl = await supabase
       .from("pkl")

@@ -27,7 +27,9 @@ export function getFileUrl(path: string): string {
   return `https://ysqlqkegzdalostasyxo.supabase.co/storage/v1/object/public/ppl/${path}`;
 }
 
-export function groupMahasiswaByAngkatan(mahasiswaData: Array<{ angkatan: number }>) {
+export function groupMahasiswaByAngkatan(
+  mahasiswaData: Array<{ angkatan: number }>
+) {
   const groupedByAngkatan: Record<number, Array<{ angkatan: number }>> = {};
   mahasiswaData.forEach((mahasiswa) => {
     const angkatan = mahasiswa.angkatan;
@@ -49,8 +51,14 @@ interface Irs {
   semester: number;
 }
 
-export function groupByAngkatanBySemester(mahasiswaData: Mahasiswa[], irsData: Irs[]) {
-  const groupedByAngkatanBySem: Record<string, Array<{ nim: string, angkatan: number, semester: number }>> = {};
+export function groupByAngkatanBySemester(
+  mahasiswaData: Mahasiswa[],
+  irsData: Irs[]
+) {
+  const groupedByAngkatanBySem: Record<
+    string,
+    Array<{ nim: string; angkatan: number; semester: number }>
+  > = {};
 
   mahasiswaData.forEach((mahasiswa) => {
     const angkatan = mahasiswa.angkatan;
@@ -73,4 +81,14 @@ export function groupByAngkatanBySemester(mahasiswaData: Mahasiswa[], irsData: I
   });
 
   return groupedByAngkatanBySem;
+}
+
+export function formatDateToIndonesian(date: Date): string {
+  const tanggal = new Date(date);
+  const options: Intl.DateTimeFormatOptions = {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  };
+  return tanggal.toLocaleDateString("id-ID", options);
 }
