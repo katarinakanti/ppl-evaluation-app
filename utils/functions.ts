@@ -38,3 +38,39 @@ export function groupMahasiswaByAngkatan(mahasiswaData: Array<{ angkatan: number
   });
   return groupedByAngkatan;
 }
+
+interface Mahasiswa {
+  nim: string;
+  angkatan: number;
+}
+
+interface Irs {
+  nim: string;
+  semester: number;
+}
+
+export function groupByAngkatanBySemester(mahasiswaData: Mahasiswa[], irsData: Irs[]) {
+  const groupedByAngkatanBySem: Record<string, Array<{ nim: string, angkatan: number, semester: number }>> = {};
+
+  mahasiswaData.forEach((mahasiswa) => {
+    const angkatan = mahasiswa.angkatan;
+
+    irsData.forEach((irs) => {
+      if (irs.nim === mahasiswa.nim) {
+        const key = `${angkatan}-${irs.semester}`;
+
+        if (!groupedByAngkatanBySem[key]) {
+          groupedByAngkatanBySem[key] = [];
+        }
+
+        groupedByAngkatanBySem[key].push({
+          nim: mahasiswa.nim,
+          angkatan: angkatan,
+          semester: irs.semester,
+        });
+      }
+    });
+  });
+
+  return groupedByAngkatanBySem;
+}

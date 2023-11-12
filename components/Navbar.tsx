@@ -96,10 +96,10 @@ export function DeptNavbar() {
     <div className="p-5 flex items-center mx-auto bg-gray-100 border w-full h-16">
       <div className="flex gap-5">
         <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/"}>Home</Link>
-        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/dept/irs"}>IRS</Link>
-        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/dept/khs"}>KHS</Link>
-        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/dept/pkl"}>PKL</Link>
-        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/dept/skripsi"}>Skripsi</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/departemen/irs"}>IRS</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/departemen/khs"}>KHS</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/departemen/pkl"}>PKL</Link>
+        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/departemen/skripsi"}>Skripsi</Link>
         <button className="hover:bg-gray-300 px-3 py-2 rounded" onClick={handleSignOut}>Sign out</button>
       </div>
     </div>
