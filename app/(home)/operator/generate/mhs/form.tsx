@@ -3,6 +3,7 @@
 import { useFormState, useFormStatus } from "react-dom";
 import { generateMhs } from "./form-submit";
 import { Dosen } from "@/data/dosen";
+import { Button } from "@/components/Button";
 
 export default function GenerateMhs({ dosen }: { dosen: Dosen[] }) {
   const initialState = { message: null, errors: {} };
@@ -121,12 +122,7 @@ export default function GenerateMhs({ dosen }: { dosen: Dosen[] }) {
 
         <div className="flex w-full justify-end">
           <div className="flex items-center mr-20">
-            <button
-              disabled={pending}
-              className="mb-10 bg-green-500 hover:bg-green-600 text-white font-semibold px-7 py-2 rounded"
-            >
-              {pending ? "Loading..." : "Generate"}
-            </button>
+            <Button />
           </div>
         </div>
       </div>

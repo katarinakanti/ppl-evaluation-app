@@ -65,6 +65,6 @@ export async function updateMhs(prevState: MahasiswaState, formData: FormData) {
     };
   }
 
-  revalidatePath("/profile");
-  redirect("/profile");
+  // revalidatePath("/profile");
+  // redirect("/profile");
 }

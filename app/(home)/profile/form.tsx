@@ -13,6 +13,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { updateMhs } from "./form-submit";
 
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/Button";
 
 type UserFormProps = {
   session: Session;
@@ -28,6 +29,9 @@ export default function UserForm({
   const router = useRouter();
   const [kotaList, setKotaList] = useState<Kota[]>([]);
   const [selectedKota, setSelectedKota] = useState<string | null>(null);
+  const [status, setStatus] = useState<
+    "idle" | "success" | "failed" | "loading"
+  >("idle");
   const supabase = createClientComponentClient();
 
   const getKotaList = async (provId: string) => {
@@ -50,32 +54,36 @@ export default function UserForm({
     }
   }, [mahasiswaData]);
 
-  const initialState = { message: null, errors: {} };
-  const [state, dispatch] = useFormState(updateMhs, initialState);
-  const { pending } = useFormStatus();
+  // const initialState = { message: null, errors: {} };
+  // const [state, dispatch] = useFormState(updateMhs, initialState);
+  // const { pending } = useFormStatus();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setStatus("loading");
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
-    dispatch(formData);
-    // TODO: maybe add something better here
-    await new Promise((r) => setTimeout(r, 2000));
-
-    await supabase.auth
-      .refreshSession()
+    updateMhs({}, formData)
       .then((res) => {
-        if (res.error) {
+        if (res && res.errors) {
+          console.log(res.errors);
+          setStatus("failed");
+          return;
+        }
+        return supabase.auth.refreshSession();
+      })
+      .then((res) => {
+        if (res && res.error) {
           console.log(res.error);
+          setStatus("failed");
           return;
         }
         console.log(res);
+        setStatus("success");
       })
       .finally(() => {
         router.refresh();
       });
-
-    await new Promise((r) => setTimeout(r, 2000));
   };
 
   return (
@@ -86,22 +94,13 @@ export default function UserForm({
             <tbody>
               <tr>
                 <th className="w-56">NIM</th>
-                <td>
-                  {session.user.user_metadata.no_induk}
-                  </td>
+                <td>{session.user.user_metadata.no_induk}</td>
               </tr>
               <tr>
                 <th>Nama Lengkap</th>
                 <td>
                   {/* {session.user.user_metadata.nama} */}
-                  <input
-                    className="p-2 border border-gray-300 bg-white"
-                    type="text"
-                    placeholder="Nama Lengkap"
-                    name="nama"
-                    defaultValue={mahasiswaData.nama}
-                    required
-                  />
+                  <p>{mahasiswaData.nama}</p>
                 </td>
               </tr>
               <tr>
@@ -222,8 +221,13 @@ export default function UserForm({
         </div>
       </div>
       <div className="flex mt-10 justify-end  mb-10">
-        <button className="bg-white hover:bg-blue-100 text-blue-400 border border-blue-400 px-7 py-1 font-semibold rounded mb-5">
-          Simpan
+        <button
+          disabled={status === "loading"}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
+          disabled:opacity-50 disabled:cursor-not-allowed
+          "
+        >
+          {status === "loading" ? "Loading..." : "Simpan"}
         </button>
       </div>
     </form>
