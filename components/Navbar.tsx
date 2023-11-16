@@ -180,6 +180,12 @@ export function DeptNavbar() {
         </Link>
         <Link
           className="hover:bg-gray-300 px-3 py-2 rounded"
+          href={"/departemen/progress"}
+        >
+          Progress Mahasiswa
+        </Link>
+        <Link
+          className="hover:bg-gray-300 px-3 py-2 rounded"
           href={"/departemen/khs"}
         >
           KHS
