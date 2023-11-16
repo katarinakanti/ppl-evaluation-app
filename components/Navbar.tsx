@@ -196,6 +196,12 @@ export function DeptNavbar() {
         >
           Skripsi
         </Link>
+        <Link
+          className="hover:bg-gray-300 px-3 py-2 rounded"
+          href={"/departemen/status"}
+        >
+          Status
+        </Link>
         <button
           className="hover:bg-gray-300 px-3 py-2 rounded"
           onClick={handleSignOut}
