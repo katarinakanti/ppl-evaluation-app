@@ -7,7 +7,7 @@ return (
     <br />
     <br />
     <h1 className="text-center text-2xl font-bold font-arial">
-    Rekap Progress PKL Mahasiswa Informatika 
+    Rekap Progress Skripsi Mahasiswa Informatika 
     Fakultas Sains dan Matematika UNDIP Semarang
     </h1>
     <br />
