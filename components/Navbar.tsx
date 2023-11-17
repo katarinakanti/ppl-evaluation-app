@@ -146,6 +146,12 @@ export function OpNavbar() {
         >
           Generate Dosen
         </Link>
+        <Link
+          className="hover:bg-gray-300 px-2 py-2 rounded"
+          href="/operator/generate/csv"
+        >
+          Generate CSV
+        </Link>
         <button
           className="hover:bg-gray-300 px-3 py-2 rounded"
           onClick={handleSignOut}

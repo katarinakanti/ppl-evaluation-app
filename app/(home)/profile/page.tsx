@@ -14,7 +14,7 @@ export default async function Page() {
   } = await supabase.auth.getSession();
 
   const mahasiswaData = await fetchMahasiswaByNim(
-    session.user.user_metadata.no_induk
+    session!.user.user_metadata.no_induk
   );
   const provData = await fetchAllProvinsi();
 
@@ -34,12 +34,12 @@ export default async function Page() {
         <div className="flex items-center justify-center ml-10">
           <div className="flex-col w-full">
             <p className="text-4xl mb-5 font-arial font-semibold text-left">
-              {session.user.user_metadata.nama}
+              {session!.user.user_metadata.nama}
             </p>
 
             <div className="flex">
               <p className="text-lg font-arial font-extralight">
-                NIM : {session.user.user_metadata.no_induk}
+                NIM : {session!.user.user_metadata.no_induk}
               </p>
               <p className="ml-32 text-lg font-arial font-extralight">
                 Informatika
@@ -74,7 +74,7 @@ export default async function Page() {
             <div className="flex flex-col items-center ml-36">
               <div className="text-left font-arial font-medium">
                 <UserForm
-                  session={session}
+                  session={session!}
                   mahasiswaData={mahasiswaData}
                   provData={provData}
                 />
@@ -92,4 +92,3 @@ export default async function Page() {
     </>
   );
 }
-
