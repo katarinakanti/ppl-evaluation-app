@@ -4,6 +4,9 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { fetchMahasiswaByNim } from "@/data/mahasiswa";
+import { fetchDosenByNip } from "@/data/dosen";
+import { fetchDepartemenByNip } from "@/data/departemen";
+import { fetchOperatorByNip } from "@/data/operator";
 import { fetchAllProvinsi } from "@/data/provinsi";
 import UserForm from "./form";
 
@@ -13,23 +16,69 @@ export default async function Page() {
     data: { session },
   } = await supabase.auth.getSession();
 
-  const mahasiswaData = await fetchMahasiswaByNim(
-    session!.user.user_metadata.no_induk
-  );
+  let userData;
+  let entityType;
+
+  // Menentukan jenis pengguna berdasarkan informasi session
+  if (session!.user.user_metadata.role === "mahasiswa") {
+    entityType = "mahasiswa";
+    userData = await fetchMahasiswaByNim(session!.user.user_metadata.no_induk);
+  } else if (session!.user.user_metadata.role === "dosen") {
+    entityType = "dosen";
+    userData = await fetchDosenByNip(session!.user.user_metadata.nip);
+  } else if (session!.user.user_metadata.role === "departemen") {
+    entityType = "departemen";
+    userData = await fetchDepartemenByNip(session!.user.user_metadata.nip);
+  } else if (session!.user.user_metadata.role === "operator") {
+    entityType = "operator";
+    userData = await fetchOperatorByNip(session!.user.user_metadata.nip);
+  };
+
+  //Mengambil foto berdasarkan session
+  const getProfilePhotoSrc = (entityType) => {
+    switch (entityType) {
+      case "mahasiswa":
+        return mahasiswaData.foto_mhs; 
+      case "dosen":
+        return DosenData.foto_dosen; 
+      case "departemen":
+        return DepartemenData.foto_departemen; 
+      case "operator":
+        return OperatorData.foto_operator; 
+      default:
+        return "/default-photo.jpg"; 
+    }
+  };
+
+  const getIndukNumber = (entityType) => {
+    switch (entityType) {
+      case "mahasiswa":
+        return mahasiswaData.no_induk; 
+      case "dosen":
+        return DosenData.nip; 
+      case "departemen":
+        return DepartemenData.nip;
+      case "operator":
+        return OperatorData.nip; 
+      default:
+        return ""; 
+    }
+  };
+
   const provData = await fetchAllProvinsi();
 
   return (
     <>
       <div className="flex mb-8 mt-10 mx-auto bg-gray-100 w-10/12 h-48">
-        <div className="flex items-center justify-center ml-10">
-          <img
-            className="h-150 w-150 rounded-full"
-            src="/img/slide1.jpg"
-            alt="Foto_Mahasiswa"
-            height={150}
-            width={150}
-          />
-        </div>
+      <div className="flex items-center justify-center ml-10">
+        <img
+          className="h-150 w-150 rounded-full"
+          src={getProfilePhotoSrc(entityType)}
+          alt={`Foto_${entityType}`}
+          height={150}
+          width={150}
+        />
+      </div>
 
         <div className="flex items-center justify-center ml-10">
           <div className="flex-col w-full">
@@ -38,9 +87,9 @@ export default async function Page() {
             </p>
 
             <div className="flex">
-              <p className="text-lg font-arial font-extralight">
-                NIM : {session!.user.user_metadata.no_induk}
-              </p>
+            <p className="text-lg font-arial font-extralight">
+              {entityType === "mahasiswa" ? "NIM" : "NIP"} : {getIndukNumber(entityType)}
+            </p>    
               <p className="ml-32 text-lg font-arial font-extralight">
                 Informatika
               </p>
@@ -57,12 +106,13 @@ export default async function Page() {
         <div className="flex mx-auto pt-14">
           <div className="flex ml-24">
             <div className="flex-col ml-5">
-              <img
-                src="/img/slide1.jpg"
-                alt="Foto_Mahasiswa"
-                height={150}
-                width={150}
-              />
+            <img
+              className="h-150 w-150 rounded-full"
+              src={getProfilePhotoSrc(entityType)}
+              alt={`Foto_${entityType}`}
+              height={150}
+              width={150}
+            />
               <p className="mt-3 text-center text-xl font-arial font-medium">
                 2023/2024
               </p>
@@ -75,7 +125,8 @@ export default async function Page() {
               <div className="text-left font-arial font-medium">
                 <UserForm
                   session={session!}
-                  mahasiswaData={mahasiswaData}
+                  userData={userData}
+                  entityType={entityType}
                   provData={provData}
                 />
               </div>

@@ -1,6 +1,9 @@
 "use client";
 
 import { MahasiswaWithRelations } from "@/data/mahasiswa";
+import { DosenWithRelations } from "@/data/dosen";
+import { DepartemenWithRelations } from "@/data/departemen";
+import { OperatorWithRelations } from "@/data/operator";
 import { Provinsi } from "@/data/provinsi";
 import { Kota } from "@/data/kota";
 
@@ -11,19 +14,28 @@ import { useState, useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 
 import { updateMhs } from "./form-submit";
+import { updateDosen } from "./form-submit";
+import { updateDepartemen } from "./form-submit";
+import { updateOperator } from "./form-submit";
 
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/Button";
 
 type UserFormProps = {
   session: Session;
-  mahasiswaData: MahasiswaWithRelations;
+  userData: 
+    | MahasiswaWithRelations
+    | DosenWithRelations
+    | DepartemenWithRelations
+    | OperatorWithRelations;
+  entityType: "mahasiswa" | "dosen" | "departemen" | "operator";
   provData: Provinsi[];
 };
 
 export default function UserForm({
   session,
-  mahasiswaData,
+  userData,
+  entityType,
   provData,
 }: UserFormProps) {
   const router = useRouter();
@@ -46,13 +58,30 @@ export default function UserForm({
     }
     setKotaList(data as Kota[]);
   };
-
   useEffect(() => {
-    if (mahasiswaData.kota && mahasiswaData.kota_id) {
-      getKotaList(String(mahasiswaData.kota.provinsi_id));
-      setSelectedKota(String(mahasiswaData.kota_id));
+    if (userData.kota && userData.kota_id) {
+      getKotaList(String(userData.kota.provinsi_id));
+      setSelectedKota(String(userData.kota_id));
     }
-  }, [mahasiswaData]);
+  }, [userData]);
+  // useEffect(() => {
+  //   if (mahasiswaData.kota && mahasiswaData.kota_id) {
+  //     getKotaList(String(mahasiswaData.kota.provinsi_id));
+  //     setSelectedKota(String(mahasiswaData.kota_id));
+  //   }
+  //   if(DosenData.kota && DosenData.kota_id){
+  //     getKotaList(String(DosenData.kota.provinsi_id));
+  //     setSelectedKota(String(DosenData.kota_id));
+  //   }
+  //   if(DepartemenData.kota && DepartemenData.kota_id){
+  //     getKotaList(String(DepartemenData.kota.provinsi_id));
+  //     setSelectedKota(String(DepartemenData.kota_id));
+  //   }
+  //   if(OperatorData.kota && OperatorData.kota_id){
+  //     getKotaList(String(OperatorData.kota.provinsi_id));
+  //     setSelectedKota(String(OperatorData.kota_id));
+  //   }
+  // }, [mahasiswaData, DosenData, DepartemenData, OperatorData]);
 
   // const initialState = { message: null, errors: {} };
   // const [state, dispatch] = useFormState(updateMhs, initialState);
@@ -100,31 +129,37 @@ export default function UserForm({
                 <th>Nama Lengkap</th>
                 <td>
                   {/* {session.user.user_metadata.nama} */}
-                  <p>{mahasiswaData.nama}</p>
+                  <p>{userData.nama}</p>
                 </td>
               </tr>
               <tr>
-                <th>Angkatan</th>
-                <td>{mahasiswaData!.angkatan}</td>
-              </tr>
-              <tr>
-                <th>Jalur Masuk</th>
+                <th>
+                  {entityType === "mahasiswa" ? "Angkatan" : "NIDN"}
+                </th>
                 <td>
-                  <select
-                    className="p-2 border border-gray-300 bg-white"
-                    name="jalur_masuk_id"
-                    id="Status"
-                    defaultValue={mahasiswaData.jalur_masuk_id}
-                    required
-                  >
-                    <option>Pilih Jalur Masuk</option>
-                    <option value="1">SBUB</option>
-                    <option value="2">SNMPTN</option>
-                    <option value="3">SBMPTN</option>
-                    <option value="4">UM</option>
-                  </select>
+                  {entityType === "mahasiswa" ? userData!.angkatan : userData!.nidn}
                 </td>
               </tr>
+              {entityType === "mahasiswa" && (
+                <tr>
+                  <th>Jalur Masuk</th>
+                  <td>
+                    <select
+                      className="p-2 border border-gray-300 bg-white"
+                      name="jalur_masuk_id"
+                      id="Status"
+                      defaultValue={userData.jalur_masuk_id}
+                      required
+                    >
+                      <option>Pilih Jalur Masuk</option>
+                      <option value="1">SBUB</option>
+                      <option value="2">SNMPTN</option>
+                      <option value="3">SBMPTN</option>
+                      <option value="4">UM</option>
+                    </select>
+                  </td>
+                </tr>
+              )}
               <tr>
                 <th>Nomor HP</th>
                 <td>
@@ -133,7 +168,7 @@ export default function UserForm({
                     type="tel"
                     placeholder="Nomor Telepon"
                     name="no_hp"
-                    defaultValue={mahasiswaData.no_hp}
+                    defaultValue={userData.no_hp}
                     required
                   />
                 </td>
@@ -146,7 +181,7 @@ export default function UserForm({
                     type="text"
                     placeholder="Email Pribadi"
                     name="email"
-                    defaultValue={mahasiswaData.email}
+                    defaultValue={userData.email}
                     required
                   />
                 </td>
@@ -159,7 +194,7 @@ export default function UserForm({
                     type="text"
                     placeholder="Alamat Asal"
                     name="alamat"
-                    defaultValue={mahasiswaData.alamat}
+                    defaultValue={userData.alamat}
                     required
                   />
                 </td>
@@ -173,8 +208,8 @@ export default function UserForm({
                     id="provinsi"
                     onChange={(e) => getKotaList(e.target.value)}
                     defaultValue={
-                      mahasiswaData.kota
-                        ? String(mahasiswaData.kota.provinsi_id)
+                      userData.kota
+                        ? String(userData.kota.provinsi_id)
                         : ""
                     }
                     required

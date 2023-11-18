@@ -1,5 +1,6 @@
 import { serverActionSupabase as supabase } from "@/lib/supabaseClient";
 import { z } from "zod";
+import { Kota } from "./kota";
 
 export const DosenSchema = z.object({
   nama: z.string({
@@ -8,12 +9,24 @@ export const DosenSchema = z.object({
   nip: z.string({
     invalid_type_error: "Isi nipnya yang sesuai ya.",
   }),
+  nidn: z.string({
+    invalid_type_error: "Isi nidnnya yang sesuai ya.",
+  }),
+  alamat: z.string().optional(),
+  email: z.string().optional(),
+  no_hp: z.string().optional(),
+  kota_id: z.coerce.number().optional(),
 });
 
 export type DosenState = {
   errors?: {
     nama?: string[];
+    no_hp?: string[];
     nip?: string[];
+    nidn?: string[];
+    alamat?: string[];
+    email?: string[];
+    kota_id?: string[];
   };
   message?: string | null;
 };
@@ -21,8 +34,18 @@ export type DosenState = {
 export type Dosen = {
   nip: string;
   nama: string;
+  alamat?: string;
+  email?: string;
+  no_hp?: string;
+  foto_dosen?: string;
+  kota_id?: number; // foreign key on table kota.id
   created_at: string;
   updated_at: string;
+};
+
+
+export type DosenWithRelations = Dosen & {
+  kota: Kota | null;
 };
 
 export type Mhs = {

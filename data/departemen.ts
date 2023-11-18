@@ -1,11 +1,51 @@
 import { serverActionSupabase as supabase } from "@/lib/supabaseClient";
 import { Mahasiswa } from "./mahasiswa";
+import { z } from "zod";
+import { Kota } from "./kota";
+
+export const DepartemenSchema = z.object({
+  nama: z.string({
+    invalid_type_error: "Isi namanya yang sesuai ya.",
+  }),
+  nip: z.string({
+    invalid_type_error: "Isi nipnya yang sesuai ya.",
+  }),
+  nidn: z.string({
+    invalid_type_error: "Isi nidnnya yang sesuai ya.",
+  }),
+  alamat: z.string().optional(),
+  email: z.string().optional(),
+  no_hp: z.string().optional(),
+  kota_id: z.coerce.number().optional(),
+});
+
+export type DepartemenState = {
+  errors?: {
+    nama?: string[];
+    nip?: string[];
+    nidn?: string[];
+    alamat?: string[];
+    email?: string[];
+    no_hp?: string[];
+    kota_id?: string[];
+  };
+  message?: string | null;
+};
 
 export type Departemen = {
   nip: string;
   nama: string;
+  alamat?: string;
+  email?: string;
+  no_hp?: string;
+  foto_departemen?: string;
+  kota_id?: number; // foreign key on table kota.id
   created_at: string;
   updated_at: string;
+};
+
+export type DepartemenWithRelations = Departemen & {
+  kota: Kota | null;
 };
 
 export type Dosen = {
@@ -14,6 +54,24 @@ export type Dosen = {
   created_at: string;
   updated_at: string;
 };
+
+
+export async function fetchDepartemenByNip(nip: string): Promise<Departemen> {
+  try {
+    const departemen = await supabase
+      .from("departemen")
+      .select("*")
+      .eq("nip", nip)
+      .single();
+    if (!departemen.data) {
+      throw new Error("Departemen not found");
+    }
+    return departemen.data as Departemen;
+  } catch (error) {
+    console.error("Failed to fetch departemen data: ", error);
+    throw new Error("Failed to fetch departemen");
+  }
+}
 
 export async function fetchAllMahasiswa(): Promise<Mahasiswa[]> {
   try {
