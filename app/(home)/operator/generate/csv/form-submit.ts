@@ -42,7 +42,7 @@ export async function generateMhsCsv(prevState: FileState, formData: FormData) {
 
         const email = `${nim.trim()}@maildrop.cc`;
 
-        // // Create account using admin API
+        // Create account using admin API
         await supabase.auth.admin
           .createUser({
             email: email,

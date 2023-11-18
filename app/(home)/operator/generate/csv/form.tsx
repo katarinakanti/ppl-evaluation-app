@@ -4,6 +4,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { Dosen } from "@/data/dosen";
 import { Button } from "@/components/Button";
 import { generateMhsCsv } from "./form-submit";
+import CSVReader from "@/components/CSVReader";
 
 export default function Form() {
   const initialState = { message: null, errors: {} };
@@ -27,16 +28,7 @@ export default function Form() {
               </label>
             </p>
             <div className="mt-5 flex items-center ml-24">
-              {/* <input
-                className="w-96 p-1 border border-gray-300 bg-white"
-                type="file"
-                name="file"
-                id="file"
-                accept=".csv"
-              /> */}
-              <textarea name="csv" className="w-96 h-48">
-                nim,nama,angkatan,doswal_nip
-              </textarea>
+              <CSVReader />
             </div>
           </div>
         </div>
