@@ -23,22 +23,18 @@ return (
     </div>
     <table className="mx-auto bg-gray-100 w-10/12"> 
     {groupAngkatan.map((data) => {
-        return (
-        <thead>
-            <tr key={data.angkatan}>
+        return ( 
+            <td>
                 <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark" colSpan={2}>
                 {data.angkatan}      
-                </th> 
-            </tr>
-            <tr>
-                <th className="border border-stone-800 text-center font-semibold">Sudah</th>
-                <th className="border border-stone-800 text-center font-semibold">Belum</th>   
-            </tr>
-            <tr>
+                </th>
+                <tr>
+                <td className="border border-stone-800 text-center font-semibold">Sudah</td>
+                <td className="border border-stone-800 text-center font-semibold">Belum</td>   
+                </tr> 
                 <td className="border border-stone-800 text-center font-semibold text-2xl">{data.sudah}</td>
                 <td className="border border-stone-800 text-center font-semibold text-2xl">{data.belum}</td>  
-            </tr>
-        </thead>
+            </td>
         );
     })}
     </table>

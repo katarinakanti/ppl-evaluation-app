@@ -1,7 +1,13 @@
 import Link from "next/link";
+import { fetchAllMahasiswaSkripsi } from "@/data/departemen";
+import { fetchAllMahasiswa } from "@/data/departemen";
+import { groupMhsByAngkatanSkripsi } from "@/utils/functions";
 import { PrintButton } from "@/components/Button";
 
-export default function Page() {
+export default async function Page() {
+const MhsData = await fetchAllMahasiswa();
+const MhsDataSkripsi = await fetchAllMahasiswaSkripsi();
+const groupAngkatan = groupMhsByAngkatanSkripsi(MhsData,MhsDataSkripsi);
 return (
 <>
     <br />
@@ -16,47 +22,21 @@ return (
     <p className="text-center text-xl font-semibold">Angkatan</p>
     </div>
     <table className="mx-auto bg-gray-100 w-10/12"> 
-        <thead>
-            <tr>
+    {groupAngkatan.map((data) => {
+        return ( 
+            <td>
                 <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark" colSpan={2}>
-                2016      
+                {data.angkatan}      
                 </th>
-                <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark " colSpan={2}>
-                2017
-                </th>
-                <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark" colSpan={2}>
-                2018
-                </th>
-                <th className="border  border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark" colSpan={2}>
-                2019
-                </th>
-                <th className="border  border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark" colSpan={2}>
-                2020
-                </th>
-                <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark" colSpan={2}>
-                2021
-                </th>
-                <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark" colSpan={2}>
-                2022
-                </th>
-            </tr>
-            <tr>
-                <th className="border border-stone-800 text-center font-semibold">Sudah</th>
-                <th className="border border-stone-800 text-center font-semibold">Belum</th>  
-                <th className="border border-stone-800 text-center font-semibold">Sudah</th>
-                <th className="border border-stone-800 text-center font-semibold">Belum</th> 
-                <th className="border border-stone-800 text-center font-semibold">Sudah</th>
-                <th className="border border-stone-800 text-center font-semibold">Belum</th> 
-                <th className="border border-stone-800 text-center font-semibold">Sudah</th>
-                <th className="border border-stone-800 text-center font-semibold">Belum</th> 
-                <th className="border border-stone-800 text-center font-semibold">Sudah</th>
-                <th className="border border-stone-800 text-center font-semibold">Belum</th> 
-                <th className="border border-stone-800 text-center font-semibold">Sudah</th>
-                <th className="border border-stone-800 text-center font-semibold">Belum</th> 
-                <th className="border border-stone-800 text-center font-semibold">Sudah</th>
-                <th className="border border-stone-800 text-center font-semibold">Belum</th> 
-            </tr>
-        </thead>
+                <tr>
+                    <td className="py-2 px-4 border border-stone-800 text-center font-semibold">Sudah</td>
+                    <td className="py-2 px-4 border border-stone-800 text-center font-semibold">Belum</td>   
+                </tr> 
+                <td className=" py-2 px-4 border border-stone-800 text-center font-semibold text-2xl">{data.sudah}</td>
+                <td className="py-2 px-4 border border-stone-800 text-center font-semibold text-2xl">{data.belum}</td>  
+            </td>
+        );
+    })}
     </table>
     <div className="flex justify-center mt-10">
         {/* Pagination or 'Print' button would go here */}

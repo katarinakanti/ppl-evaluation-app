@@ -3,6 +3,7 @@ import { Mahasiswa } from "./mahasiswa";
 import { Pkl } from "./pkl";
 import { z } from "zod";
 import { Kota } from "./kota";
+import { Skripsi } from "./skripsi";
 
 export const DepartemenSchema = z.object({
   nama: z.string({
@@ -101,6 +102,21 @@ export async function fetchAllMahasiswaPKL(): Promise<Pkl[]> {
   } catch (error) {
     console.error("Failed to fetch pkl data: ", error);
     throw new Error("Failed to fetch pkl");
+  }
+}
+
+export async function fetchAllMahasiswaSkripsi(): Promise<Skripsi[]> {
+  try {
+    const skripsi = await supabase.from("skripsi").select(`*`);
+
+    if (!skripsi.data || skripsi.data.length === 0) {
+      throw new Error("No skripsi found");
+    }
+
+    return skripsi.data as Skripsi[];
+  } catch (error) {
+    console.error("Failed to fetch skripsi data: ", error);
+    throw new Error("Failed to fetch skripsi");
   }
 }
 

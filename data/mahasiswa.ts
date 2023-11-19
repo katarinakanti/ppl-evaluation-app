@@ -22,7 +22,7 @@ export const MahasiswaSchema = z.object({
   doswal_nip: z.string({
     invalid_type_error: "Isi nipnya yang sesuai ya.",
   }),
-  status: z.enum(["Aktif", "Cuti", "Lulus", "Mangkir", "Drop Out"], {
+  status: z.enum(["Aktif", "Cuti", "Lulus", "Mangkir", "Drop Out", "Undur Diri", "Meninggal Dunia"], {
     invalid_type_error: "Isi statusnya yang sesuai ya.",
   }),
   alamat: z.string().optional(),

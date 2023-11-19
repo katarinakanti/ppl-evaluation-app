@@ -8,10 +8,12 @@ export const SkripsiSchema = z.object({
     dosen_pembimbing_nip: z.coerce.string({
         invalid_type_error: "Tolong pilih Dosen Pembimbing",
     }),
-
+    angkatan: z.coerce.number(),
     tgl_sidang: z.coerce.date({ invalid_type_error: "Tolong isi Tanggal Sidang Skripsi" }),
 
     status_verifikasi_id: z.number().default(1),
+
+    status_mhs_id: z.coerce.number(),
 
     nilai_skripsi: z.coerce.string({ invalid_type_error: "Tolong isi Nilai Skripsi" }),
     semester: z.coerce.number(),

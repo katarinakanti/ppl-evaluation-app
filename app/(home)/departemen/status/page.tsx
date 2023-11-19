@@ -1,7 +1,14 @@
 import Link from "next/link";
+import { fetchAllMahasiswaSkripsi } from "@/data/departemen";
+import { fetchAllMahasiswa } from "@/data/mahasiswa";
+import { fetchStatusMahasiswa } from "@/data/status_mhs";
+import { groupMhsByStatusByAngkatan } from "@/utils/functions";
 import { PrintButton } from "@/components/Button";
 
-export default function Page() {
+export default async function Page() {
+const MhsData = await fetchAllMahasiswa();
+const StatusMhsData = await fetchStatusMahasiswa();
+const groupAngkatanByStatus = groupMhsByStatusByAngkatan(MhsData, StatusMhsData);
 return (
 <>
     <br />
@@ -21,98 +28,52 @@ return (
                 <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark" colSpan={7}>Angkatan</th> 
             </tr>
 
-            <tr>
-            <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark">
-                2016      
-                </th>
-                <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark ">
-                2017
-                </th>
+            {groupAngkatanByStatus.map((data) => ( 
                 <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark">
-                2018
-                </th>
-                <th className="border  border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark">
-                2019
-                </th>
-                <th className="border  border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark">
-                2020
-                </th>
-                <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark">
-                2021
-                </th>
-                <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark">
-                2022
-                </th>
-            </tr>
+                {data.angkatan}
+                </th> 
+            ))}
             <tr>
                 <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark">Aktif</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">150</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">120</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">150</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">120</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">250</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">210</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">250</td>
+            {groupAngkatanByStatus.map((data) => (
+                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">{data.aktif}</td> 
+            ))}     
             </tr>
             <tr>
                 <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark">Cuti</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">150</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">120</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">150</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">120</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">250</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">210</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">250</td>
+            {groupAngkatanByStatus.map((data) => (
+                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">{data.cuti}</td> 
+            ))}     
             </tr>
             <tr>
                 <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark">Mangkir</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">150</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">120</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">150</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">120</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">250</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">210</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">250</td>
+            {groupAngkatanByStatus.map((data) => (
+                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">{data.mangkir}</td> 
+            ))}     
             </tr>
             <tr>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark">Drop Out</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">150</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">120</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">150</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">120</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">250</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">210</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">250</td>
+                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark">DropOut</td>
+            {groupAngkatanByStatus.map((data) => (
+                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">{data.dropOut}</td> 
+            ))}     
             </tr>
             <tr>
                 <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark">Undur Diri</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">150</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">120</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">150</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">120</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">250</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">210</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">250</td>
+            {groupAngkatanByStatus.map((data) => (
+                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">{data.undurdiri}</td> 
+            ))}     
             </tr>
             <tr>
                 <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark">Lulus</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">150</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">120</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">150</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">120</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">250</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">210</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">250</td>
+            {groupAngkatanByStatus.map((data) => (
+                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">{data.lulus}</td> 
+            ))}     
             </tr>
             <tr>
                 <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark">Meninggal Dunia</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">150</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">120</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">150</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">120</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">250</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">210</td>
-                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">250</td>
+            {groupAngkatanByStatus.map((data) => (
+                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-normal uppercase text-xl text-grey-dark">{data.meninggal}</td> 
+            ))}     
             </tr>
         </thead>
     </table>

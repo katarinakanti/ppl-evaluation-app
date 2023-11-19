@@ -14,6 +14,8 @@ export const PklSchema = z.object({
 
   status_verifikasi_id: z.number().default(1),
 
+  status_mhs_id: z.coerce.number(),
+
   nilai_pkl: z.coerce.string({ invalid_type_error: "Tolong isi Nilai PKL" }),
   semester: z.coerce.number(),
   scan_pkl: z.string(),
