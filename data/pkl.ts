@@ -9,7 +9,7 @@ export const PklSchema = z.object({
   dosen_pembimbing_nip: z.coerce.string({
     invalid_type_error: "Tolong pilih Dosen Pembimbing",
   }),
-
+  angkatan: z.coerce.number(),
   waktu_pkl: z.coerce.date({ invalid_type_error: "Tolong isi Waktu PKL" }),
 
   status_verifikasi_id: z.number().default(1),
