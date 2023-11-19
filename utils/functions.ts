@@ -137,3 +137,39 @@ export function transformIRSData(
 
   return result;
 }
+
+export function groupMhsByAngkatanPKL(
+  data: Mahasiswa[],
+  sudahPKLData: Mahasiswa[]
+): { angkatan: number; sudah: number; belum: number }[] {
+  const angkatanCounts: { [angkatan: number]: { sudah: number; belum: number } } = {};
+
+  for (const student of data) {
+    if (student.angkatan) {
+      if (angkatanCounts[student.angkatan]) {
+        angkatanCounts[student.angkatan].belum++;
+      } else {
+        angkatanCounts[student.angkatan] = { sudah: 0, belum: 1 };
+      }
+    }
+  }
+
+  for (const student of sudahPKLData) {
+    if (student.angkatan) {
+      if (angkatanCounts[student.angkatan]) {
+        angkatanCounts[student.angkatan].sudah++;
+      } else {
+        angkatanCounts[student.angkatan] = { sudah: 1, belum: 0 };
+      }
+    }
+  }
+
+  const result = Object.entries(angkatanCounts).map(([angkatan, counts]) => ({
+    angkatan: parseInt(angkatan),
+    sudah: counts.sudah,
+    belum: counts.belum,
+  }));
+
+  return result;
+}
+

@@ -1,7 +1,13 @@
 import Link from "next/link";
+import { fetchAllMahasiswaPKL } from "@/data/departemen";
+import { fetchAllMahasiswa } from "@/data/departemen";
+import { groupMhsByAngkatanPKL } from "@/utils/functions";
 import { PrintButton } from "@/components/Button";
 
-export default function Page() {
+export default async function Page() {
+const MhsData = await fetchAllMahasiswa();
+const MhsDataPKL = await fetchAllMahasiswaPKL();
+const groupAngkatan = groupMhsByAngkatanPKL(MhsData,MhsDataPKL);
 return (
 <>
     <br />
@@ -16,47 +22,25 @@ return (
     <p className="text-center text-xl font-semibold">Angkatan</p>
     </div>
     <table className="mx-auto bg-gray-100 w-10/12"> 
+    {groupAngkatan.map((data) => {
+        return (
         <thead>
-            <tr>
+            <tr key={data.angkatan}>
                 <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark" colSpan={2}>
-                2016      
-                </th>
-                <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark " colSpan={2}>
-                2017
-                </th>
-                <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark" colSpan={2}>
-                2018
-                </th>
-                <th className="border  border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark" colSpan={2}>
-                2019
-                </th>
-                <th className="border  border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark" colSpan={2}>
-                2020
-                </th>
-                <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark" colSpan={2}>
-                2021
-                </th>
-                <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark" colSpan={2}>
-                2022
-                </th>
+                {data.angkatan}      
+                </th> 
             </tr>
             <tr>
                 <th className="border border-stone-800 text-center font-semibold">Sudah</th>
-                <th className="border border-stone-800 text-center font-semibold">Belum</th>  
-                <th className="border border-stone-800 text-center font-semibold">Sudah</th>
-                <th className="border border-stone-800 text-center font-semibold">Belum</th> 
-                <th className="border border-stone-800 text-center font-semibold">Sudah</th>
-                <th className="border border-stone-800 text-center font-semibold">Belum</th> 
-                <th className="border border-stone-800 text-center font-semibold">Sudah</th>
-                <th className="border border-stone-800 text-center font-semibold">Belum</th> 
-                <th className="border border-stone-800 text-center font-semibold">Sudah</th>
-                <th className="border border-stone-800 text-center font-semibold">Belum</th> 
-                <th className="border border-stone-800 text-center font-semibold">Sudah</th>
-                <th className="border border-stone-800 text-center font-semibold">Belum</th> 
-                <th className="border border-stone-800 text-center font-semibold">Sudah</th>
-                <th className="border border-stone-800 text-center font-semibold">Belum</th> 
+                <th className="border border-stone-800 text-center font-semibold">Belum</th>   
+            </tr>
+            <tr>
+                <td className="border border-stone-800 text-center font-semibold text-2xl">{data.sudah}</td>
+                <td className="border border-stone-800 text-center font-semibold text-2xl">{data.belum}</td>  
             </tr>
         </thead>
+        );
+    })}
     </table>
     <div className="flex justify-center mt-10">
         {/* Pagination or 'Print' button would go here */}

@@ -1,5 +1,6 @@
 import { serverActionSupabase as supabase } from "@/lib/supabaseClient";
 import { Mahasiswa } from "./mahasiswa";
+import { Pkl } from "./pkl";
 import { z } from "zod";
 import { Kota } from "./kota";
 
@@ -85,6 +86,21 @@ export async function fetchAllMahasiswa(): Promise<Mahasiswa[]> {
   } catch (error) {
     console.error("Failed to fetch mahasiswa data: ", error);
     throw new Error("Failed to fetch mahasiswa");
+  }
+}
+
+export async function fetchAllMahasiswaPKL(): Promise<Pkl[]> {
+  try {
+    const pkl = await supabase.from("pkl").select(`*`);
+
+    if (!pkl.data || pkl.data.length === 0) {
+      throw new Error("No pkl found");
+    }
+
+    return pkl.data as Pkl[];
+  } catch (error) {
+    console.error("Failed to fetch pkl data: ", error);
+    throw new Error("Failed to fetch pkl");
   }
 }
 
