@@ -26,7 +26,7 @@ export default function MahasiswaDashboard({ session }: { session: Session }) {
                 NIM : {session.user.user_metadata.no_induk}
               </p>
               <p className="ml-32 text-lg font-arial font-extralight">
-                Informatika
+                Angkatan : {session.user.user_metadata.angkatan}
               </p>
             </div>
           </div>

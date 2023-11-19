@@ -101,9 +101,9 @@ export async function fetchDosenWithRelationsByNip(
   }
 }
 
-export async function fetchMhsByNip(nip: string): Promise<Mhs[]> {
+export async function fetchMhsByNip(nip: string, searchTerm?: string): Promise<Mhs[]> {
   try {
-    const mahasiswa = await supabase
+    let query = supabase
       .from("mahasiswa")
       .select(
         `
@@ -111,6 +111,13 @@ export async function fetchMhsByNip(nip: string): Promise<Mhs[]> {
       `
       )
       .eq("doswal_nip", nip);
+    
+    if (searchTerm) {
+      query = query.or(`nama.ilike.%${searchTerm}%,nim.ilike.%${searchTerm}%`);
+    }
+
+    const mahasiswa = await query;
+
     if (!mahasiswa.data) {
       throw new Error("mahasiswa not found");
     }
