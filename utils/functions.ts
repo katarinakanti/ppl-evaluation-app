@@ -15,7 +15,7 @@ export function mapStatusToNumber(status: string): number {
       return 5;
     case "Undur Diri":
       return 6;
-    case "Meniggal Dunia":
+    case "Meninggal Dunia":
       return 7;
     default:
       throw new Error("Invalid status");
