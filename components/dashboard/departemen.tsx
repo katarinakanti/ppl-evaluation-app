@@ -1,5 +1,6 @@
 import { Session } from "@supabase/supabase-js";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function DepartemenDashboard({ session }: { session: Session }) {
   return (
@@ -30,6 +31,16 @@ export default function DepartemenDashboard({ session }: { session: Session }) {
               </p>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div>
+        <div className= "flex-col w-10/12 mx-auto"> 
+            <Link className = "text-xl bg-gray-100 h-14 flex items-center justify-center" href={"/departemen/status"}>Status</Link>
+            <Link className = "text-xl bg-gray-100 h-14 mt-5 flex items-center justify-center" href={"/departemen/irs"}>IRS</Link>
+            <Link className = "text-xl bg-gray-100 h-14 mt-5 flex items-center justify-center" href={"/departemen/khs"}>KHS</Link>
+            <Link className = "text-xl bg-gray-100 h-14 mt-5 flex items-center justify-center" href={"/departemen/pkl"}>PKL</Link>
+            <Link className = "text-xl bg-gray-100 h-14 mt-5 flex items-center justify-center" href={"/departemen/skripsi"}>Skripsi</Link>
         </div>
       </div>
     </>
