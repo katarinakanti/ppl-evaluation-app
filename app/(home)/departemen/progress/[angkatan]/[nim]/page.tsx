@@ -1,6 +1,7 @@
 import { progressMahasiswa } from "@/data/progress";
 import { SemesterData, mapData } from "./data";
 import { fetchMahasiswaByNim } from "@/data/mahasiswa";
+import ProgressSemesters from "@/components/Progress";
 
 export default async function Page({ params }: { params: { nim: string } }) {
   const SEMESTER_TOTAL = 14;
@@ -8,34 +9,7 @@ export default async function Page({ params }: { params: { nim: string } }) {
   const mhsData = await fetchMahasiswaByNim(params.nim);
   const mappedData = mapData(data);
 
-  const renderSemesters = () => {
-    // Create a map of semester colors
-    const semesterColors = new Map();
-    mappedData.forEach((data) => {
-      if (data.skripsi) {
-        semesterColors.set(data.semester, "bg-green-600");
-      } else if (data.pkl) {
-        semesterColors.set(data.semester, "bg-yellow-600");
-      } else if (data.irs || data.khs) {
-        semesterColors.set(data.semester, "bg-blue-600");
-      }
-    });
-
-    // Generate semester divs
-    return Array.from({ length: SEMESTER_TOTAL }, (_, index) => {
-      const semesterNumber = index + 1;
-      const bgColor = semesterColors.get(semesterNumber) || "bg-red-600"; // Default color: red
-
-      return (
-        <div
-          key={index}
-          className={`mt-5 flex items-center justify-center mx-auto ${bgColor} w-40 h-20 text-white rounded-md`}
-        >
-          <h1 className="text-4xl">{semesterNumber}</h1>
-        </div>
-      );
-    });
-  };
+  console.log(mappedData);
 
   return (
     <>
@@ -67,7 +41,12 @@ export default async function Page({ params }: { params: { nim: string } }) {
         </div>
       </div>
       <p className="text-center text-3xl">Semester</p>
-      <div className="grid grid-cols-5">{renderSemesters()}</div>
+      <div className="grid grid-cols-5">
+        <ProgressSemesters
+          semestersData={mappedData}
+          SEMESTER_TOTAL={SEMESTER_TOTAL}
+        />
+      </div>
       <div className="flex mt-10 ml-32">
         <h1 className="text-xl font-semibold">Keterangan</h1>
       </div>

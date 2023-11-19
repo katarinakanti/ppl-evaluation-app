@@ -1,21 +1,21 @@
 import { Irs } from "@/data/irs";
 import { Khs } from "@/data/khs";
-import { Pkl } from "@/data/pkl";
-import { Skripsi } from "@/data/skripsi";
+import { Pkl, PklWithRelations } from "@/data/pkl";
+import { Skripsi, SkripsiWithRelations } from "@/data/skripsi";
 
 type MhsData = {
   irs: Irs[] | null;
   khs: Khs[] | null;
-  pkl: Pkl | null;
-  skripsi: Skripsi | null;
+  pkl: PklWithRelations | null;
+  skripsi: SkripsiWithRelations | null;
 };
 
 export type SemesterData = {
   semester: number;
   irs?: Irs;
   khs?: Khs;
-  pkl?: Pkl;
-  skripsi?: Skripsi;
+  pkl?: PklWithRelations;
+  skripsi?: SkripsiWithRelations;
 };
 
 export function mapData(data: MhsData) {

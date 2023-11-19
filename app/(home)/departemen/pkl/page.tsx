@@ -18,25 +18,37 @@ return (
     </h1>
     <br />
     <br />
-    <div className="flex items-center justify-center mx-auto bg-gray-100 border border-gray-500 w-10/12 h-16">
-    <p className="text-center text-xl font-semibold">Angkatan</p>
-    </div>
+
     <table className="mx-auto bg-gray-100 w-10/12"> 
-    {groupAngkatan.map((data) => {
-        return ( 
-            <td>
-                <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark" colSpan={2}>
-                {data.angkatan}      
-                </th>
+        <thead>
+            <tr>
+            </tr>
+            <tr>
+                <th className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark" colSpan={7}>Angkatan</th> 
+            </tr>
+            <tr>
+            {groupAngkatan.map((data) => (
+                <th>
+                <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark" colSpan={2}>
+                {data.angkatan}
+                </td>  
                 <tr>
-                <td className=" py-2 px-4 border border-stone-800 text-center font-semibold">Sudah</td>
-                <td className=" py-2 px-4 border border-stone-800 text-center font-semibold">Belum</td>   
-                </tr> 
+                    <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark">
+                    Sudah
+                    </td> 
+                    <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark">
+                    Belum
+                    </td> 
+                </tr>
+                <tr>
                 <td className=" py-2 px-4 border border-stone-800 text-center font-semibold text-2xl">{data.sudah}</td>
-                <td className=" py-2 px-4 border border-stone-800 text-center font-semibold text-2xl">{data.belum}</td>  
-            </td>
-        );
-    })}
+                <td className="py-2 px-4 border border-stone-800 text-center font-semibold text-2xl">{data.belum}</td>  
+                </tr>
+                </th>
+                
+            ))}
+            </tr>
+        </thead>
     </table>
     <div className="flex justify-center mt-10">
         {/* Pagination or 'Print' button would go here */}
