@@ -79,17 +79,6 @@ export default function VerifikasiKhs({
             <div className="flex w-full -mt-10">
               <div>
                 <p className="flex items-center w-60 p-10 font-semibold">
-                  SKS Kumulatif
-                </p>
-              </div>
-              <div className="flex items-center ml-40">
-                :<p className="ml-10">{khs.sks_kumulatif}</p>
-              </div>
-            </div>
-
-            <div className="flex w-full -mt-10">
-              <div>
-                <p className="flex items-center w-60 p-10 font-semibold">
                   IP Semester
                 </p>
               </div>
@@ -98,6 +87,18 @@ export default function VerifikasiKhs({
               </div>
             </div>
 
+            
+            <div className="flex w-full -mt-10">
+              <div>
+                <p className="flex items-center w-60 p-10 font-semibold">
+                  SKS Kumulatif
+                </p>
+              </div>
+              <div className="flex items-center ml-40">
+                :<p className="ml-10">{khs.sks_kumulatif}</p>
+              </div>
+            </div>
+            
             <div className="flex w-full -mt-10">
               <div>
                 <p className="flex items-center w-60 p-10 font-semibold">
@@ -129,7 +130,7 @@ export default function VerifikasiKhs({
           <div className="flex col mb-10 mr-10 ">
             <div className="flex w-full">
               <a target="_blank" href={getFileUrl(khs.scan_khs)}>
-                <button className="w-32 h-10 bg-white hover:bg-pink-200 text-pink-400 border border-pink-400 font-semibold rounded">Lihat IRS</button>
+                <button className="w-32 h-10 bg-white hover:bg-pink-200 text-pink-400 border border-pink-400 font-semibold rounded">Lihat KHS</button>
                     {" "}
                 </a>
             </div>
