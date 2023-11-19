@@ -1,6 +1,17 @@
 import { Irs } from "@/data/irs";
 import { StatusMhs } from "@/data/status_mhs";
 
+export function mapStatusVerifikasiToNumber(status: number): string {
+  switch (status) {
+    case 1:
+      return "Diproses";
+    case 2:
+      return "Terverifikasi";
+    default:
+      return "Terjadi kesalahan";
+  }
+}
+
 export function mapStatusToNumber(status: string): number {
   switch (status) {
     case "Aktif":
@@ -148,7 +159,9 @@ export function groupMhsByAngkatanPKL(
   data: Mahasiswa[],
   sudahPKLData: Mahasiswa[]
 ): { angkatan: number; sudah: number; belum: number }[] {
-  const angkatanCounts: { [angkatan: number]: { sudah: number; belum: number } } = {};
+  const angkatanCounts: {
+    [angkatan: number]: { sudah: number; belum: number };
+  } = {};
 
   for (const student of data) {
     if (student.angkatan) {
@@ -183,7 +196,9 @@ export function groupMhsByAngkatanSkripsi(
   data: Mahasiswa[],
   sudahSkripsiData: Mahasiswa[]
 ): { angkatan: number; sudah: number; belum: number }[] {
-  const angkatanCounts: { [angkatan: number]: { sudah: number; belum: number } } = {};
+  const angkatanCounts: {
+    [angkatan: number]: { sudah: number; belum: number };
+  } = {};
 
   for (const student of data) {
     if (student.angkatan) {
@@ -217,14 +232,25 @@ export function groupMhsByAngkatanSkripsi(
 export function groupMhsByStatusByAngkatan(
   data: Mahasiswa[],
   statusMhsData: StatusMhs[]
-): { angkatan: number; aktif: number; cuti: number; lulus: number; mangkir: number; dropOut: number, undurdiri:number, meninggal:number }[] {
-  const angkatanCounts: { [angkatan: number]: { [status: string]: number } } = {};
+): {
+  angkatan: number;
+  aktif: number;
+  cuti: number;
+  lulus: number;
+  mangkir: number;
+  dropOut: number;
+  undurdiri: number;
+  meninggal: number;
+}[] {
+  const angkatanCounts: { [angkatan: number]: { [status: string]: number } } =
+    {};
 
   for (const student of data) {
     if (student.angkatan && student.status_mhs_id) {
       const angkatan = student.angkatan;
       const statusNumber = mapStatusToNumber(
-        statusMhsData.find((status) => status.id === student.status_mhs_id)?.nama || ""
+        statusMhsData.find((status) => status.id === student.status_mhs_id)
+          ?.nama || ""
       );
 
       if (angkatanCounts[angkatan]) {
@@ -236,18 +262,18 @@ export function groupMhsByStatusByAngkatan(
     }
   }
 
-  const result = Object.entries(angkatanCounts).map(([angkatan, statusCounts]) => ({
-    angkatan: parseInt(angkatan),
-    aktif: statusCounts[1],
-    cuti: statusCounts[2],
-    lulus: statusCounts[3],
-    mangkir: statusCounts[4],
-    dropOut: statusCounts[5],
-    undurdiri: statusCounts[6],
-    meninggal: statusCounts[7],
-  }));
+  const result = Object.entries(angkatanCounts).map(
+    ([angkatan, statusCounts]) => ({
+      angkatan: parseInt(angkatan),
+      aktif: statusCounts[1],
+      cuti: statusCounts[2],
+      lulus: statusCounts[3],
+      mangkir: statusCounts[4],
+      dropOut: statusCounts[5],
+      undurdiri: statusCounts[6],
+      meninggal: statusCounts[7],
+    })
+  );
 
   return result;
 }
-
-
