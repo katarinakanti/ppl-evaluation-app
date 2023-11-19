@@ -57,18 +57,19 @@ export type Dosen = {
   updated_at: string;
 };
 
-
-export async function fetchDepartemenByNip(nip: string): Promise<Departemen> {
+export async function fetchDepartemenByNip(
+  nip: string
+): Promise<DepartemenWithRelations> {
   try {
     const departemen = await supabase
       .from("departemen")
-      .select("*")
+      .select("*, kota:kota_id (*)")
       .eq("nip", nip)
       .single();
     if (!departemen.data) {
       throw new Error("Departemen not found");
     }
-    return departemen.data as Departemen;
+    return departemen.data as DepartemenWithRelations;
   } catch (error) {
     console.error("Failed to fetch departemen data: ", error);
     throw new Error("Failed to fetch departemen");

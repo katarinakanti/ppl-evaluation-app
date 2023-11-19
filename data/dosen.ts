@@ -39,10 +39,10 @@ export type Dosen = {
   no_hp?: string;
   foto_dosen?: string;
   kota_id?: number; // foreign key on table kota.id
+  nidn?: string;
   created_at: string;
   updated_at: string;
 };
-
 
 export type DosenWithRelations = Dosen & {
   kota: Kota | null;
@@ -76,6 +76,25 @@ export async function fetchDosenByNip(nip: string): Promise<Dosen> {
       throw new Error("Dosen not found");
     }
     return dosen.data as Dosen;
+  } catch (error) {
+    console.error("Failed to fetch dosen data: ", error);
+    throw new Error("Failed to fetch dosen");
+  }
+}
+
+export async function fetchDosenWithRelationsByNip(
+  nip: string
+): Promise<DosenWithRelations> {
+  try {
+    const dosen = await supabase
+      .from("dosen")
+      .select("*, kota:kota_id (*)")
+      .eq("nip", nip)
+      .single();
+    if (!dosen.data) {
+      throw new Error("Dosen not found");
+    }
+    return dosen.data as DosenWithRelations;
   } catch (error) {
     console.error("Failed to fetch dosen data: ", error);
     throw new Error("Failed to fetch dosen");

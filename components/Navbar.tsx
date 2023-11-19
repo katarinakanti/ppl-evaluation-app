@@ -40,7 +40,10 @@ export function MhsNavbar() {
         <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/"}>
           Home
         </Link>
-        <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/profile"}>
+        <Link
+          className="hover:bg-gray-300 px-3 py-2 rounded"
+          href={"/mhs/profile"}
+        >
           Profile
         </Link>
         <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/mhs/irs"}>
@@ -83,6 +86,12 @@ export function DosenNavbar() {
       <div className="flex gap-5">
         <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/"}>
           Home
+        </Link>
+        <Link
+          className="hover:bg-gray-300 px-3 py-2 rounded"
+          href={"/dosen/profile"}
+        >
+          Profile
         </Link>
         <Link
           className="hover:bg-gray-300 px-3 py-2 rounded"
@@ -136,6 +145,12 @@ export function OpNavbar() {
         </Link>
         <Link
           className="hover:bg-gray-300 px-2 py-2 rounded"
+          href="/operator/profile"
+        >
+          Profile
+        </Link>
+        <Link
+          className="hover:bg-gray-300 px-2 py-2 rounded"
           href="/operator/generate/mhs"
         >
           Generate Mahasiswa
@@ -177,6 +192,12 @@ export function DeptNavbar() {
       <div className="flex gap-5">
         <Link className="hover:bg-gray-300 px-3 py-2 rounded" href={"/"}>
           Home
+        </Link>
+        <Link
+          className="hover:bg-gray-300 px-3 py-2 rounded"
+          href={"/departemen/profile"}
+        >
+          Profile
         </Link>
         <Link
           className="hover:bg-gray-300 px-3 py-2 rounded"

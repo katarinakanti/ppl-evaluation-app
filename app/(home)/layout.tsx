@@ -33,7 +33,8 @@ export default async function Layout({
       case "departemen":
         return <DeptNavbar />;
       default:
-        return <NonAuthNavbar />;
+        // return <NonAuthNavbar />;
+        return null;
     }
   };
 
