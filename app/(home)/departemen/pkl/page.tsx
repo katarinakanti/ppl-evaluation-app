@@ -29,11 +29,11 @@ return (
                 {data.angkatan}      
                 </th>
                 <tr>
-                <td className="border border-stone-800 text-center font-semibold">Sudah</td>
-                <td className="border border-stone-800 text-center font-semibold">Belum</td>   
+                <td className=" py-2 px-4 border border-stone-800 text-center font-semibold">Sudah</td>
+                <td className=" py-2 px-4 border border-stone-800 text-center font-semibold">Belum</td>   
                 </tr> 
-                <td className="border border-stone-800 text-center font-semibold text-2xl">{data.sudah}</td>
-                <td className="border border-stone-800 text-center font-semibold text-2xl">{data.belum}</td>  
+                <td className=" py-2 px-4 border border-stone-800 text-center font-semibold text-2xl">{data.sudah}</td>
+                <td className=" py-2 px-4 border border-stone-800 text-center font-semibold text-2xl">{data.belum}</td>  
             </td>
         );
     })}
