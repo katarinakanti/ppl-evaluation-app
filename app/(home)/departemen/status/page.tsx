@@ -19,7 +19,7 @@ return (
     </h1>
     <br />
     <br />
-    <table className="mx-auto bg-gray-100 w-10/12"> 
+    <table className="mx-auto bg-gray-100 "> 
         <thead>
             <tr>
             </tr>
@@ -33,6 +33,7 @@ return (
                 {data.angkatan}
                 </th> 
             ))}
+            
             <tr>
                 <td className="text-center border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark">Aktif</td>
             {groupAngkatanByStatus.map((data) => (
