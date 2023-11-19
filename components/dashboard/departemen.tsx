@@ -1,7 +1,7 @@
 import { Session } from "@supabase/supabase-js";
 import Image from "next/image";
 
-export default function DosenDashboard({ session }: { session: Session }) {
+export default function DepartemenDashboard({ session }: { session: Session }) {
   return (
     <>
       <div className="flex mb-8 mt-10 mx-auto bg-gray-100 w-10/12 h-48">

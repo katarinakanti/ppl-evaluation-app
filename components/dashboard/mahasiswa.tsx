@@ -1,7 +1,7 @@
 import { Session } from "@supabase/supabase-js";
 import Image from "next/image";
 
-export default function DosenDashboard({ session }: { session: Session }) {
+export default function MahasiswaDashboard({ session }: { session: Session }) {
   return (
     <>
       <div className="flex mb-8 mt-10 mx-auto bg-gray-100 w-10/12 h-48">
@@ -23,7 +23,7 @@ export default function DosenDashboard({ session }: { session: Session }) {
 
             <div className="flex">
               <p className="text-lg font-arial font-extralight">
-                NIP : {session.user.user_metadata.no_induk}
+                NIM : {session.user.user_metadata.no_induk}
               </p>
               <p className="ml-32 text-lg font-arial font-extralight">
                 Informatika
