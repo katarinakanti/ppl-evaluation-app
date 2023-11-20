@@ -1,4 +1,6 @@
 import { Irs } from "@/data/irs";
+import { Pkl } from "@/data/pkl";
+import { Skripsi } from "@/data/skripsi";
 import { StatusMhs } from "@/data/status_mhs";
 
 export function mapStatusVerifikasiToNumber(status: number): string {
@@ -157,7 +159,7 @@ export function transformIRSData(
 
 export function groupMhsByAngkatanPKL(
   data: Mahasiswa[],
-  sudahPKLData: Mahasiswa[]
+  sudahPKLData: Pkl[]
 ): { angkatan: number; sudah: number; belum: number }[] {
   const angkatanCounts: {
     [angkatan: number]: { sudah: number; belum: number };
@@ -194,7 +196,7 @@ export function groupMhsByAngkatanPKL(
 
 export function groupMhsByAngkatanSkripsi(
   data: Mahasiswa[],
-  sudahSkripsiData: Mahasiswa[]
+  sudahSkripsiData: Skripsi[]
 ): { angkatan: number; sudah: number; belum: number }[] {
   const angkatanCounts: {
     [angkatan: number]: { sudah: number; belum: number };

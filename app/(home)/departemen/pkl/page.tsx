@@ -3,6 +3,7 @@ import { fetchAllMahasiswaPKL } from "@/data/departemen";
 import { fetchAllMahasiswa } from "@/data/departemen";
 import { groupMhsByAngkatanPKL } from "@/utils/functions";
 import { PrintButton } from "@/components/Button";
+import React from "react";
 
 export default async function Page() {
 const MhsData = await fetchAllMahasiswa();
@@ -40,10 +41,18 @@ return (
                     Belum
                     </td> 
                 </tr>
-                <tr>
-                <td className=" py-2 px-4 border border-stone-800 text-center font-semibold text-2xl">{data.sudah}</td>
-                <td className="py-2 px-4 border border-stone-800 text-center font-semibold text-2xl">{data.belum}</td>  
-                </tr>
+                
+                <td className=" py-2 px-4 border border-stone-800 text-center font-semibold text-2xl">
+                <Link href={`/departemen/pkl/${data.angkatan}`}>
+                    <p>{data.sudah}</p>
+                </Link>
+                </td>
+                <td className="py-2 px-4 border border-stone-800 text-center font-semibold text-2xl">
+                <Link href={`/departemen/pkl/${data.angkatan}`}>
+                    <p>{data.belum}</p>
+                </Link> 
+                </td>  
+                
                 </th>
                 
             ))}

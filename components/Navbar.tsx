@@ -199,24 +199,24 @@ export function DeptNavbar() {
         >
           Profile
         </Link>
-        <Link
+        {/* <Link
           className="hover:bg-gray-300 px-3 py-2 rounded"
           href={"/departemen/irs"}
         >
           IRS
-        </Link>
+        </Link> */}
         <Link
           className="hover:bg-gray-300 px-3 py-2 rounded"
           href={"/departemen/progress"}
         >
           Progress Mahasiswa
         </Link>
-        <Link
+        {/* <Link
           className="hover:bg-gray-300 px-3 py-2 rounded"
           href={"/departemen/khs"}
         >
           KHS
-        </Link>
+        </Link> */}
         <Link
           className="hover:bg-gray-300 px-3 py-2 rounded"
           href={"/departemen/pkl"}

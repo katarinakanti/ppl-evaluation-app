@@ -39,11 +39,16 @@ return (
                     Belum
                     </td> 
                 </tr>
-                <tr>
                 <td className=" py-2 px-4 border border-stone-800 text-center font-semibold text-2xl">
-                {data.sudah}</td>
-                <td className="py-2 px-4 border border-stone-800 text-center font-semibold text-2xl">{data.belum}</td>  
-                </tr>
+                <Link href={`/departemen/skripsi/${data.angkatan}`}>
+                    <p>{data.sudah}</p>
+                </Link>
+                </td>
+                <td className="py-2 px-4 border border-stone-800 text-center font-semibold text-2xl">
+                <Link href={`/departemen/skripsi/${data.angkatan}`}>
+                    <p>{data.belum}</p>
+                </Link> 
+                </td>  
                 </th>
                 
             ))}
