@@ -3,9 +3,11 @@ import { serverActionSupabase as supabase } from "@/lib/supabaseClient";
 import { z } from "zod";
 import { Dosen } from "./dosen";
 import { Mhs } from "./dosen";
+import { Mahasiswa } from "./mahasiswa";
 
 export const PklSchema = z.object({
   nim: z.string(),
+
   dosen_pembimbing_nip: z.coerce.string({
     invalid_type_error: "Tolong pilih Dosen Pembimbing",
   }),
@@ -27,7 +29,7 @@ export type Pkl = z.infer<typeof PklSchema>;
 export type PklWithRelations =
   | (Pkl & {
       dosen: Dosen;
-      mahasiswa: Dosen;
+      mahasiswa: Mahasiswa;
     })
   | null;
 
@@ -43,6 +45,7 @@ export type PklState = {
     scan_pkl?: string[];
     created_at?: string[];
     updated_at?: string[];
+    nama?: string;
   };
   message?: string | null;
 };
@@ -86,6 +89,7 @@ export async function fetchPklByNim1(nim: string): Promise<Pkl[]> {
   }
 }
 
+
 export async function fetchPklByNimAngkatanDosen(
   nim: string[],
   angkatan: string,
@@ -109,3 +113,73 @@ export async function fetchPklByNimAngkatanDosen(
     throw new Error("Failed to fetch data");
   }
 }
+
+type PklByAngkatan = {
+  nim: string;
+  nama: string;
+  angkatan: number;
+  nilai_pkl: string;
+};
+// export async function fetchPklByAngkatan(
+//   angkatan: number,
+// ): Promise<Pkl[]> {
+//   try {
+//     // Cek di supabase buat rpc-nya
+//     // https://supabase.com/dashboard/project/ysqlqkegzdalostasyxo/database/functions
+//     const pkl = await supabase.rpc("get_pkl_by_angkatan", { angkatan });
+
+//     if (!pkl.data) {
+//       throw new Error("pkl not found");
+//     }
+
+//     return pkl.data;
+//   } catch (error) {
+//     console.log("Failed to fetch pkl data: ", error);
+//     console.error("Failed to fetch pkl data: ", error);
+//     throw new Error("Failed to fetch pkl data");
+//   }
+// }
+
+export async function fetchPklByAngkatan(angkatan: string): Promise<Pkl[]> {
+  try {
+    const pkl = await supabase
+      .from("pkl")
+      .select(
+        `
+          pkl.*,
+          mahasiswa.nama as nama
+        `
+      )
+      .eq("angkatan", angkatan)
+      .eq("status_verifikasi_id", 2)
+      .innerJoin("mahasiswa", "pkl.nim", "mahasiswa.nim");
+
+    if (!pkl.data) {
+      throw new Error("Pkl not found");
+    }
+    return pkl.data as Pkl[];
+  } catch (error) {
+    console.error("Failed to fetch mahasiswa data: ", error);
+    throw new Error("Failed to fetch mahasiswa");
+  }
+}
+
+// export async function fetchPklByAngkatan(
+//   akt: number,
+// ): Promise<PklByAngkatan[]> {
+//   try {
+//     // Cek di supabase buat rpc-nya
+//     // https://supabase.com/dashboard/project/ysqlqkegzdalostasyxo/database/functions
+//     const pkl = await supabase.rpc("get_pkl_by_akt", { akt});
+
+//     if (!pkl.data) {
+//       throw new Error("pkl not found");
+//     }
+
+//     return pkl.data;
+//   } catch (error) {
+//     console.log("Failed to fetch pkl data: ", error);
+//     console.error("Failed to fetch pkl data: ", error);
+//     throw new Error("Failed to fetch pkl data");
+//   }
+// }

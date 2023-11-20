@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { mapStatusToNumber } from "@/utils/functions";
 import { JalurMasuk } from "./jalur_masuk";
 import { Dosen } from "./dosen";
+import { Pkl } from "./pkl";
 import { StatusMhs } from "./status_mhs";
 import { Kota } from "./kota";
 
@@ -139,7 +140,9 @@ export async function fetchMahasiswaByAngkatan(
       query = query.or(`nama.ilike.%${search}%,nim.ilike.%${search}%`);
     }
 
-    const mahasiswa = await query;
+    // const mahasiswa = await query;
+
+    const { data: mahasiswa } = await query;
     return mahasiswa.data as MahasiswaWithRelations[];
   } catch (error) {
     console.error("Failed to fetch mahasiswa data: ", error);
