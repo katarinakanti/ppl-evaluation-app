@@ -89,7 +89,6 @@ export async function fetchPklByNim1(nim: string): Promise<Pkl[]> {
   }
 }
 
-
 export async function fetchPklByNimAngkatanDosen(
   nim: string[],
   angkatan: string,
@@ -140,25 +139,27 @@ type PklByAngkatan = {
 //   }
 // }
 
-export async function fetchPklByAngkatan(angkatan: string): Promise<Pkl[]> {
+export async function fetchPklByAngkatan(
+  angkatan: number
+  // status: number
+): Promise<PklWithRelations[]> {
   try {
     const pkl = await supabase
       .from("pkl")
       .select(
         `
-          pkl.*,
-          mahasiswa.nama as nama
+          *,  mahasiswa:nim (*), dosen:dosen_pembimbing_nip (*)
         `
       )
-      .eq("angkatan", angkatan)
-      .eq("status_verifikasi_id", 2)
-      .innerJoin("mahasiswa", "pkl.nim", "mahasiswa.nim");
+      .eq("angkatan", angkatan);
+    // .eq("status_verifikasi_id", status);
 
     if (!pkl.data) {
       throw new Error("Pkl not found");
     }
-    return pkl.data as Pkl[];
+    return pkl.data as PklWithRelations[];
   } catch (error) {
+    console.log("error", error);
     console.error("Failed to fetch mahasiswa data: ", error);
     throw new Error("Failed to fetch mahasiswa");
   }

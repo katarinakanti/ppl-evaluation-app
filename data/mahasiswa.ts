@@ -23,9 +23,20 @@ export const MahasiswaSchema = z.object({
   doswal_nip: z.string({
     invalid_type_error: "Isi nipnya yang sesuai ya.",
   }),
-  status: z.enum(["Aktif", "Cuti", "Lulus", "Mangkir", "Drop Out", "Undur Diri", "Meninggal Dunia"], {
-    invalid_type_error: "Isi statusnya yang sesuai ya.",
-  }),
+  status: z.enum(
+    [
+      "Aktif",
+      "Cuti",
+      "Lulus",
+      "Mangkir",
+      "Drop Out",
+      "Undur Diri",
+      "Meninggal Dunia",
+    ],
+    {
+      invalid_type_error: "Isi statusnya yang sesuai ya.",
+    }
+  ),
   alamat: z.string().optional(),
   jalur_masuk_id: z.coerce.number().optional(),
   email: z.string().optional(),
@@ -140,12 +151,15 @@ export async function fetchMahasiswaByAngkatan(
       query = query.or(`nama.ilike.%${search}%,nim.ilike.%${search}%`);
     }
 
-    // const mahasiswa = await query;
+    const mahasiswa = await query;
 
-    const { data: mahasiswa } = await query;
+    // buat noia: ini yang kode kamu aku comment soalnya jadi gajalan di aku
+    // const { data: mahasiswa } = await query;
     return mahasiswa.data as MahasiswaWithRelations[];
   } catch (error) {
     console.error("Failed to fetch mahasiswa data: ", error);
     throw new Error("Failed to fetch mahasiswa");
   }
 }
+
+
