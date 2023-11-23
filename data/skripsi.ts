@@ -84,7 +84,5 @@ export async function fetchSkripsiByAngkatanOnProgress(
     p_is_exist: status,
   });
 
-  console.log(data, error);
-
   return data;
 }
