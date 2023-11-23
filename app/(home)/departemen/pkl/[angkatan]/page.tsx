@@ -1,13 +1,20 @@
 import { PrintButton } from "@/components/Button";
 import { fetchMahasiswaByAngkatan } from "@/data/mahasiswa";
-import { fetchPklByAngkatan } from "@/data/pkl";
+import { fetchPklByAngkatan, fetchPklByAngkatanOnProgress } from "@/data/pkl";
 
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: { angkatan: string; search: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const data = await fetchPklByAngkatan(Number(params.angkatan));
+  // const data = await fetchPklByAngkatan(Number(params.angkatan));
+  const status = Boolean(Number(searchParams.status));
+  const data = await fetchPklByAngkatanOnProgress(
+    Number(params.angkatan),
+    status
+  );
 
   return (
     <div className="container mx-auto mt-5">
@@ -34,9 +41,12 @@ export default async function Page({
               <th className="py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
                 Angkatan
               </th>
-              <th className="py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-                Nilai
-              </th>
+
+              {status && (
+                <th className="py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+                  Nilai
+                </th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -49,14 +59,16 @@ export default async function Page({
                   {student?.nim}
                 </td>
                 <td className="text-center py-2 px-4 border-b border-grey-light">
-                  {student?.mahasiswa.nama}
+                  {student?.nama}
                 </td>
                 <td className="text-center py-2 px-4 border-b border-grey-light">
                   {student?.angkatan}
                 </td>
-                <td className="text-center py-2 px-4 border-b border-grey-light">
-                  {student?.nilai_pkl}
-                </td>
+                {status && (
+                  <td className="text-center py-2 px-4 border-b border-grey-light">
+                    {student?.nilai_pkl}
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

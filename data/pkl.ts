@@ -165,6 +165,24 @@ export async function fetchPklByAngkatan(
   }
 }
 
+type PklByAngkatanReturnType = {
+  nim: string;
+  nama: string;
+  angkatan: number;
+  nilai_pkl: string | null;
+};
+export async function fetchPklByAngkatanOnProgress(
+  angkatan: number,
+  status: boolean
+): Promise<PklByAngkatanReturnType[]> {
+  const { data, error } = await supabase.rpc("get_mahasiswa_pkl", {
+    p_angkatan: angkatan,
+    p_is_exist: status,
+  });
+
+  return data;
+}
+
 // export async function fetchPklByAngkatan(
 //   akt: number,
 // ): Promise<PklByAngkatan[]> {
