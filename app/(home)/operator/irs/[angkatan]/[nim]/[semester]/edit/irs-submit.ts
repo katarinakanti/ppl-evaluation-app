@@ -3,25 +3,22 @@ import { serverActionAdminSupabase as supabase } from "@/lib/supabaseClient";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-import { KhsSchema } from "@/data/khs";
-import { KhsState } from "@/data/khs";
+import { IrsSchema } from "@/data/irs";
+import { IrsState } from "@/data/irs";
 import { z } from "zod";
 import { FileSchema } from "@/data/file";
 
-const EditKhsSchema = KhsSchema.pick({
+const EditIrsSchema = IrsSchema.pick({
   semester: true,
-  sks_semester: true,
-  ip_semester: true,
-  sks_kumulatif: true,
-  ip_kumulatif: true,
+  sks_diambil: true,
 });
 
 const MergedSchema = z.object({
-  ...EditKhsSchema.shape,
+  ...EditIrsSchema.shape,
   ...FileSchema.shape,
 });
 
-export async function updateKhs(prevState: KhsState, formData: FormData) {
+export async function updateIrs(prevState: IrsState, formData: FormData) {
   const nim = formData.get("nim");
   const angkatan = formData.get("angkatan");
   const fileUpload = formData.get("file");
@@ -34,17 +31,13 @@ export async function updateKhs(prevState: KhsState, formData: FormData) {
   // Prepare your validation data. If the file is not uploaded, it will not be included in the validation
   const dataToValidate = {
     semester: formData.get("semester"),
-    sks_semester: formData.get("sks_semester"),
-    ip_semester: formData.get("ip_semester"),
-    sks_kumulatif: formData.get("sks_kumulatif"),
-    ip_kumulatif: formData.get("ip_kumulatif"),
-
+    sks_diambil: formData.get("sks_diambil"),
     ...(isFileUploaded && { file: fileUpload }),
   };
 
   // Validate the data
   const validatedFields = (
-    isFileUploaded ? MergedSchema : EditKhsSchema
+    isFileUploaded ? MergedSchema : EditIrsSchema
   ).safeParse(dataToValidate);
 
   if (!validatedFields.success) {
@@ -55,15 +48,14 @@ export async function updateKhs(prevState: KhsState, formData: FormData) {
     };
   }
 
-  const { semester, sks_semester, ip_semester, sks_kumulatif, ip_kumulatif } =
-    validatedFields.data; // Don't destructure file here
+  const { semester, sks_diambil } = validatedFields.data; // Don't destructure file here
 
   try {
     // If a file is uploaded, we handle the file upload
     if (isFileUploaded) {
-      const { data: scan_khs, error: file_error } = await supabase.storage
+      const { data: scan_irs, error: file_error } = await supabase.storage
         .from("ppl")
-        .upload(`khs/${nim}_${semester}`, fileUpload, {
+        .upload(`irs/${nim}_${semester}`, fileUpload, {
           cacheControl: "3600",
           upsert: true,
         });
@@ -73,14 +65,11 @@ export async function updateKhs(prevState: KhsState, formData: FormData) {
     const record = {
       nim,
       semester,
-      sks_semester,
-      ip_semester,
-      sks_kumulatif,
-      ip_kumulatif,
+      sks_diambil,
     };
 
     const { data, error } = await supabase
-      .from("khs")
+      .from("irs")
       .update(record)
       .eq("nim", nim)
       .eq("semester", semester);
@@ -89,15 +78,15 @@ export async function updateKhs(prevState: KhsState, formData: FormData) {
   } catch (e) {
     console.error(e); // Log the error for debugging purposes
     return {
-      message: "Ada kesalahan dalam pembuatan KHS.",
+      message: "Ada kesalahan dalam pembuatan IRS.",
       error: e,
     };
   }
 
   // Assuming revalidatePath and redirect are functions you have defined elsewhere:
-  revalidatePath(`/dosen/khs/${angkatan}/${nim}/${semester}`);
-  redirect(`/dosen/khs/${angkatan}/${nim}/${semester}`);
+  revalidatePath(`/dosen/irs/${angkatan}/${nim}/${semester}`);
+  redirect(`/dosen/irs/${angkatan}/${nim}/${semester}`);
 
   // Optionally return something indicating success
-  return { message: "KHS berhasil diperbarui." };
+  return { message: "IRS berhasil diperbarui." };
 }

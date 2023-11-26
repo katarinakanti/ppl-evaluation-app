@@ -95,8 +95,8 @@ export async function updateKhs(prevState: KhsState, formData: FormData) {
   }
 
   // Assuming revalidatePath and redirect are functions you have defined elsewhere:
-  revalidatePath(`/dosen/khs/${angkatan}/${nim}/${semester}`);
-  redirect(`/dosen/khs/${angkatan}/${nim}/${semester}`);
+  revalidatePath(`/operator/khs/${angkatan}/${nim}/${semester}`);
+  redirect(`/operator/khs/${angkatan}/${nim}/${semester}`);
 
   // Optionally return something indicating success
   return { message: "KHS berhasil diperbarui." };
