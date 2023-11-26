@@ -18,6 +18,13 @@ export default function Form() {
 
       <div className="mx-auto bg-gray-100 w-10/12 h-fit">
         <div className="flex-col ml-16 mt-8">
+          <a
+            className="mt-5 flex items-center w-60 p-10 hover:underline"
+            target="_blank"
+            href="https://drive.google.com/drive/folders/1lQrBh7Ex6Gur67EcvGJIRVqrw7BxVNUH?usp=drive_link"
+          >
+            Download Template
+          </a>
           <div className="flex w-full">
             <p>
               <label

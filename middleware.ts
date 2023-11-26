@@ -22,10 +22,10 @@ export async function middleware(req: NextRequest) {
 
   if (urlSegment === "mhs") {
     if (role === "mahasiswa") {
-      if (no_hp) {
-        return res;
+      if (!no_hp && !req.nextUrl.pathname.endsWith("/mhs/profile")) {
+        return NextResponse.redirect(new URL("/mhs/profile", req.url));
       } else {
-        return NextResponse.redirect(new URL("/profile", req.url));
+        return res;
       }
     } else {
       return NextResponse.redirect(new URL("/", req.url));
