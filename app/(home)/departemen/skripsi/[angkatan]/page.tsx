@@ -57,7 +57,7 @@ export default async function Page({
                 <td className="text-center py-2 px-4 border-b border-grey-light">
                   {student?.nim}
                 </td>
-                <td className="text-center py-2 px-4 border-b border-grey-light">
+                <td className="py-2 px-4 border-b border-grey-light">
                   {student?.nama}
                 </td>
                 <td className="text-center py-2 px-4 border-b border-grey-light">

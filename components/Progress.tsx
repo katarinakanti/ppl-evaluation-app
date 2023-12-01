@@ -162,10 +162,10 @@ const ProgressSemesters: React.FC<ProgressSemestersProps> = ({
                             currentSemesterData.pkl.waktu_pkl
                           )}
                         </p>
-                        <p>
+                        {/* <p>
                           Dosen Pembimbing :{" "}
                           {currentSemesterData.pkl.dosen.nama}
-                        </p>
+                        </p> */}
                         <p>Nilai PKL : {currentSemesterData.pkl.nilai_pkl}</p>
                         <p>
                           Status :{" "}
@@ -187,10 +187,10 @@ const ProgressSemesters: React.FC<ProgressSemestersProps> = ({
                     )}
                     {currentSemesterData?.skripsi && (
                       <TabsContent value="skripsi">
-                        <p>
+                        {/* <p>
                           Dosen Pembimbing :{" "}
                           {currentSemesterData.skripsi.dosen.nama}
-                        </p>
+                        </p> */}
                         <p>
                           Tanggal Sidang :{" "}
                           {formatDateToIndonesian(

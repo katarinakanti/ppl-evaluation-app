@@ -27,13 +27,18 @@ export default function CreateIrs() {
                 </p>
               </div>
               <div className="flex items-center ml-28">
-                <input
+                <select
                   className="w-80 p-2 border border-gray-300 bg-white"
-                  type="number"
                   name="semester"
                   id="semester"
                   placeholder="1 - 14"
-                />
+                >
+                  {Array.from({ length: 14 }, (_, index) => index + 1).map((semester) => (
+                    <option key={semester} value={semester}>
+                      {semester}
+                    </option>
+                  ))}
+                </select>
               </div>
               {state.errors?.semester && (
                 <div

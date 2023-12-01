@@ -22,7 +22,7 @@ export default function CreateKhs() {
               
         <div className="flex items-center">
           <div className="flex-col ml-8">
-            <div className="flex w-full -mt-3">
+            <div className="flex w-full mt-3">
               <div>
                 <p className="flex items-center w-60 p-10 font-semibold">
                   Semester
@@ -31,12 +31,18 @@ export default function CreateKhs() {
               <div className="flex items-center ml-80">
                 {" "}
                 :
-                <input
-                  className="ml-20 w-80 p-2 border border-gray-300 bg-white"
-                  type="number"
+                <select
+                  className="w-80 p-2 border border-gray-300 bg-white ml-20"
                   name="semester"
-                  placeholder="0 - 14"
-                />
+                  id="semester"
+                  placeholder="1 - 14"
+                >
+                  {Array.from({ length: 14 }, (_, index) => index + 1).map((semester) => (
+                    <option key={semester} value={semester}>
+                      {semester}
+                    </option>
+                  ))}
+                </select>
                 {state.errors?.semester && (
                   <div
                     id="semester-error"

@@ -20,8 +20,8 @@ export default function CreatePkl({ dosen }: { dosen: Dosen[] }) {
       </div>
       <form action={dispatch} className="mx-auto bg-gray-100 w-10/12 h-fit">
         <div className="flex items-center">
-          <div className="flex-col ml-8">
-            <div className="flex w-full mt-10">
+          <div className="flex-col ml-8 mt-20">
+            {/* <div className="flex w-full mt-10">
               <p className="flex items-center w-64 p-10 font-semibold">
                 Dosen Pembimbing
               </p>
@@ -50,19 +50,26 @@ export default function CreatePkl({ dosen }: { dosen: Dosen[] }) {
                   ))}
                 </div>
               )}
-            </div>
+            </div> */}
             <div className="flex w-full -mt-10">
               <p className="flex items-center w-64 p-10 font-semibold">
                 Semester
               </p>
               <div className="flex items-center ml-28">
-                <input
-                  className="p-2 border border-gray-300 bg-white"
-                  type="number"
-                  id="semester"
-                  name="semester"
-                  placeholder="Semester"
-                />{" "}
+              <select
+                className="w-80 p-2 border border-gray-300 bg-white"
+                name="semester"
+                id="semester"
+              >
+                <option value="" disabled selected hidden>
+                  Minimal semester 5 atau 6
+                </option>
+                {Array.from({ length: 10 }, (_, index) => index + 5).map((semester) => (
+                  <option key={semester} value={semester}>
+                    {semester}
+                  </option>
+                ))}
+              </select>{" "}
               </div>
               {state.errors?.semester && (
                 <div
@@ -129,7 +136,7 @@ export default function CreatePkl({ dosen }: { dosen: Dosen[] }) {
                 </div>
               )}
             </div>
-            <div className="flex w-full -mt-10">
+            <div className="flex w-full mt-10">
               <p className="flex items-center w-64 p-10 font-semibold">
                 Upload Berita Acara PKL
               </p>

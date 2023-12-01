@@ -28,7 +28,7 @@ export default function UpdateSkripsi({
         <form action={dispatch} className="mx-auto bg-gray-100 w-10/12 h-fit">
         <div className="flex items-center">
             <div className="flex-col ml-8">
-            <div className="flex w-full mt-10">
+            {/* <div className="flex w-full mt-10">
                 <p className="flex items-center w-60 p-10 font-semibold">
                 Dosen Pembimbing
                 </p>
@@ -57,7 +57,7 @@ export default function UpdateSkripsi({
                     ))}
                 </div>
                 )}
-            </div>
+            </div> */}
             <div className="flex w-full -mt-10">
                 <p className="flex items-center w-60 p-10 font-semibold">
                 Tanggal Sidang

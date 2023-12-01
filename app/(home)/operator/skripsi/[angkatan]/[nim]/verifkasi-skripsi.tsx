@@ -69,7 +69,7 @@ export default function VerifikasiSkripsi({
           <br />
           <div className="flex w-full">
             <div className="flex-col ml-8">
-              <div className="flex w-full mt-5">
+              {/* <div className="flex w-full mt-5">
                 <div>
                   <p className="flex items-center w-60 p-10 font-semibold">
                     Dosen Pembimbing
@@ -79,7 +79,7 @@ export default function VerifikasiSkripsi({
                   {" "}
                   :<p className="ml-10">{skripsi.dosen.nama}</p>
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex w-full -mt-10">
                 <div>

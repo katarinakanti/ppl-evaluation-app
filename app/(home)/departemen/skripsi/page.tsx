@@ -24,7 +24,7 @@ export default async function Page() {
           <tr>
             <th
               className="border border-stone-800 py-2 px-4 bg-grey-lightest font-semibold uppercase text-2xl text-grey-dark"
-              colSpan={7}
+              colSpan={8}
             >
               Angkatan
             </th>
