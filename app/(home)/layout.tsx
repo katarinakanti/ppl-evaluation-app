@@ -10,6 +10,7 @@ import {
   OpNavbar,
 } from "@/components/Navbar";
 import Link from "next/link";
+import { Toaster } from "@/components/ui/toaster";
 
 export default async function Layout({
   children,
@@ -42,6 +43,7 @@ export default async function Layout({
     <>
       {getNavbar(role)}
       {children}
+      <Toaster />
     </>
   );
 }

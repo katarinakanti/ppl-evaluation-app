@@ -82,7 +82,7 @@ export async function fetchAllIrs(): Promise<Irs[]> {
 export async function fetchIrsByNimBySem(
   nim: string,
   semester: number
-): Promise<Irs> {
+): Promise<Irs | null> {
   try {
     const irs = await supabase
       .from("irs")
@@ -95,10 +95,8 @@ export async function fetchIrsByNimBySem(
       .eq("semester", semester)
       .single();
 
-    console.log("nim, semester", nim, semester);
-
     if (!irs.data) {
-      throw new Error("irs not found");
+      return null;
     }
     return irs.data as Irs;
   } catch (error) {

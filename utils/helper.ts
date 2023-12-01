@@ -1,7 +1,7 @@
 import { Irs } from "@/data/irs";
 import { Khs } from "@/data/khs";
-import { Pkl, PklWithRelations } from "@/data/pkl";
-import { Skripsi, SkripsiWithRelations } from "@/data/skripsi";
+import { PklWithRelations } from "@/data/pkl";
+import { SkripsiWithRelations } from "@/data/skripsi";
 
 type MhsData = {
   irs: Irs[] | null;
@@ -18,7 +18,7 @@ export type SemesterData = {
   skripsi?: SkripsiWithRelations;
 };
 
-export function mapData(data: MhsData) {
+export function mapProgressMhs(data: MhsData) {
   let result: SemesterData[] = [];
 
   for (let i = 1; i <= 8; i++) {
@@ -46,4 +46,15 @@ export function mapData(data: MhsData) {
   }
 
   return result;
+}
+
+export function calculateCumulativeSks(data: Irs[]): number {
+  let sksKumulatif = 0;
+
+  data.forEach((record) => {
+    const { sks_diambil } = record;
+    sksKumulatif += sks_diambil;
+  });
+
+  return sksKumulatif;
 }

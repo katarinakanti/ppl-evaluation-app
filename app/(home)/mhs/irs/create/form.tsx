@@ -1,12 +1,28 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
 import { createIrs } from "./irs-submit";
+import { Irs } from "@/data/irs";
+import { Button } from "@/components/Button";
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
+import { useEffect } from "react";
 
-export default function CreateIrs() {
+export default function CreateIrs({ data }: { data: Irs[] }) {
+  const { toast } = useToast();
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(createIrs, initialState);
-  const { pending } = useFormStatus();
+
+  useEffect(() => {
+    if (state.message) {
+      toast({
+        variant: "destructive",
+        title: state.message,
+        action: <ToastAction altText="Tutup">Tutup</ToastAction>,
+      });
+    }
+  }, [state.message]);
+  console.log("state", state);
   return (
     <>
       <link rel="stylesheet" href="view.css" />
@@ -33,7 +49,10 @@ export default function CreateIrs() {
                   id="semester"
                   placeholder="1 - 14"
                 >
-                  {Array.from({ length: 14 }, (_, index) => index + 1).map((semester) => (
+                  {Array.from(
+                    { length: data.length + 1 },
+                    (_, index) => index + 1
+                  ).map((semester) => (
                     <option key={semester} value={semester}>
                       {semester}
                     </option>
@@ -106,20 +125,8 @@ export default function CreateIrs() {
               )}
             </div>
 
-            <div className="flex w-full mt-7">
-              <button className="w-32 h-10 ml-10 bg-white hover:bg-pink-100 text-pink-400 border border-pink-400 font-semibold rounded">
-                Scan IRS
-              </button>
-                  {" "}
-            </div>
             <div className="flex w-full mt-5 mb-10">
-              <button
-                disabled={pending}
-                type="submit"
-                className="w-32 h-10 ml-10 bg-white hover:bg-blue-100 text-blue-400 border border-blue-400 px-10 font-semibold rounded"
-              >
-                {pending ? "Saving..." : "Simpan"}
-              </button>
+              <Button />
                   {" "}
             </div>
           </div>

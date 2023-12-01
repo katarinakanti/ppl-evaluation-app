@@ -1,4 +1,5 @@
 // import CreatePkl from "./create/form";
+import { fetchIrsByNim } from "@/data/irs";
 import { fetchSkripsiByNim } from "@/data/skripsi";
 import { getFileUrl } from "@/utils/functions";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -11,8 +12,11 @@ export default async function Page({ params }: { params: { nim: string } }) {
     data: { session },
   } = await supabase.auth.getSession();
   const nim = session?.user.user_metadata.no_induk;
-
+  const irs = await fetchIrsByNim(nim);
   const skripsi = await fetchSkripsiByNim(nim);
+  const sks_kumulatif = irs.reduce((acc, curr) => {
+    return acc + curr.sks_diambil;
+  }, 0);
 
   return (
     <>
@@ -28,21 +32,10 @@ export default async function Page({ params }: { params: { nim: string } }) {
       <div className="flex items-center  mx-auto bg-gray-100 w-10/12 h-fit">
         {skripsi ? (
           <div className="flex-col ml-8">
-            {/* <div className="flex w-full mt-5">
-              <div>
-                <p className="flex items-center w-60 p-10 font-semibold">
-                  Dosen Pembimbing
-                </p>
-              </div>
-              <div className="flex items-center ml-32">
-                {" "}
-                :<p className="ml-10">{skripsi.dosen.nama}</p>
-              </div>
-            </div> */}
-
             <div className="flex w-full -mt-10">
               <p className="flex items-center w-60 p-10 font-semibold">
-              Tanggal Sidang</p>
+                Tanggal Sidang
+              </p>
               <div className="flex items-center ml-32">
                 :<p className="ml-10">{skripsi.tgl_sidang.toString()}</p>
               </div>
@@ -82,12 +75,17 @@ export default async function Page({ params }: { params: { nim: string } }) {
               </button>
             </div>
           </div>
-        ) : (
+        ) : sks_kumulatif >= 120 ? (
           <div className="flex w-full mt-5 mb-10 ml-10">
             <button className="bg-white hover:bg-blue-100 text-green-400 border border-green-400 px-5 py-1 font-semibold rounded mb-5">
               <Link href="/mhs/skripsi/create">Isi Form Skripsi</Link>
             </button>
           </div>
+        ) : (
+          <p className="p-10">
+            Belum dapat mengisi skripsi. Minimal sudah mengambil 120 sks pada
+            IRS.
+          </p>
         )}
       </div>
     </>

@@ -1,4 +1,3 @@
-import { SemesterData } from "@/app/(home)/departemen/progress/[angkatan]/[nim]/data";
 import React from "react";
 import {
   Dialog,
@@ -14,6 +13,7 @@ import {
   getFileUrl,
   mapStatusVerifikasiToNumber,
 } from "@/utils/functions";
+import { SemesterData } from "@/utils/helper";
 
 // Define the types for your props
 interface ProgressSemestersProps {
@@ -38,10 +38,15 @@ const ProgressSemesters: React.FC<ProgressSemestersProps> = ({
         data.semester,
         "bg-yellow-600 hover:bg-yellow-700 cursor-pointer"
       );
-    } else if (data.irs || data.khs) {
+    } else if (data.irs && data.khs) {
       semesterColors.set(
         data.semester,
         "bg-blue-600 hover:bg-blue-700 cursor-pointer"
+      );
+    } else if (data.irs || data.khs) {
+      semesterColors.set(
+        data.semester,
+        "bg-blue-300 hover:bg-blue-400 cursor-pointer"
       );
     }
   });

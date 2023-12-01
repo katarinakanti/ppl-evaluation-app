@@ -1,15 +1,13 @@
 import { progressMahasiswa } from "@/data/progress";
-import { SemesterData, mapData } from "./data";
 import { fetchMahasiswaByNim } from "@/data/mahasiswa";
 import ProgressSemesters from "@/components/Progress";
+import { mapProgressMhs } from "@/utils/helper";
 
 export default async function Page({ params }: { params: { nim: string } }) {
   const SEMESTER_TOTAL = 14;
   const data = await progressMahasiswa(params.nim);
   const mhsData = await fetchMahasiswaByNim(params.nim);
-  const mappedData = mapData(data);
-
-  console.log(mappedData);
+  const mappedData = mapProgressMhs(data);
 
   return (
     <>

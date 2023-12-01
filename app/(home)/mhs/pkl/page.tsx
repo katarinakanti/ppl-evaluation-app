@@ -1,4 +1,4 @@
-// import CreatePkl from "./create/form";
+import { fetchIrsByNimBySem } from "@/data/irs";
 import { fetchPklByNim } from "@/data/pkl";
 import { getFileUrl } from "@/utils/functions";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -11,7 +11,7 @@ export default async function Page({ params }: { params: { nim: string } }) {
     data: { session },
   } = await supabase.auth.getSession();
   const nim = session?.user.user_metadata.no_induk;
-
+  const irs = await fetchIrsByNimBySem(nim, 5);
   const pkl = await fetchPklByNim(nim);
 
   return (
@@ -83,11 +83,16 @@ export default async function Page({ params }: { params: { nim: string } }) {
               </button>
             </div>
           </div>
-        ) : (
+        ) : irs ? (
           <div className="flex w-full mt-5 mb-10 ml-10">
             <button className="bg-white hover:bg-blue-100 text-green-400 border border-green-400 px-5 py-1 font-semibold rounded mb-5">
               <Link href="/mhs/pkl/create">Tambah PKL</Link>
             </button>
+          </div>
+        ) : (
+          <div className="w-full mt-5 mb-10 ml-10">
+            <div>Belum bisa menambahkan PKL.</div>
+            <div>PKL dapat diambil setelah mengisi IRS semester 5.</div>
           </div>
         )}
       </div>
