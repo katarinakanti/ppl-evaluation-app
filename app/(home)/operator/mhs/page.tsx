@@ -7,7 +7,7 @@ export default async function Page() {
   return (
     <>
       <div className="m-6 mx-32">
-        <p className="text-center text-xl mb-5">Data Mahasiswa</p>
+        <p className="text-center text-xl">Data Mahasiswa</p>
         <DataTable columns={columns} data={data} />
       </div>
     </>
