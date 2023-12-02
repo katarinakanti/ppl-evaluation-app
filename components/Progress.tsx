@@ -73,17 +73,17 @@ const ProgressSemesters: React.FC<ProgressSemestersProps> = ({
           <div key={index}>
             {isNoData ? (
               <div
-                className={`mt-5 flex items-center justify-center mx-auto ${bgColor} w-40 h-20 text-white rounded-md`}
+                className={`mt-10 flex items-center justify-center mx-auto ${bgColor} w-28 h-16 text-white rounded-md`}
               >
-                <h1 className="text-4xl">{semesterNumber}</h1>
+                <h1 className="text-3xl">{semesterNumber}</h1>
               </div>
             ) : (
               <Dialog>
                 <DialogTrigger asChild>
                   <div
-                    className={`mt-5 flex items-center justify-center mx-auto ${bgColor} w-40 h-20 text-white rounded-md`}
+                    className={`mt-10 flex items-center justify-center mx-auto ${bgColor} w-28 h-16 text-white rounded-md`}
                   >
-                    <h1 className="text-4xl">{semesterNumber}</h1>
+                    <h1 className="text-3xl">{semesterNumber}</h1>
                   </div>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">

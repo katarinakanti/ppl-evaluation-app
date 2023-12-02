@@ -34,7 +34,32 @@ export default function DepartemenDashboard({ session }: { session: Session }) {
         </div>
       </div>
 
-      <div>
+      <div className="flex mx-auto w-10/12">
+        <div className="mb-8 mx-auto w-full h-96">
+          <div className= "flex-col mt-5 w-full">
+          <div className = "bg-gray-200 h-14 flex items-center "></div>
+            <div className = "flex-col h-full bg-gray-100 ">
+              <div className="flex w-full">
+                <Link className="flex flex-col items-center justify-center mb-8 mt-10 ml-10 bg-indigo-200 w-64 h-52 hover:bg-indigo-300" href={"/departemen/progress"}>
+                  <p className="text-2xl">Progress</p>
+                  <p className="text-2xl">Mahasiswa</p>
+                </Link>
+                <Link className="flex items-center justify-center mb-10 mt-10 ml-auto bg-indigo-200 w-64 h-52 hover:bg-indigo-300" href={"departemen/pkl"}>
+                  <p className="text-2xl">PKL</p>
+                </Link>
+                <Link className="flex items-center justify-center mb-10 mt-10 ml-auto  bg-indigo-200 w-64 h-52 hover:bg-indigo-300" href={"departemen/skripsi"}>
+                  <p className="text-2xl">Skripsi</p>
+                </Link>
+                <Link className="flex items-center justify-center mb-10 mt-10 ml-auto mr-10 bg-indigo-200 w-64 h-52 hover:bg-indigo-300" href={"departemen/status"}>
+                  <p className="text-2xl">Status</p>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+      {/* <div>
         <div className= "flex-col w-10/12 mx-auto"> 
             <Link className = "text-xl bg-gray-100 h-14 flex items-center justify-center" href={"/departemen/status"}>Status</Link>
             <Link className = "text-xl bg-gray-100 h-14 mt-5 flex items-center justify-center" href={"/departemen/irs"}>IRS</Link>
@@ -42,7 +67,7 @@ export default function DepartemenDashboard({ session }: { session: Session }) {
             <Link className = "text-xl bg-gray-100 h-14 mt-5 flex items-center justify-center" href={"/departemen/pkl"}>PKL</Link>
             <Link className = "text-xl bg-gray-100 h-14 mt-5 flex items-center justify-center" href={"/departemen/skripsi"}>Skripsi</Link>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
