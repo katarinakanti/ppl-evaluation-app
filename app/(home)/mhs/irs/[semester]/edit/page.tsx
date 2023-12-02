@@ -22,7 +22,7 @@ export default async function Page({
 
   return (
     <>
-      <UpdateIrs data={irsSemester} />
+      {irsSemester ? <UpdateIrs data={irsSemester} /> : <p>Tidak ada data</p>}
     </>
   );
 }

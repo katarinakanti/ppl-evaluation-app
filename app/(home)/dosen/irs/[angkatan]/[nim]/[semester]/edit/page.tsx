@@ -14,7 +14,11 @@ export default async function Page({
 
   return (
     <>
-      <UpdateIrs data={irsSemester} params={params} />
+      {irsSemester ? (
+        <UpdateIrs data={irsSemester} params={params} />
+      ) : (
+        <p>Tidak ada data</p>
+      )}
     </>
   );
 }

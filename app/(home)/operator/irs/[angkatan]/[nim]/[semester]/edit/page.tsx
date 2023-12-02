@@ -1,5 +1,4 @@
 import { fetchIrsByNimBySem } from "@/data/irs";
-import Link from "next/link";
 import UpdateIrs from "./form";
 
 export default async function Page({
@@ -14,7 +13,11 @@ export default async function Page({
 
   return (
     <>
-      <UpdateIrs data={irsSemester} params={params} />
+      {irsSemester ? (
+        <UpdateIrs data={irsSemester} params={params} />
+      ) : (
+        <p>Tidak ada data.</p>
+      )}
     </>
   );
 }
