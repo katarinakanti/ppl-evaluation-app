@@ -101,6 +101,7 @@ export function OpNavbar() {
       links={[
         { href: "/", label: "Home" },
         { href: "/operator/profile", label: "Profile" },
+        { href: "/operator/mhs", label: "Data Mahasiswa" },
         { href: "/operator/generate/mhs", label: "Generate Mahasiswa" },
         { href: "/operator/generate/dosen", label: "Generate Dosen" },
         { href: "/operator/generate/csv", label: "Generate CSV" },
