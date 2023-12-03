@@ -2,24 +2,34 @@
 
 import "./Login.css";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useToast } from "./ui/use-toast";
 
 export default function Login() {
   const [isMounted, setIsMounted] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { toast } = useToast();
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: `${email}@maildrop.cc`,
       password,
     });
+    if (error) {
+      toast({
+        title: "Login Gagal",
+        description: "Username atau password salah",
+        variant: "destructive",
+      });
+      return;
+    }
+
     router.refresh();
   };
 

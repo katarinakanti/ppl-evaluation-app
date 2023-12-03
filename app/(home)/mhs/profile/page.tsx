@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { fetchMahasiswaByNim } from "@/data/mahasiswa";
 import { fetchAllProvinsi } from "@/data/provinsi";
 import UserForm from "./form";
+import { UpdatePassword } from "@/components/UpdatePassword";
 
 export default async function Page() {
   const supabase = createServerComponentClient<Database>({ cookies });
@@ -68,6 +69,9 @@ export default async function Page() {
               <p className="mt-3 bg-lime-500 text-white mx-auto w-2/3 rounded py-1 text-center text-medium font-medium">
                 Aktif
               </p>
+              <div className="mt-4 ml-3">
+                <UpdatePassword />
+              </div>
             </div>
 
             <div className="flex flex-col items-center ml-36">
