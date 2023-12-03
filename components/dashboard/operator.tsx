@@ -34,7 +34,7 @@ export default function OperatorDashboard({ session }: { session: Session }) {
         </div>
       </div>
 
-      <div className="flex mx-auto w-10/12">
+      {/* <div className="flex mx-auto w-10/12">
         <div className="mb-8 mt-10 mx-auto w-9/12 h-64">
           <div className= "flex-col w-full">
             <div className = "bg-gray-200 h-14 flex items-center ">
@@ -45,18 +45,54 @@ export default function OperatorDashboard({ session }: { session: Session }) {
             </div>
           </div>
 
+        </div> */}
+
+        <div className="flex mx-auto w-10/12">
+        <div className="mb-8 mx-auto w-full h-96">
+          <div className= "flex-col mt-5 w-full">
+          <div className = "bg-gray-200 h-14 flex items-center "></div>
+            <div className = "flex-col h-full bg-gray-100 ">
+              <div className="flex w-full">
+              <Link className="flex items-center justify-center mb-10 mt-10 ml-auto  bg-indigo-200 w-64 h-52 hover:bg-indigo-300" href={"/operator/mhs"}>
+                  <p className="text-xl">Data Mahasiswa</p>
+                </Link>
+                <Link className="flex items-center justify-center mb-8 mt-10 ml-10 bg-indigo-200 w-64 h-52 hover:bg-indigo-300" href={"/operator/generate/mhs"}>
+                  <p className="text-xl">Generate Mahasiswa</p>
+                </Link>
+                <Link className="flex items-center justify-center mb-10 mt-10 ml-auto bg-indigo-200 w-64 h-52 hover:bg-indigo-300" href={"/operator/generate/dosen"}>
+                  <p className="text-xl">Generate Dosen</p>
+                </Link>
+                <Link className="flex items-center justify-center mb-10 mt-10 ml-auto mr-10 bg-indigo-200 w-64 h-52 hover:bg-indigo-300" href={"/operator/generate/csv"}>
+                  <p className="text-xl">Generate CSV</p>
+                </Link>
+              </div>
+              <div className="flex pb-1">
+                <Link className="flex items-center justify-center mb-8 ml-10 bg-indigo-200 w-64 h-52 hover:bg-indigo-300" href={"/operator/irs"}>
+                  <p className="text-xl">IRS</p>
+                </Link>
+                <Link className="flex items-center justify-center mb-10 ml-auto bg-indigo-200 w-64 h-52 hover:bg-indigo-300" href={"/operator/khs"}>
+                  <p className="text-xl">KHS</p>
+                </Link>
+                <Link className="flex items-center justify-center mb-10 ml-auto  bg-indigo-200 w-64 h-52 hover:bg-indigo-300" href={"/operator/pkl"}>
+                  <p className="text-xl">PKL</p>
+                </Link>
+                <Link className="flex items-center justify-center mb-10 ml-auto mr-10 bg-indigo-200 w-64 h-52 hover:bg-indigo-300" href={"/operator/skripsi"}>
+                  <p className="text-xl">Skripsi</p>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
 
-        <div className=" ml-10 mb-8 mt-10 mx-auto w-3/12 h-64">
+        {/* <div className=" ml-10 mb-8 mt-10 mx-auto w-3/12 h-64">
           <div className= "flex-col w-full"> 
             <Link className = "bg-gray-100 h-12 flex items-center justify-center" href={"/operator/generate/mhs"}>Generate Mahasiswa</Link>
             <Link className = "bg-gray-100 h-12 mt-5 flex items-center justify-center" href={"/operator/generate/dosen"}>Generate Dosen</Link>
             <Link className = "bg-gray-100 h-12 mt-5 flex items-center justify-center" href={"/operator/generate/csv"}>Generate CSV</Link>
-            {/* <Link className = "bg-gray-100 h-10 mt-5 flex items-center justify-center" href={"/dosen/skripsi"}>Skripsi</Link> */}
-            {/* <Link className = "bg-gray-100 h-10 mt-3 flex items-center justify-center" href={"/dosen/search"}>Search Progress Studi</Link> */}
           </div>
-        </div>
-      </div>
+        </div> */}
+
     </>
   );
 }
