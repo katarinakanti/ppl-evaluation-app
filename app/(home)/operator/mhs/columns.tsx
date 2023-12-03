@@ -14,6 +14,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import { deleteMahasiswa } from "@/data/admin";
+import { ToastTrigger } from "@/components/ui/toast-button";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -37,6 +39,10 @@ function getStatusBadgeColor(status: string) {
     default:
       return "bg-gray-500"; // or any default color
   }
+}
+
+async function deleteHandler(nim: string) {
+  await deleteMahasiswa(nim);
 }
 
 export const columns: ColumnDef<MahasiswaWithRelations>[] = [
@@ -145,7 +151,15 @@ export const columns: ColumnDef<MahasiswaWithRelations>[] = [
             </Link>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="cursor-pointer">
-              Delete
+              <ToastTrigger
+                onTrigger={() => deleteHandler(data.nim)}
+                message={{
+                  title: "Berhasil menghapus mahasiswa",
+                  description: "Mahasiswa berhasil dihapus dari database",
+                }}
+              >
+                Delete
+              </ToastTrigger>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

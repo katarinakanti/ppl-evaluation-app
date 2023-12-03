@@ -8,7 +8,6 @@ import { Button } from "@/components/Button";
 export default function GenerateMhs({ dosen }: { dosen: Dosen[] }) {
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(generateMhs, initialState);
-  const { pending } = useFormStatus();
 
   return (
     <form action={dispatch}>
