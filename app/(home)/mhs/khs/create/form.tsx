@@ -32,12 +32,15 @@ export default function CreateKhs() {
                 {" "}
                 :
                 <select
-                  className="w-80 p-2 border border-gray-300 bg-white ml-20"
+                  className="w-80 p-2 border border-gray-300 bg-white"
                   name="semester"
                   id="semester"
                   placeholder="1 - 14"
                 >
-                  {Array.from({ length: 14 }, (_, index) => index + 1).map((semester) => (
+                  {Array.from(
+                    { length: data.length + 1 },
+                    (_, index) => index + 1
+                  ).map((semester) => (
                     <option key={semester} value={semester}>
                       {semester}
                     </option>
@@ -133,7 +136,7 @@ export default function CreateKhs() {
 
             <div className="flex w-full -mt-10">
               <p className="flex items-center w-60 p-10 font-semibold">
-                Scan IRS
+                Scan KHS
               </p>
               <div className="flex items-center ml-28">
                 <input
